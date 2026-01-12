@@ -23,6 +23,7 @@ To preserve its core principles, the system explicitly and intentionally does **
 -   Require completion of any task
 -   Escalate actions or create urgency
 -   Guarantee outcomes or results
+-   Require justification, explanation, or reasoning for refusal, non-participation, or inaction
 
 These exclusions are foundational to protecting the integrity of consent and presence.
 
