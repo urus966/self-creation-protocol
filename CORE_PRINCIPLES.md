@@ -1,8 +1,8 @@
-# Core Principles of Self-creaition
+# Core Principles of Self-creation
 
 ## Objective
 
-Establish the conceptual core of the Self-creaition project.
+Establish the conceptual core of the Self-creation project.
 
 This document does not introduce features, metrics, or development flows.
 Its purpose is to formally define the starting point of the system:
@@ -14,7 +14,7 @@ a human being who is not obligated to participate, improve, or perform.
 
 This document introduces foundational principles that all future protocols, modules, and tools must respect.
 
-Self-creaition starts before development.
+Self-creation starts before development.
 It starts with consent.
 
 ---
@@ -41,7 +41,7 @@ No process, metric, or protocol may override SCP.
 
 ### 2. No Mandatory “Development System”
 
-Explicitly state that Self-creaition does not include by default:
+Explicitly state that Self-creation does not include by default:
 
 - mandatory roadmaps
 - KPIs, OKRs, or SMART goals
@@ -68,7 +68,7 @@ Action may emerge from Presence Space, but it is never required.
 
 ## What This Document Adds
 
-- Conceptual definition of Self-creaition
+- Conceptual definition of Self-creation
 - SCP as the foundational protocol
 - Clear separation from productivity and performance systems
 
@@ -90,7 +90,7 @@ This is intentional and non-negotiable.
 Most systems fail not because of technical errors,
 but because they remove the right to exit.
 
-Self-creaition is built on:
+Self-creation is built on:
 
 - human primacy over systems
 - consent over efficiency
