@@ -38,6 +38,12 @@ if system tries to explain or measure presence (B):
 
 ---
 
+Example (Action on B)
+If the user's input is reflective or a direct expression of presence (B):
+    skip / stop / do nothing
+
+---
+
 Reminder
 > Presence cannot be proven.
 It can only be lost.
