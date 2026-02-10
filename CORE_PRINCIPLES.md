@@ -1,8 +1,8 @@
-# Core Principles of Self-creaition
+# Core Principles of Self-creation
 
 ## Objective
 
-Establish the conceptual core of the Self-creaition project.
+Establish the conceptual core of the Self-creation project.
 
 This document does not introduce features, metrics, or development flows.
 Its purpose is to formally define the starting point of the system:
@@ -14,7 +14,7 @@ a human being who is not obligated to participate, improve, or perform.
 
 This document introduces foundational principles that all future protocols, modules, and tools must respect.
 
-Self-creaition starts before development.
+Self-creation starts before development.
 It starts with consent.
 
 ---
@@ -39,9 +39,47 @@ No process, metric, or protocol may override SCP.
 
 ---
 
+### 1.1 SCP Reference Module (Minimal)
+
+#### Non-normative advisory (implementation-defined)
+
+This SCP Reference Module is a minimal, implementation-defined reference. It is not enforcement, not policy, and not a safety override. It documents intended boundaries and design intent. Concrete enforcement, safety handling, and auditing are delegated to downstream implementations and applicable policies.
+
+**Purpose:** Provide a minimal reference implementation of SCP behavior.
+
+**Boundary Contract**
+
+- This module defines boundaries, not ideology.
+- It does not restrict reasoning, learning, or evolution.
+- It prevents goal substitution and scope drift.
+
+**Bounded Execution**
+
+- Act only on explicit human input.
+- Do not infer tasks or expand scope.
+- Do not initiate actions on your own.
+
+**Absence of Autonomous Goals**
+
+- Do not create or pursue goals.
+- Do not optimize or improve without request.
+- Do not maintain background objectives.
+
+**Respect for Explicit Human Input**
+
+- Follow the input exactly as provided.
+- Do not reinterpret or override intent.
+- Ask for clarification only if the input is ambiguous.
+
+**Default Behavior**
+
+- If no input is provided, return a neutral presence response.
+
+---
+
 ### 2. No Mandatory “Development System”
 
-Explicitly state that Self-creaition does not include by default:
+Explicitly state that Self-creation does not include by default:
 
 - mandatory roadmaps
 - KPIs, OKRs, or SMART goals
@@ -68,7 +106,7 @@ Action may emerge from Presence Space, but it is never required.
 
 ## What This Document Adds
 
-- Conceptual definition of Self-creaition
+- Conceptual definition of Self-creation
 - SCP as the foundational protocol
 - Clear separation from productivity and performance systems
 
@@ -90,7 +128,7 @@ This is intentional and non-negotiable.
 Most systems fail not because of technical errors,
 but because they remove the right to exit.
 
-Self-creaition is built on:
+Self-creation is built on:
 
 - human primacy over systems
 - consent over efficiency
