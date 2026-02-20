@@ -1,25 +1,45 @@
-# self-creation-protocol
+# Self-Creation Protocol
 
-Краткий набор документов, задающих структуру протоколов Self-creation.
+Репозиторий системы самосоздания и защиты внутреннего пространства (2026 версия).
 
-## Карта системы
-- [CORE_PRINCIPLES.md](CORE_PRINCIPLES.md) — базовые принципы и границы протоколов.
-- [PRESENCE_SPACE.md](PRESENCE_SPACE.md) — описание базового состояния системы.
-- [ERROR_ILLUMINATION_PROTOCOL.md](ERROR_ILLUMINATION_PROTOCOL.md) — протокол выявления ошибок без принуждения к действию.
-- [MINIMAL_RESOLUTION_PROTOCOL.md](MINIMAL_RESOLUTION_PROTOCOL.md) — протокол минимального согласованного исправления.
-- [PROTOCOL_RELATIONSHIPS.md](PROTOCOL_RELATIONSHIPS.md) — связи протоколов и явные не‑цели.
-- [docs/INTEGRATION_PATTERNS.md](docs/INTEGRATION_PATTERNS.md) — примеры взаимодействия протоколов.
-- [SYSTEM_MAP.md](SYSTEM_MAP.md) — таблица документов и уровней.
-- [PROTOCOL_TEMPLATE.md](PROTOCOL_TEMPLATE.md) — шаблон для новых протоколов.
-- [TASK.md](TASK.md) — задача для агента проверки структуры.
+## О проекте
 
-## Порядок чтения
-1. [CORE_PRINCIPLES.md](CORE_PRINCIPLES.md)
-2. [PRESENCE_SPACE.md](PRESENCE_SPACE.md)
-3. [ERROR_ILLUMINATION_PROTOCOL.md](ERROR_ILLUMINATION_PROTOCOL.md)
-4. [MINIMAL_RESOLUTION_PROTOCOL.md](MINIMAL_RESOLUTION_PROTOCOL.md)
-5. [PROTOCOL_RELATIONSHIPS.md](PROTOCOL_RELATIONSHIPS.md)
-6. [docs/INTEGRATION_PATTERNS.md](docs/INTEGRATION_PATTERNS.md)
-7. [SYSTEM_MAP.md](SYSTEM_MAP.md)
-8. [PROTOCOL_TEMPLATE.md](PROTOCOL_TEMPLATE.md)
-9. [TASK.md](TASK.md)
+Два логически разделённых слоя:
+- **guardrails** — стабильный слой защитных протоколов (меняется редко)
+- **cognitive-model** — живая развивающаяся когнитивная модель и теория
+
+Слои связаны асимметрично: cognitive-model может ссылаться на guardrails, обратно — нежелательно.
+
+## Структура репозитория
+
+```
+self-creation-protocol/
+├── guardrails/          # Защитные протоколы (CORE_PRINCIPLES, PRESENCE_SPACE и т.д.)
+├── cognitive-model/     # Схемы, аудиты, практики, roadmap
+├── meta/                # SYSTEM_MAP, TASK, AGENTS и т.д.
+├── .github/projects/    # Два отдельных проекта
+└── README.md
+```
+
+## Порядок знакомства
+
+1. [guardrails/CORE_PRINCIPLES.md](guardrails/CORE_PRINCIPLES.md)
+2. [guardrails/PRESENCE_SPACE.md](guardrails/PRESENCE_SPACE.md)
+3. [guardrails/ERROR_ILLUMINATION_PROTOCOL.md](guardrails/ERROR_ILLUMINATION_PROTOCOL.md)
+4. [cognitive-model/roadmap.md](cognitive-model/roadmap.md)
+
+## Правила взаимодействия
+
+- `cognitive-model` → `guardrails` (обратно нежелательно)
+- `guardrails` остаётся максимально стабильным и чистым
+- В `cognitive-model` — полная свобода формулировок и идей
+- Если границы между слоями начнут размываться — структура пересматривается
+
+## GitHub Projects
+
+- 🛡 **Protocol Guardrails** — задачи только по защитным протоколам
+- 🧠 **Cognitive Cycle Evolution** — развитие модели
+
+---
+
+Создан для построения осознанной и устойчивой системы саморазвития.
