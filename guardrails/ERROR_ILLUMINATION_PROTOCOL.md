@@ -56,7 +56,7 @@ Moving from illumination to correction:
 No error forces action.
 
 ## What This Protocol Defines
-- A standalone document (ERROR_ILLUMINATION_PROTOCOL.md)
+- A standalone document (guardrails/ERROR_ILLUMINATION_PROTOCOL.md)
 - Formal separation of illumination vs correction
 - Rules for safe error visibility
 - Constraints for future diagnostic or analytic tools
