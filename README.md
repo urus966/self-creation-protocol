@@ -1,25 +1,37 @@
 # self-creation-protocol
 
-Краткий набор документов, задающих структуру протоколов Self-creation.
+Репозиторий с базовой структурой и документами протокола Self-creation.
 
-## Карта системы
-- [CORE_PRINCIPLES.md](CORE_PRINCIPLES.md) — базовые принципы и границы протоколов.
-- [PRESENCE_SPACE.md](PRESENCE_SPACE.md) — описание базового состояния системы.
-- [ERROR_ILLUMINATION_PROTOCOL.md](ERROR_ILLUMINATION_PROTOCOL.md) — протокол выявления ошибок без принуждения к действию.
-- [MINIMAL_RESOLUTION_PROTOCOL.md](MINIMAL_RESOLUTION_PROTOCOL.md) — протокол минимального согласованного исправления.
-- [PROTOCOL_RELATIONSHIPS.md](PROTOCOL_RELATIONSHIPS.md) — связи протоколов и явные не‑цели.
-- [docs/INTEGRATION_PATTERNS.md](docs/INTEGRATION_PATTERNS.md) — примеры взаимодействия протоколов.
-- [SYSTEM_MAP.md](SYSTEM_MAP.md) — таблица документов и уровней.
-- [PROTOCOL_TEMPLATE.md](PROTOCOL_TEMPLATE.md) — шаблон для новых протоколов.
-- [TASK.md](TASK.md) — задача для агента проверки структуры.
+## Структура (v2.1)
 
-## Порядок чтения
-1. [CORE_PRINCIPLES.md](CORE_PRINCIPLES.md)
-2. [PRESENCE_SPACE.md](PRESENCE_SPACE.md)
-3. [ERROR_ILLUMINATION_PROTOCOL.md](ERROR_ILLUMINATION_PROTOCOL.md)
-4. [MINIMAL_RESOLUTION_PROTOCOL.md](MINIMAL_RESOLUTION_PROTOCOL.md)
-5. [PROTOCOL_RELATIONSHIPS.md](PROTOCOL_RELATIONSHIPS.md)
-6. [docs/INTEGRATION_PATTERNS.md](docs/INTEGRATION_PATTERNS.md)
-7. [SYSTEM_MAP.md](SYSTEM_MAP.md)
-8. [PROTOCOL_TEMPLATE.md](PROTOCOL_TEMPLATE.md)
-9. [TASK.md](TASK.md)
+- `guardrails/` — ограничения и правила поведения уровня A.
+- `meta/` — карты системы и мета-описания.
+- `cognitive-model/` — рабочие материалы по модели мышления.
+- `.github/projects/` — служебные файлы для GitHub Projects.
+
+## Ключевые документы
+
+- [meta/SYSTEM_MAP.md](meta/SYSTEM_MAP.md) — карта уровней A/B и назначение документов.
+- [cognitive-model/roadmap.md](cognitive-model/roadmap.md) — текущий [WIP] план развития cognitive-model.
+
+## Быстрый старт
+
+1. Прочитайте [meta/SYSTEM_MAP.md](meta/SYSTEM_MAP.md).
+2. Перейдите в [cognitive-model/roadmap.md](cognitive-model/roadmap.md).
+3. Добавляйте новые документы в соответствующие папки структуры.
+
+## Примечание
+
+Этот репозиторий держит разделение уровней:
+- **A (Behavior)** — действия, логика, тестируемые изменения.
+- **B (Presence)** — не является объектом оптимизации или тестирования.
+
+## FAQ: «Агент может сделать это сам?»
+
+Коротко: **да, в этой рабочей среде агент может сделать это самостоятельно**:
+
+- создать/обновить файлы;
+- сделать `git commit`;
+- подготовить PR-описание через интеграцию.
+
+Важно: если вы работаете только через веб GitHub с телефона, это по‑прежнему удобный режим — агент может подготовить чистые тексты и изменения, а вы проверяете и подтверждаете их в интерфейсе GitHub.
