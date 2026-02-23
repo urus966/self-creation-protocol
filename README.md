@@ -20,6 +20,16 @@
 2. Перейдите в [cognitive-model/roadmap.md](cognitive-model/roadmap.md).
 3. Добавляйте новые документы в соответствующие папки структуры.
 
+## Порядок знакомства
+
+### 1. Защитные протоколы (guardrails)
+
+- [CORE_PRINCIPLES.md](CORE_PRINCIPLES.md) — базовые принципы протокола
+- [ERROR_ILLUMINATION_PROTOCOL.md](ERROR_ILLUMINATION_PROTOCOL.md) — протокол работы с ошибками
+- [MINIMAL_RESOLUTION_PROTOCOL.md](MINIMAL_RESOLUTION_PROTOCOL.md) — минимальный контур разрешения
+- [PROTOCOL_RELATIONSHIPS.md](PROTOCOL_RELATIONSHIPS.md) — связи между протоколами
+- [PROTOCOL_TEMPLATE.md](PROTOCOL_TEMPLATE.md) — шаблон для новых протоколов
+
 ## Примечание
 
 Этот репозиторий держит разделение уровней:

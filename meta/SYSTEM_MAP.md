@@ -13,6 +13,7 @@
 | `meta/SYSTEM_MAP.md` | Карта структуры и уровней | A |
 | `cognitive-model/roadmap.md` | Рабочий план развития cognitive-model | A |
 | `guardrails/` | Набор поведенческих ограничений | A |
+| `guardrails/ARCHITECTURE_RULES.md` | Правила архитектурных ограничений для A-изменений | A |
 | `.github/projects/` | Служебные конфиги и проектные шаблоны | A |
 
 ## Граница

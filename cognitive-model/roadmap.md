@@ -19,3 +19,9 @@
 1. `concepts.md` (основные понятия),
 2. `flow.md` (поток обработки),
 3. `examples.md` (короткие примеры использования).
+
+## Acceptance Criteria for v0
+- Все guardrails-файлы имеют чёткую ссылку в SYSTEM_MAP.md
+- Асимметрия ссылок проверена (нет ни одной из guardrails → cognitive-model)
+- README содержит полный и актуальный порядок знакомства
+- Создан минимальный ARCHITECTURE_RULES.md
