@@ -1,4 +1,4 @@
-# ARCHITECTURE_RULES
+## ARCHITECTURE_RULES
 
 ## Основные правила архитектуры
 
