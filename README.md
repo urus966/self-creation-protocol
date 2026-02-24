@@ -23,3 +23,7 @@
 7. [SYSTEM_MAP.md](SYSTEM_MAP.md)
 8. [PROTOCOL_TEMPLATE.md](PROTOCOL_TEMPLATE.md)
 9. [TASK.md](TASK.md)
+
+### 1. Защитные протоколы (guardrails)
+
+PROTOCOL_TEMPLATE.md — шаблон для новых протоколов
