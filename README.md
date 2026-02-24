@@ -10,7 +10,7 @@
 - [PROTOCOL_RELATIONSHIPS.md](PROTOCOL_RELATIONSHIPS.md) — связи протоколов и явные не‑цели.
 - [docs/INTEGRATION_PATTERNS.md](docs/INTEGRATION_PATTERNS.md) — примеры взаимодействия протоколов.
 - [SYSTEM_MAP.md](SYSTEM_MAP.md) — таблица документов и уровней.
-- [PROTOCOL_TEMPLATE.md](PROTOCOL_TEMPLATE.md) — шаблон для новых протоколов.
+- [guardrails/PROTOCOL_TEMPLATE.md](guardrails/PROTOCOL_TEMPLATE.md) — шаблон для новых протоколов.
 - [TASK.md](TASK.md) — задача для агента проверки структуры.
 
 ## Порядок чтения
@@ -21,5 +21,5 @@
 5. [PROTOCOL_RELATIONSHIPS.md](PROTOCOL_RELATIONSHIPS.md)
 6. [docs/INTEGRATION_PATTERNS.md](docs/INTEGRATION_PATTERNS.md)
 7. [SYSTEM_MAP.md](SYSTEM_MAP.md)
-8. [PROTOCOL_TEMPLATE.md](PROTOCOL_TEMPLATE.md)
+8. [guardrails/PROTOCOL_TEMPLATE.md](guardrails/PROTOCOL_TEMPLATE.md)
 9. [TASK.md](TASK.md)
