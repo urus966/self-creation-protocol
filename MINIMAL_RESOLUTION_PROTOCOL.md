@@ -40,7 +40,7 @@ Resolution must not introduce:
 Completion or interruption of resolution automatically returns the system to Presence Space.
 
 ## What This PR Adds
-- A standalone document: guardrails/MINIMAL_RESOLUTION_PROTOCOL.md
+- A standalone document: MINIMAL_RESOLUTION_PROTOCOL.md
 - Formal rules for consent-based correction
 - Clear constraints preventing overreach
 
