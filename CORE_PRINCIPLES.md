@@ -12,7 +12,7 @@ a human being who is not obligated to participate, improve, or perform.
 
 ## Scope
 
-This document introduces foundational principles that all future protocols, modules, and tools must respect.
+This document introduces foundational principles that all future protocols, modules, and tools align with.
 
 Self-creation starts before development.
 It starts with consent.
@@ -58,11 +58,11 @@ Define Presence Space as a baseline state of the system.
 
 Presence Space is a condition where:
 
-- no action is required
+- no action is mandatory
 - no evaluation occurs
 - no optimization is running
 
-Action may emerge from Presence Space, but it is never required.
+Action may emerge from Presence Space, but it is never mandatory.
 
 ---
 

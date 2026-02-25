@@ -4,7 +4,7 @@
 
 Presence Space is the baseline state of the Self-creation system in which:
 
-- no task is required
+- no task is mandatory
 - no evaluation is performed
 - no optimization is running
 - no progress is expected
