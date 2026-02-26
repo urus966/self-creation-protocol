@@ -1,5 +1,7 @@
 # self-creation-protocol
 
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/urus966/self-creation-protocol/blob/main/LICENSE)
+
 Краткий набор документов, задающих структуру протоколов Self-creation.
 
 ## Карта системы
