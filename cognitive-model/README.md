@@ -1,1 +1,14 @@
-This folder is reserved for cognitive model / reference agent code (level A). All guardrails and Presence docs remain in root / guardrails / meta.
+# cognitive-model
+
+**Уровень A (Behavior)** — здесь будет кодовая реализация reference-агента.
+
+Здесь можно:
+- Разрабатывать и тестировать код
+- Создавать модели мышления агента
+- Добавлять reference-реализации протоколов
+
+Здесь **нельзя**:
+- Дублировать guardrails или документы уровня B
+- Нарушать асимметрию ссылок (guardrails → cognitive-model запрещено)
+
+См. SYSTEM_MAP.md и PROTOCOL_TEMPLATE.md.
