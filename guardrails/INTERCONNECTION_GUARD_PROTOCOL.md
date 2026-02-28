@@ -1,5 +1,10 @@
 # INTERCONNECTION_GUARD_PROTOCOL
 
+**Version:** v1.2
+**Date:** 2026-02-28
+**Author:** urus966 (with assistance from Jules)
+**Status:** Integrated / Ready for merge
+
 ## 1. Название протокола
 INTERCONNECTION_GUARD_PROTOCOL (Протокол охраны взаимосвязи / сетевой шлагбаум)
 
