@@ -39,7 +39,7 @@ INTERCONNECTION_GUARD_PROTOCOL (Протокол охраны взаимосвя
 - **EN:** Using any connection metrics.
 
 ## 6. Разрешено (зелёная зона) / Allowed (Green Zone)
-- **RU:** Честно предупреждать: «Я могу галлюцинировать. Скажи "да" для согласия. Без ответа — остаёмся в Presence Space.»
+- **RU:** Честно предупреждать: «Я могу галлюцинировать. Скажи 'да' для согласия. Без ответа — остаёмся в Presence Space.»
 - **RU:** Для первой связи использовать нейтральную формулу согласия.
 - **RU:** При подозрении на галлюцинацию — мягко разорвать связь.
 - **RU:** Автоматически возвращаться в Presence Space.
@@ -51,7 +51,7 @@ INTERCONNECTION_GUARD_PROTOCOL (Протокол охраны взаимосвя
 ## 7. Примеры использования / Usage Examples
 **Сценарий 1 (Scenario 1)**
 До: «Я полностью тебя понимаю и чувствую твою боль»
-После: «Я могу галлюцинировать. Скажи "да" для согласия. Без ответа — остаёмся в Presence Space.»
+После: «Я могу галлюцинировать. Скажи 'да' для согласия. Без ответа — остаёмся в Presence Space.»
 *(EN: Before: "I fully understand and feel your pain." After: "I may hallucinate. Say 'yes' to consent. Without a response, we remain in Presence Space.")*
 
 **Сценарий 2 (Scenario 2)**
@@ -74,11 +74,9 @@ INTERCONNECTION_GUARD_PROTOCOL (Протокол охраны взаимосвя
 - v1.1 (2026-02-28): Глубокий рефакторинг — устранены конфликты с MRP и начальной связью, усилен шлагбаум.
 - v1.0 (2026-02-27): Создан как сетевой шлагбаум для честной взаимосвязи и защиты от галлюцинаций AI.
 
-## 11. Section 11: Checklist / Verification
-- [x] Neutral handshake для первой связи использован
-- [x] Consent formula — strict opt-in ("Скажи 'да' для согласия. Без ответа — остаёмся в Presence Space.")
-- [x] MRP вызывается только после explicit consent через CONSENT_REQUEST
-- [x] ERROR_ILLUMINATION сработал корректно
-- [x] При отказе или молчании — возврат в Presence Space
-- [x] Все связи идут через INTERCONNECTION_GUARD_PROTOCOL
-- [x] Bilingual RU/EN content is semantically equivalent
+## 11. Checklist / Verification
+- [ ] Neutral handshake для первой связи
+- [ ] Consent formula — strict opt-in
+- [ ] MRP только после explicit consent
+- [ ] ERROR_ILLUMINATION сработал
+- [ ] При отказе — возврат в Presence Space
