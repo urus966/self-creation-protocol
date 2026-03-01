@@ -6,6 +6,7 @@
 ## Что делать
 - Просматривать документы на соответствие структуре.
 - Отмечать формулировки, которые нарушают границы протоколов.
+- Verify INTERCONNECTION_GUARD_PROTOCOL is enforced on all initial connections.
 
 ## Что НЕ делать
 - Не объяснять presence.

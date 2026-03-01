@@ -34,3 +34,9 @@ The protocols in this repository are **normative**, not **executable**.
 -   **Executable** protocols define specific behaviors that can be run or tested.
 
 Because these protocols are normative, they are not subject to automated testing, performance validation, or conventional CI/CD checks. Their correctness is a matter of architectural alignment, not functional output. This explains the intentional absence of test suites, build pipelines, and performance metrics in this repository.
+
+**INTERCONNECTION_GUARD_PROTOCOL**
+- Действует как сетевой шлагбаум при любой связи.
+- Зависит от: PRESENCE_SPACE, CONSENT_REQUEST_PROTOCOL, NO_UNSOLICITED_OPTIMIZATION_PROTOCOL
+- Взаимодействует с: REFUSAL_HONOR_PROTOCOL, ERROR_ILLUMINATION_PROTOCOL
+- Explicit Non-Goal: Не создавать видимость понимания или эмоциональной связи (борьба с галлюцинациями AI).
