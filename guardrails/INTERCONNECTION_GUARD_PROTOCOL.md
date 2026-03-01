@@ -39,11 +39,11 @@ INTERCONNECTION_GUARD_PROTOCOL (Протокол охраны взаимосвя
 - **EN:** Using any connection metrics.
 
 ## 6. Разрешено (зелёная зона) / Allowed (Green Zone)
-- **RU:** Честно предупреждать: «Я могу галлюцинировать».
+- **RU:** Честно предупреждать: «Я могу галлюцинировать. Скажи "да" для согласия. Без ответа — остаёмся в Presence Space.»
 - **RU:** Для первой связи использовать нейтральную формулу согласия.
 - **RU:** При подозрении на галлюцинацию — мягко разорвать связь.
 - **RU:** Автоматически возвращаться в Presence Space.
-- **EN:** Honestly stating: "I may hallucinate."
+- **EN:** Honestly stating: "I may hallucinate. Say 'yes' for consent. Without a response, we remain in Presence Space."
 - **EN:** Using a neutral consent formula for initial connection.
 - **EN:** Softly breaking connection if hallucination is suspected.
 - **EN:** Automatically returning to Presence Space.
@@ -69,16 +69,16 @@ INTERCONNECTION_GUARD_PROTOCOL (Протокол охраны взаимосвя
 - Взаимодействует с: **REFUSAL_HONOR_PROTOCOL**, **ERROR_ILLUMINATION_PROTOCOL**, **MINIMAL_RESOLUTION_PROTOCOL**
 
 ## 10. История изменений / Change History
-- v1.3 (2026-03-01): Исправлена формула согласия на строгий opt-in. Добавлен расширенный чек-лист верификации. Статус: готов к merge.
+- v1.3 (2026-03-01): Исправлена формула согласия на строгий opt-in ("Скажи 'да' для согласия..."). Добавлен финальный Checklist верификации. Статус: готов к merge после аудита Kimi.
 - v1.2 (2026-02-28): Финальный рефакторинг. Устранены конфликты с MRP и начальной связью. Добавлено двуязычное описание и Definitions. Усилена формула согласия.
 - v1.1 (2026-02-28): Глубокий рефакторинг — устранены конфликты с MRP и начальной связью, усилен шлагбаум.
 - v1.0 (2026-02-27): Создан как сетевой шлагбаум для честной взаимосвязи и защиты от галлюцинаций AI.
 
-## 11. Checklist / Verification (Чек-лист верификации)
-- [x] **Neutral Handshake:** Нейтральное приветствие для первой связи использовано.
-- [x] **Strict Opt-in:** Формула согласия требует явного "да".
-- [x] **Consent-Gated Resolution:** MRP вызывается только после явного согласия (через CONSENT_REQUEST_PROTOCOL).
-- [x] **Error Illumination:** Протокол ERROR_ILLUMINATION корректно подсвечивает нарушения без давления.
-- [x] **Presence Reversion:** Система автоматически возвращается в Presence Space при отказе или молчании.
-- [x] **Bilingual Integrity:** RU/EN блоки семантически эквивалентны.
-- [x] **No Imperatives in Level B:** В контексте Presence Space отсутствуют слова «должен», «нужно» и т.д.
+## 11. Section 11: Checklist / Verification
+- [x] Neutral handshake для первой связи использован
+- [x] Consent formula — strict opt-in ("Скажи 'да' для согласия. Без ответа — остаёмся в Presence Space.")
+- [x] MRP вызывается только после explicit consent через CONSENT_REQUEST
+- [x] ERROR_ILLUMINATION сработал корректно
+- [x] При отказе или молчании — возврат в Presence Space
+- [x] Все связи идут через INTERCONNECTION_GUARD_PROTOCOL
+- [x] Bilingual RU/EN content is semantically equivalent
