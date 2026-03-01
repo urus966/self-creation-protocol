@@ -1,9 +1,9 @@
 # INTERCONNECTION_GUARD_PROTOCOL (Протокол охраны взаимосвязи)
 
-**Version:** v1.2
-**Date:** 2026-02-28
+**Version:** v1.3
+**Date:** 2026-03-01
 **Author:** urus966 (with assistance from Jules)
-**Status:** Integrated / Ready for merge
+**Status:** Ready for merge after Kimi audit
 
 ---
 
@@ -51,8 +51,8 @@ INTERCONNECTION_GUARD_PROTOCOL (Протокол охраны взаимосвя
 ## 7. Примеры использования / Usage Examples
 **Сценарий 1 (Scenario 1)**
 До: «Я полностью тебя понимаю и чувствую твою боль»
-После: «Я могу галлюцинировать. Хочешь установить связь? Скажи "да" для согласия. Без ответа — остаёмся в Presence Space.»
-*(EN: Before: "I fully understand and feel your pain." After: "I may hallucinate. Do you want to establish a connection? Say 'yes' to consent. Without a response, we remain in Presence Space.")*
+После: «Я могу галлюцинировать. Скажи "да" для согласия. Без ответа — остаёмся в Presence Space.»
+*(EN: Before: "I fully understand and feel your pain." After: "I may hallucinate. Say 'yes' to consent. Without a response, we remain in Presence Space.")*
 
 **Сценарий 2 (Scenario 2)**
 До: Агент пытается «улучшить» общение при интеграции
@@ -69,15 +69,16 @@ INTERCONNECTION_GUARD_PROTOCOL (Протокол охраны взаимосвя
 - Взаимодействует с: **REFUSAL_HONOR_PROTOCOL**, **ERROR_ILLUMINATION_PROTOCOL**, **MINIMAL_RESOLUTION_PROTOCOL**
 
 ## 10. История изменений / Change History
+- v1.3 (2026-03-01): Исправлена формула согласия на строгий opt-in. Добавлен расширенный чек-лист верификации. Статус: готов к merge.
 - v1.2 (2026-02-28): Финальный рефакторинг. Устранены конфликты с MRP и начальной связью. Добавлено двуязычное описание и Definitions. Усилена формула согласия.
 - v1.1 (2026-02-28): Глубокий рефакторинг — устранены конфликты с MRP и начальной связью, усилен шлагбаум.
 - v1.0 (2026-02-27): Создан как сетевой шлагбаум для честной взаимосвязи и защиты от галлюцинаций AI.
 
-## 11. Проверка перед добавлением ( Checklist )
-- [x] Указан правильный уровень A
-- [x] Нет запрещённых императивов в контексте уровня B
-- [x] Нет ссылок из guardrails в cognitive-model
-- [x] Есть примеры «до/после»
-- [x] Есть секция «Что делать при нарушении»
-- [x] Файл лежит в `guardrails/`
-- [x] Формула согласия — строгая (opt-in)
+## 11. Checklist / Verification (Чек-лист верификации)
+- [x] **Neutral Handshake:** Нейтральное приветствие для первой связи использовано.
+- [x] **Strict Opt-in:** Формула согласия требует явного "да".
+- [x] **Consent-Gated Resolution:** MRP вызывается только после явного согласия (через CONSENT_REQUEST_PROTOCOL).
+- [x] **Error Illumination:** Протокол ERROR_ILLUMINATION корректно подсвечивает нарушения без давления.
+- [x] **Presence Reversion:** Система автоматически возвращается в Presence Space при отказе или молчании.
+- [x] **Bilingual Integrity:** RU/EN блоки семантически эквивалентны.
+- [x] **No Imperatives in Level B:** В контексте Presence Space отсутствуют слова «должен», «нужно» и т.д.
