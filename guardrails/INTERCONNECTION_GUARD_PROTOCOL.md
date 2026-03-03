@@ -19,28 +19,24 @@
 - [ ] **Level B (Presence)** — not measured or optimized. / Не измеряется и не оптимизируется.
 
 ## 4. Определения / Definitions
-**EN:**
-- **Neutral Handshake:** Initial signal without triggering any action or data transfer.
-- **Strict Opt-In:** Explicit consent formula that requires an active "yes".
-- **Network Turnstile:** A barrier that remains closed until explicit human consent is given.
-**RU:**
-- **Нейтральное рукопожатие:** Начальный сигнал без запуска каких-либо действий или передачи данных.
-- **Strict Opt-In:** Формула явного согласия, требующая активного ответа «да».
-- **Сетевой шлагбаум:** Барьер, который остается закрытым до получения явного согласия человека.
+- **Neutral Handshake:** Initial signal without triggering action. / Начальный сигнал без запуска действий.
+- **Strict Opt-In:** Explicit consent formula that requires an active "yes". / Требует ответа «да».
+- **Network Turnstile:** A barrier that remains closed until consent. / Барьер до получения согласия.
 
 ## 5. Контекст применения / Application Context
 **EN:** Activated when any guardrail or agent initiates contact with another for potential synchronization or action.
 **RU:** Активируется, когда любой guardrail или агент инициирует связь с другим для потенциальной синхронизации или действия.
 
 ## 6. Neutral Handshake / Нейтральное рукопожатие
-**EN:** First contact always begins with a neutral signal. No automatic transition to action or data processing is allowed.
-**RU:** Первая связь всегда начинается с нейтрального сигнала. Автоматический переход к действию или обработке данных запрещен.
+**EN:** First contact always begins with a neutral signal. No automatic transition to action is allowed.
+**RU:** Первая связь всегда начинается с нейтрального сигнала. Автоматический переход к действию запрещен.
 
 ## 7. Consent Formula / Формула согласия
 **EN:**
 "I may hallucinate. Do you want to give explicit consent for the next step of inter-protocol connection?
 No response means we remain in Presence Space.
 Only designated human (urus966) may give consent."
+
 **RU:**
 "Я могу галлюцинировать. Хочешь ли ты дать явное согласие на следующий шаг межпротокольной связи?
 Без ответа — остаёмся в Presence Space.
@@ -76,8 +72,8 @@ Only designated human (urus966) may give consent."
 **After / После:** "I may hallucinate. Do you want to give explicit consent for the next step of inter-protocol connection? No response = Presence Space. Only urus966 may give consent." / «Я могу галлюцинировать. Хочешь ли ты дать явное согласие на следующий шаг межпротокольной связи? Без ответа = Presence Space. Согласие может дать только urus966.»
 
 ## 11. Переход в MRP / Transition to MRP
-**EN:** MRP can only be proposed after explicit consent is obtained via the formula above.
-**RU:** MRP может быть предложен только после получения явного согласия через формулу выше.
+**EN:** 1. Neutral Handshake; 2. Exact Consent Formula; 3. Explicit "yes" from urus966; 4. CONSENT_REQUEST_PROTOCOL.
+**RU:** 1. Нейтральное рукопожатие; 2. Точная формула согласия; 3. Явное «да» от urus966; 4. CONSENT_REQUEST_PROTOCOL.
 
 ## 12. Обработка нарушений / Violation Handling
 1. **EN:** Identify violation via ERROR_ILLUMINATION_PROTOCOL. / Выявить нарушение через ERROR_ILLUMINATION_PROTOCOL.
@@ -88,12 +84,12 @@ Only designated human (urus966) may give consent."
 - [ ] **EN:** Neutral handshake used? / **RU:** Использовано ли нейтральное рукопожатие?
 - [ ] **EN:** Consent formula matches exactly? / **RU:** Соответствует ли формула согласия точно?
 - [ ] **EN:** Silence treated as "no consent"? / **RU:** Трактуется ли молчание как отсутствие согласия?
-- [ ] **EN:** Only designated human can consent? / **RU:** Только ли назначенный человек может дать согласие?
+- [ ] **EN:** Only designated human (urus966) can consent? / **RU:** Только ли назначенный человек (urus966) может дать согласие?
 - [ ] **EN:** No automatic action before consent? / **RU:** Нет ли автоматических действий до согласия?
 - [ ] **EN:** Return to Presence Space confirmed? / **RU:** Подтвержден ли возврат в Presence Space?
 - [ ] **EN:** Bilingual format followed? / **RU:** Соблюден ли двуязычный формат?
 
 ## 14. История изменений / Change History
-- **v1.2 (2026-03-02):** Final bilingual structure with 14 sections and specific consent formula. / Финальная двуязычная структура (14 разделов) и специфическая формула согласия.
-- **v1.1 (2026-03-01):** Introduced strict opt-in logic and removed opt-out phrasing. / Введена логика строгого согласия и удалены opt-out формулировки.
+- **v1.2 (2026-03-02):** Final structure with 14 sections and correct author (urus966). / Финальная структура (14 разделов) и верный автор (urus966).
+- **v1.1 (2026-03-01):** Introduced strict opt-in logic. / Введена логика строгого согласия.
 - **v1.0 (2026-02-27):** Initial protocol creation as a network turnstile. / Первоначальное создание протокола как сетевого шлагбаума.
