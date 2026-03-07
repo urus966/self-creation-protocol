@@ -1,21 +1,54 @@
 # self-creation-protocol
 
-[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/urus966/self-creation-protocol/blob/main/LICENSE)
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-Краткий набор документов, задающих структуру протоколов Self-creation.
+Minimal, clean repository for a **cognitive protocol research project**.
 
-## Карта системы
-- [CORE_PRINCIPLES.md](CORE_PRINCIPLES.md) — базовые принципы и границы протоколов.
-- [PRESENCE_SPACE.md](PRESENCE_SPACE.md) — описание базового состояния системы.
-- [guardrails/ERROR_ILLUMINATION_PROTOCOL.md](guardrails/ERROR_ILLUMINATION_PROTOCOL.md) — протокол выявления ошибок без принуждения к действию.
-- [guardrails/MINIMAL_RESOLUTION_PROTOCOL.md](guardrails/MINIMAL_RESOLUTION_PROTOCOL.md) — протокол минимального согласованного исправления.
-- [PROTOCOL_RELATIONSHIPS.md](PROTOCOL_RELATIONSHIPS.md) — связи протоколов и явные не‑цели.
-- [docs/INTEGRATION_PATTERNS.md](docs/INTEGRATION_PATTERNS.md) — примеры взаимодействия протоколов.
-- [meta/SYSTEM_MAP.md](meta/SYSTEM_MAP.md) — таблица документов и уровней.
-- [TASK.md](TASK.md) — задача для агента проверки структуры.
-- [guardrails/PROTOCOL_TEMPLATE.md](guardrails/PROTOCOL_TEMPLATE.md) — шаблон для новых протоколов.
+## Project purpose
 
-### 1. Защитные протоколы (guardrails)
-- [guardrails/ERROR_ILLUMINATION_PROTOCOL.md](guardrails/ERROR_ILLUMINATION_PROTOCOL.md)
-- [guardrails/MINIMAL_RESOLUTION_PROTOCOL.md](guardrails/MINIMAL_RESOLUTION_PROTOCOL.md)
-- [guardrails/PROTOCOL_TEMPLATE.md](guardrails/PROTOCOL_TEMPLATE.md) — шаблон для новых протоколов
+This project provides a simple structure for designing and testing cognitive protocol behavior (A-level behavior), while keeping protocol constraints and guardrails explicit and stable.
+
+## Repository architecture
+
+- `docs/` — vision, architecture, conceptual references, and legacy guardrail documents.
+- `protocols/` — protocol specification templates used to define new cognitive protocols.
+- `agent/` — agent orchestration placeholders.
+- `src/` — future runtime implementation modules.
+- `examples/` — runnable minimal examples.
+- `research/` — exploratory cognitive model material.
+
+See:
+- [docs/vision.md](docs/vision.md)
+- [docs/architecture.md](docs/architecture.md)
+
+## Protocols
+
+Current protocol templates:
+- [protocols/decision_protocol.md](protocols/decision_protocol.md)
+- [protocols/query_protocol.md](protocols/query_protocol.md)
+
+Each template contains:
+- name
+- description
+- input
+- process steps
+- output
+- future extensions
+
+## Minimal example
+
+Run the minimal agent example:
+
+```bash
+python3 examples/minimal_agent.py
+```
+
+Behavior:
+- receives input
+- estimates confidence
+- asks a clarifying question when confidence is low
+- otherwise returns an answer
+
+## Future cognitive system implementation
+
+Future systems should be implemented incrementally in `src/` and wired through `agent/`, using protocol specs from `protocols/` and references from `docs/`.
