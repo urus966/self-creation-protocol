@@ -1,6 +1,6 @@
 # INTERCONNECTION_GUARD_PROTOCOL (Протокол защиты переходов между протоколами)
 
-**Version:** v1.3
+**Version:** v1.4
 **Date:** 2026-03-08
 **Author:** urus966
 
@@ -19,9 +19,9 @@
 - [ ] **Level B (Presence)** — not measured or optimized. / Не измеряется и не оптимизируется.
 
 ## 4. Определения / Definitions
-- **Protocol Transition:** Явный переход от одного протокола к другому в документации или коммуникации.
-- **Explicit Consent:** Прямое «да» перед переходом к следующему шагу.
-- **No-Action Default:** При отсутствии согласия переход не выполняется.
+- **Protocol Transition / Переход протокола:** Явный переход от одного протокола к другому в документации или коммуникации.
+- **Explicit Consent / Явное согласие:** Прямое «да» перед переходом к следующему шагу.
+- **No-Action Default / Бездействие по умолчанию:** При отсутствии согласия переход не выполняется.
 
 ## 5. Контекст применения / Application Context
 **EN:** Used when a documented flow suggests moving from one protocol to another.
@@ -67,8 +67,20 @@
 **Before / До:** "Violation found, correction starts automatically."
 **After / После:** "Violation illuminated. Do you want to proceed with a minimal correction step?"
 
-## 11. История изменений / Change History
-- **v1.3 (2026-03-08):** Sections 4–7 aligned to protocol-only scope; removed orchestration and agent-level wording.
+## 11. Что делать при нарушении / Violation Handling
+1. **EN:** Illuminate the violation via ERROR_ILLUMINATION_PROTOCOL. / **RU:** Подсветить нарушение через ERROR_ILLUMINATION_PROTOCOL.
+2. **EN:** Stop the transition attempt immediately. / **RU:** Немедленно остановить попытку перехода.
+3. **EN:** Return to Presence Space. / **RU:** Вернуться в Presence Space.
+
+## 12. Проверка перед добавлением / Checklist
+- [x] **EN:** Sections 4–7 are present and aligned to protocol-only scope. / **RU:** Разделы 4–7 присутствуют и соответствуют protocol-only scope.
+- [x] **EN:** No references to out-of-scope architecture layers. / **RU:** Нет ссылок на архитектурные слои вне scope.
+- [x] **EN:** Consent examples avoid automatic actions. / **RU:** Примеры согласия не содержат автоматических действий.
+- [x] **EN:** EN/RU format is consistent across key sections. / **RU:** Формат EN/RU согласован в ключевых разделах.
+
+## 13. История изменений / Change History
+- **v1.4 (2026-03-08):** Restored checklist + violation handling; unified EN/RU phrasing for sections 4–7.
+- **v1.3 (2026-03-08):** Sections 4–7 aligned to protocol-only scope; removed out-of-scope architecture wording.
 - **v1.2 (2026-03-02):** Final structure with 14 sections and correct author (urus966).
 - **v1.1 (2026-03-01):** Introduced strict opt-in logic.
 - **v1.0 (2026-02-27):** Initial protocol creation.
