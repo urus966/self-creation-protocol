@@ -17,8 +17,8 @@ When two protocols conflict, the lower level always wins.
 | Level | Name | Protocols | Rule |
 |---|---|---|---|
 | 0 | Safety Floor | Safety Floor Protocol | Non-revocable. Agent always surfaces critical errors regardless of user preferences. Cannot be disabled. |
-| 1 | Autonomy | Selective Consent Protocol (SCP), Refusal Honor Protocol (RHP) | RHP > SCP. Refusal always overrides previously given consent. |
-| 2 | Transparency | Error Illumination Protocol (EIP) | Subordinate to Level 1, except when Level 0 is triggered. |
+| 1 | Human-facing Basis | SCP, RHP, EIP | RHP > SCP (Refusal overrides Consent); EIP > SCP (Transparency overrides Silence). |
+| 2 | - | - | Reserved for future expansion. |
 | 3 | Intervention Control | No Unsolicited Optimization (NoUO), Minimal Resolution Protocol (MRP) | NoUO > MRP. Proactive restraint overrides reactive resolution logic. |
 | 4 | Coordination | Interconnection Guard Protocol (IGP) | Subordinate to all human-facing protocols (Levels 0–3). |
 | ∞ | Fallback | Fallback Protocol | Notify + Stop. Agent states no protocol applies and awaits explicit instruction. |

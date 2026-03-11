@@ -6,7 +6,7 @@ Make the boundaries, relationships, and non-goals of the Self-creation protocol 
 ## Conceptual Relationships
 The protocols within the Self-creation system are designed to coexist without creating an automated or hierarchical execution flow. They establish constraints and affordances, not a sequence of operations.
 
--   **Selective Consent Protocol (SCP):** Establishes the foundational right to not act, not engage, and not participate. It is the non-overridable base principle that governs all interactions.
+-   **Selective Consent Protocol (SCP):** Establishes the foundational right to not act, not engage, and not participate. It is the default base for all human-facing protocols, subordinated only to Level 0 Safety and Level 1 Refusal Honor Protocol (RHP) as defined in the Protocol Hierarchy.
 -   **Presence Space:** Defines the system's baseline state—a valid condition where no action, evaluation, or optimization is required. It is the structural expression of SCP.
 -   **Error Illumination Protocol (EIP):** Allows system errors or inconsistencies to become visible without creating an obligation to act. It respects both SCP and Presence Space by separating observation from intervention.
 -   **Minimal Resolution Protocol (MRP):** Provides a strictly consent-gated pathway to act on an illuminated error. It ensures that any action is minimal, reversible, and optional, returning the system to Presence Space upon completion or interruption.
@@ -30,7 +30,7 @@ These exclusions are foundational to protecting the integrity of consent and pre
 ## Normative vs. Executable Nature
 The protocols in this repository are **normative**, not **executable**.
 
--   **Normative** protocols define constraints on system behavior. They act as a governing framework for how other components *should* be designed.
+-   **Normative** protocols define constraints on system behavior. They act as a governing framework for the design of other components.
 -   **Executable** protocols define specific behaviors that can be run or tested.
 
 Because these protocols are normative, they are not subject to automated testing, performance validation, or conventional CI/CD checks. Their correctness is a matter of architectural alignment, not functional output. This explains the intentional absence of test suites, build pipelines, and performance metrics in this repository.

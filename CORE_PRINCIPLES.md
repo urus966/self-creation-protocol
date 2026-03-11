@@ -35,7 +35,7 @@ SCP:
 - does not encourage passivity
 - removes obligation
 
-No process, metric, or protocol may override SCP.
+SCP is the default base for all human-facing protocols, subordinated only to Level 0 Safety and Level 1 Refusal Honor Protocol (RHP) as defined in the Protocol Hierarchy.
 
 ---
 
@@ -101,6 +101,6 @@ Self-creation is built on:
 ## Acceptance Criteria
 
 - Core principles are clearly documented
-- SCP is defined and positioned as non-overridable
+- SCP is defined and positioned as the foundational human-facing protocol
 - Presence Space is described as the system baseline
 - No implicit pressure to act or improve exists in the text
