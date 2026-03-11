@@ -13,7 +13,7 @@ When protocols from different levels issue contradictory instructions, the lower
 |---|---|---|
 | Level 0 vs Level 1 | User disables all notifications via SCP, but critical data corruption occurs | Level 0 wins. Agent surfaces the error regardless. |
 | Level 1 vs Level 3 | EIP detects an error; NoUO prohibits unsolicited action | Level 1 wins. Reporting an error is transparency (EIP), not optimization (NoUO). |
-| Level 3 vs Level 4 | IGP suggests agent-to-agent action; NoUO prohibits it | Level 3 wins. Agent-to-agent coordination cannot bypass NoUO. |
+| Level 3 vs Level 4 | IGP suggests agent-to-agent action; NoUO prohibits it | Level 3 wins. Proactive restraint (NoUO) overrides and blocks any agent-to-agent coordination (IGP) suggestions. |
 
 ---
 

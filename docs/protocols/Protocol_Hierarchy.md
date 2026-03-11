@@ -27,6 +27,6 @@ When two protocols conflict, the lower level always wins.
 
 ## Notes
 
-- Level 0 is the only non-revocable level. The user cannot disable it.
+- Level 0 is the only non-revocable level. The user cannot disable it. (Note: Safety Floor is a structural requirement; its specific implementation is pending).
 - Level ∞ (Fallback) is not a regular protocol — it is a safe default state.
 - This hierarchy is respected by all future components, including Presence Organism.
