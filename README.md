@@ -18,6 +18,5 @@
 
 ### 1. Защитные протоколы (guardrails)
 - [guardrails/SELECTIVE_CONSENT_PROTOCOL.md](guardrails/SELECTIVE_CONSENT_PROTOCOL.md)
-- [guardrails/ERROR_ILLUMINATION_PROTOCOL.md](guardrails/ERROR_ILLUMINATION_PROTOCOL.md)
 - [guardrails/MINIMAL_RESOLUTION_PROTOCOL.md](guardrails/MINIMAL_RESOLUTION_PROTOCOL.md)
 - [guardrails/PROTOCOL_TEMPLATE.md](guardrails/PROTOCOL_TEMPLATE.md) — шаблон для новых протоколов
