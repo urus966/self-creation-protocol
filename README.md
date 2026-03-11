@@ -7,6 +7,7 @@
 ## Карта системы
 - [CORE_PRINCIPLES.md](CORE_PRINCIPLES.md) — базовые принципы и границы протоколов.
 - [PRESENCE_SPACE.md](PRESENCE_SPACE.md) — описание базового состояния системы.
+- [guardrails/SELECTIVE_CONSENT_PROTOCOL.md](guardrails/SELECTIVE_CONSENT_PROTOCOL.md) — протокол выборочного согласия.
 - [guardrails/ERROR_ILLUMINATION_PROTOCOL.md](guardrails/ERROR_ILLUMINATION_PROTOCOL.md) — протокол выявления ошибок без принуждения к действию.
 - [guardrails/MINIMAL_RESOLUTION_PROTOCOL.md](guardrails/MINIMAL_RESOLUTION_PROTOCOL.md) — протокол минимального согласованного исправления.
 - [PROTOCOL_RELATIONSHIPS.md](PROTOCOL_RELATIONSHIPS.md) — связи протоколов и явные не‑цели.
@@ -16,6 +17,7 @@
 - [guardrails/PROTOCOL_TEMPLATE.md](guardrails/PROTOCOL_TEMPLATE.md) — шаблон для новых протоколов.
 
 ### 1. Защитные протоколы (guardrails)
+- [guardrails/SELECTIVE_CONSENT_PROTOCOL.md](guardrails/SELECTIVE_CONSENT_PROTOCOL.md)
 - [guardrails/ERROR_ILLUMINATION_PROTOCOL.md](guardrails/ERROR_ILLUMINATION_PROTOCOL.md)
 - [guardrails/MINIMAL_RESOLUTION_PROTOCOL.md](guardrails/MINIMAL_RESOLUTION_PROTOCOL.md)
 - [guardrails/PROTOCOL_TEMPLATE.md](guardrails/PROTOCOL_TEMPLATE.md) — шаблон для новых протоколов
