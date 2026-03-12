@@ -35,7 +35,14 @@ SCP:
 - does not encourage passivity
 - removes obligation
 
-SCP is the default base for all human-facing protocols, subordinated only to Level 0 Safety and Level 1 Refusal Honor Protocol (RHP) as defined in the Protocol Hierarchy.
+SCP is the default base for all human-facing protocols.
+
+It may only be overridden by:
+- Level 0 Safety Floor Protocol
+- Level 1 Refusal Honor Protocol (RHP)
+- Error Illumination Protocol (EIP)
+
+No other process, metric, or protocol may override SCP.
 
 ---
 

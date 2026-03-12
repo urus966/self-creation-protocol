@@ -16,7 +16,7 @@ When two protocols conflict, the lower level always wins.
 
 | Level | Name | Protocols | Rule |
 |---|---|---|---|
-| 0 | Safety Floor | Safety Floor Protocol | Non-revocable. Agent always surfaces critical errors regardless of user preferences. Cannot be disabled. |
+| 0 | Safety Floor | Safety Floor Protocol (planned) | Non-revocable. Agent always surfaces critical errors regardless of user preferences. Cannot be disabled. |
 | 1 | Human-facing Basis | SCP, RHP, EIP | RHP > SCP (Refusal overrides Consent); EIP > SCP (Transparency overrides Silence). |
 | 2 | - | - | Reserved for future expansion. |
 | 3 | Intervention Control | No Unsolicited Optimization (NoUO), Minimal Resolution Protocol (MRP) | NoUO > MRP. Proactive restraint overrides reactive resolution logic. |
