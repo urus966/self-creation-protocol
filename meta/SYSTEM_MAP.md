@@ -8,7 +8,7 @@ guardrails/ERROR_ILLUMINATION_PROTOCOL.md | Error illumination without forced ac
 guardrails/MINIMAL_RESOLUTION_PROTOCOL.md | Minimal reversible correction | 3
 PROTOCOL_RELATIONSHIPS.md | Conceptual relationships between protocols | 1
 docs/INTEGRATION_PATTERNS.md | Protocol interaction examples | 4
-docs/protocols/Protocol_Hierarchy.md | Authority hierarchy | 0 (Meta)
-docs/protocols/Conflict_Rules.md | Conflict resolution rules | 0 (Meta)
-TASK.md | Structural validation task | 0 (Verification)
-guardrails/PROTOCOL_TEMPLATE.md | Template for new protocols | 0 (Template)
+docs/protocols/Protocol_Hierarchy.md | Authority hierarchy | Meta
+docs/protocols/Conflict_Rules.md | Conflict resolution rules | Meta
+TASK.md | Structural validation task | Verification
+guardrails/PROTOCOL_TEMPLATE.md | Template for new protocols | Template
