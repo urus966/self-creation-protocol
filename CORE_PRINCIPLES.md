@@ -35,14 +35,14 @@ SCP:
 - does not encourage passivity
 - removes obligation
 
-SCP is the default base for all human-facing protocols.
+SCP is the foundational protective protocol (Level 3).
 
-It may only be overridden by:
+It may be overridden by:
 - Level 0 Safety Floor Protocol
-- Level 1 Refusal Honor Protocol (RHP)
-- Error Illumination Protocol (EIP)
+- Level 1 Human Consent (explicit instruction)
+- Level 2 Organism Autonomy (internal viability)
 
-No other process, metric, or protocol may override SCP.
+No other process, metric, or protocol may override the baseline protection provided by SCP.
 
 ---
 

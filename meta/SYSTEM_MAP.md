@@ -2,12 +2,12 @@
 
 Document | Purpose | Level
 --- | --- | ---
-CORE_PRINCIPLES.md | Core principles and protocol boundaries | 1
-PRESENCE_SPACE.md | Baseline system state | Presence (B)
-guardrails/ERROR_ILLUMINATION_PROTOCOL.md | Error illumination without forced action | 1
-guardrails/MINIMAL_RESOLUTION_PROTOCOL.md | Minimal reversible correction | 3
-PROTOCOL_RELATIONSHIPS.md | Conceptual relationships between protocols | 1
-docs/INTEGRATION_PATTERNS.md | Protocol interaction examples | 4
+CORE_PRINCIPLES.md | Core principles and protocol boundaries | 3
+PRESENCE_SPACE.md | Baseline system state | 3 (Presence)
+guardrails/ERROR_ILLUMINATION_PROTOCOL.md | Error illumination without forced action | 3
+guardrails/MINIMAL_RESOLUTION_PROTOCOL.md | Minimal reversible correction | 4
+PROTOCOL_RELATIONSHIPS.md | Conceptual relationships between protocols | 3
+docs/INTEGRATION_PATTERNS.md | Protocol interaction examples | 5
 docs/protocols/Protocol_Hierarchy.md | Authority hierarchy | Meta
 docs/protocols/Conflict_Rules.md | Conflict resolution rules | Meta
 TASK.md | Structural validation task | Verification

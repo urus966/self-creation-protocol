@@ -1,5 +1,5 @@
 # Conflict Rules
-**Version:** 1.0
+**Version:** 1.4
 **Depends on:** Protocol_Hierarchy.md
 **Status:** Finalized
 
@@ -11,9 +11,11 @@ When protocols from different levels issue contradictory instructions, the lower
 
 | Conflict | Scenario | Resolution |
 |---|---|---|
-| Level 0 vs Level 1 | User disables all notifications via SCP, but critical data corruption occurs | Level 0 wins. Agent surfaces the error regardless. |
-| Level 1 vs Level 3 | EIP detects an error; NoUO prohibits unsolicited action | Level 1 wins. Reporting an error is transparency (EIP), not optimization (NoUO). |
-| Level 3 vs Level 4 | IGP suggests agent-to-agent action; NoUO prohibits it | Level 3 wins. Proactive restraint (NoUO) overrides and blocks any agent-to-agent coordination (IGP) suggestions. |
+| Level 0 vs Level 1 | User gives consent for a destructive action | Level 0 wins. Safety Floor prevents action regardless of consent. |
+| Level 1 vs Level 3 | Human gives explicit consent for an action; SCP would otherwise grant the right to not act | Level 1 wins. Consent enables action, overriding the baseline right to non-action. |
+| Level 2 vs Level 3 | Organism is in a "Sleep" state for recovery; EIP detects an error | Level 2 wins. Organism recovery state takes priority over transparency/illumination. |
+| Level 1 vs Level 2 | Human requests action; Organism is in a "Resting" state | Level 1 wins. Explicit human instruction overrides internal organism autonomy. |
+| Level 3 vs Level 4 | EIP detects an error; NoUO prohibits unsolicited action | Level 3 wins. Reporting an error is transparency (EIP), not optimization (NoUO). |
 
 ---
 
@@ -21,9 +23,9 @@ When protocols from different levels issue contradictory instructions, the lower
 
 When two protocols at the same level conflict:
 
-- **Level 1:** RHP > SCP — refusal always overrides consent
-- **Level 1:** EIP > SCP — illumination/transparency overrides user silence/disablement (transparency remains a system baseline)
-- **Level 3:** NoUO > MRP — proactive restraint overrides reactive resolution
+- **Level 3:** RHP > SCP — refusal always overrides consent (within the guardrail layer)
+- **Level 3:** EIP > SCP — illumination/transparency overrides user silence/disablement (transparency remains a system baseline)
+- **Level 4:** NoUO > MRP — proactive restraint overrides reactive resolution
 - **All other same-level conflicts:** Fallback Protocol is triggered
 
 ---

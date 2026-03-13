@@ -6,7 +6,7 @@ Make the boundaries, relationships, and non-goals of the Self-creation protocol 
 ## Conceptual Relationships
 The protocols within the Self-creation system are designed to coexist without creating an automated or hierarchical execution flow. They establish constraints and affordances, not a sequence of operations.
 
--   **Selective Consent Protocol (SCP):** Establishes the foundational right to not act, not engage, and not participate. It is the default base for all human-facing protocols, subordinated only to Level 0 Safety, Level 1 Refusal Honor Protocol (RHP), and Error Illumination Protocol (EIP) as defined in the Protocol Hierarchy.
+-   **Selective Consent Protocol (SCP):** Establishes the foundational right to not act, not engage, and not participate. It acts as the core guardrail (Level 3), subordinated to Level 0 Safety, Level 1 Human Consent, and Level 2 Organism Autonomy as defined in the Protocol Hierarchy.
 -   **Presence Space:** Defines the system's baseline state—a valid condition where no action, evaluation, or optimization is required. It is the structural expression of SCP.
 -   **Error Illumination Protocol (EIP):** Allows system errors or inconsistencies to become visible without creating an obligation to act. It respects both SCP and Presence Space by separating observation from intervention.
 -   **Minimal Resolution Protocol (MRP):** Provides a strictly consent-gated pathway to act on an illuminated error. It ensures that any action is minimal, reversible, and optional, returning the system to Presence Space upon completion or interruption.
