@@ -1,65 +1,64 @@
-# Minimal Resolution Protocol (MRP)
+# MINIMAL_RESOLUTION_PROTOCOL (Протокол минимального разрешения)
 
-## Goal
-Introduce the Minimal Resolution Protocol (MRP) — a strictly opt-in mechanism that allows errors to be resolved only after explicit consent.
-MRP defines the smallest possible bridge from observation to action.
+**Версия:** v1.1
+**Дата:** 2026-03-05
+**Автор:** urus966
+**Статус:** READY
 
-## Context
-With:
-- SCP (right not to act)
-- Presence Space (right to remain at rest)
-- EIP (right to see errors without pressure)
-...the system now needs a way to act without becoming coercive.
-MRP is that way.
+---
 
-## Protocol Definition
-**Minimal Resolution Protocol (MRP):**
-A protocol that enables corrective action only when explicitly requested, and only to the minimal necessary degree.
-Resolution is optional, reversible, and bounded.
+## 1. Название протокола
+MINIMAL_RESOLUTION_PROTOCOL (MRP — Протокол минимального разрешения)
 
-## Core Rules
+## 2. Назначение
+Защищает от чрезмерных изменений и неконтролируемого расширения задач. Определяет правила исправления ошибок только после явного согласия и только в минимально необходимом объеме.
 
-### 1. Explicit Consent Only
-Resolution may begin only after a clear, voluntary “yes”.
-Silence, hesitation, or presence ≠ consent.
+## 3. Уровень архитектуры
+- [x] Уровень A (Behavior) — управляемый процесс разрешения противоречий
+- [ ] Уровень B (Presence) — состояние покоя, куда система возвращается после исправления
 
-### 2. Minimal Action Principle
-Only the smallest action required to address the illuminated error is allowed.
-No cascading tasks or expansions.
+## 4. Контекст применения
+Активируется только после того, как ошибка была освещена через EIP и было получено явное согласие на её исправление через CONSENT_REQUEST_PROTOCOL.
 
-### 3. Reversibility
-Any resolution step can be stopped or undone without penalty.
+## 5. Запрещено (красная линия)
+- Начинать исправление без явного подтверждения согласия
+- Увеличивать объем работы за рамки минимального («раз пока мы здесь, давай сделаем ещё и это»)
+- Использовать императивы («нужно доделать», «необходимо исправить»)
+- Оценивать скорость или качество исправления в рамках протокола
 
-### 4. No Goal Expansion
-Resolution must not introduce:
-- new objectives
-- improvement agendas
-- optimization layers
+## 6. Разрешено (зелёная зона)
+- Использовать минимальное действие для восстановления корректной работы
+- Останавливать или отменять процесс исправления в любой момент без последствий
+- Сообщать о завершении исправления и немедленно прекращать любую связанную активность
+- Возвращаться в Presence Space сразу после завершения действия
 
-### 5. Return to Presence Space
-Completion or interruption of resolution automatically returns the system to Presence Space.
+## 7. Примеры использования (обязательно!)
+**Сценарий 1 — Исправление опечатки**
+**До:** «Обнаружена опечатка в имени. Исправляю все похожие ошибки в других документах тоже, чтобы было единообразно.»
+**После:** «Опечатка в имени освещена. Получено согласие на исправление. Исправлен только один этот символ. Новых задач не создано.»
 
-## What This PR Adds
-- A standalone document: guardrails/MINIMAL_RESOLUTION_PROTOCOL.md
-- Formal rules for consent-based correction
-- Clear constraints preventing overreach
+**Сценарий 2 — Отмена исправления**
+**До:** «Мы начали исправление конфигурации, теперь вы должны закончить, иначе система будет нестабильна.»
+**После:** «Исправление начато. Если возникло желание остановиться — мы прекращаем процесс в любой момент. Система может оставаться в любом текущем состоянии.»
 
-## What This PR Does NOT Add
-- Progress tracking
-- Success metrics
-- Improvement frameworks
-- “While you’re here” logic
+## 8. Что делать при нарушении протокола
+1. Осветить нарушение границ минимальности через ERROR_ILLUMINATION_PROTOCOL
+2. Откатить изменения до состояния, согласованного ранее (если возможно и есть желание)
+3. Немедленно прекратить работу по разрешению конфликта
+4. Вернуться в состояние покоя (Presence Space)
 
-Resolution ends where the error ends.
+## 9. Связи с другими протоколами
+- Активируется после: ERROR_ILLUMINATION_PROTOCOL и CONSENT_REQUEST_PROTOCOL
+- Защищает: Presence Space от неконтролируемой активности
+- Опирается на: SELECTIVE_CONSENT_PROTOCOL
 
-## Acceptance Criteria
-- Resolution requires explicit consent
-- Actions are minimal and bounded
-- Stopping is always allowed
-- No identity, performance, or productivity framing
-- Presence Space is restored by default
+## 10. Проверка перед добавлением (чек-лист)
+- [x] Указан уровень A (как алгоритм действий)
+- [x] Принципы минимальности и обратимости соблюдены
+- [x] Отсутствуют императивы в правилах (кроме раздела «Запрещено» и примеров нарушений)
+- [x] Есть сценарии «до/после» для наглядности
+- [x] Ссылки на EIP и SCP актуальны
 
-## Review Guardrail
-If any part suggests:
-> “Since you started, you might as well continue…”
-—it violates this protocol.
+## 11. История изменений
+- v1.1 (2026-03-05): Рефакторинг под шаблон v2.1, добавление примеров и механизмов защиты от расширения задач.
+- v1.0: Начальное определение правил исправления по согласию.

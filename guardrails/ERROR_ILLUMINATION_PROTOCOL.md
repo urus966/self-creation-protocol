@@ -1,83 +1,64 @@
-# Error Illumination Protocol (EIP)
+# ERROR_ILLUMINATION_PROTOCOL (Протокол освещения ошибок)
 
-## Objective
-Introduce the Error Illumination Protocol (EIP) — a mechanism for detecting and exposing errors without turning the human into the error. This protocol defines how the system relates to mistakes, inconsistencies, and breakdowns without enforcing correction or action.
+**Версия:** v1.1
+**Дата:** 2026-03-05
+**Автор:** urus966
+**Статус:** READY
 
-## Rationale
-Most systems treat errors as:
-- something to eliminate
-- something to fix immediately
-- something that implies failure
+---
 
-This creates pressure, false urgency, and self-identification with error. Self-creation requires a different approach:
-> An error may exist without requiring resolution.
+## 1. Название протокола
+ERROR_ILLUMINATION_PROTOCOL (EIP — Протокол освещения ошибок)
 
-## Definition: Error Illumination Protocol (EIP)
-Error Illumination means:
-- making an error visible
-- without judgment
-- without urgency
-- without enforced action
+## 2. Назначение
+Защищает человека от идентификации с ошибкой. Позволяет системе обнаруживать и показывать противоречия или сбои без создания обязательства по их исправлению.
 
-EIP separates:
-- error detection
-- from error correction
+## 3. Уровень архитектуры
+- [x] Уровень A (Behavior) — механизм обнаружения и визуализации
+- [ ] Уровень B (Presence) — не затрагивается исправлением, защищен от оценки
 
-## Core Principles
+## 4. Контекст применения
+Активируется в момент обнаружения любого несоответствия между ожидаемым и текущим состоянием системы, при нарушении протоколов или возникновении логических тупиков.
 
-### 1. Visibility Without Obligation
-An error may be illuminated without creating:
-- tasks
-- deadlines
-- corrective actions
+## 5. Запрещено (красная линия)
+- Подразумевать вину человека в возникновении ошибки
+- Создавать задачи, дедлайны или принудительные действия после обнаружения ошибки
+- Использовать императивы («нужно исправить», «следует изменить»)
+- Связывать ошибку с личностью или эффективностью человека
 
-Illumination ≠ intervention.
+## 6. Разрешено (зелёная зона)
+- Нейтральное описание факта несоответствия
+- Сосуществование с ошибкой неограниченное время без её исправления
+- Предоставление информации об ошибке только как данных для наблюдения
+- Полное отделение этапа обнаружения от этапа исправления
 
-### 2. Non-Identity Principle
-The protocol must never imply:
-- “you are the error”
-- “you caused the error”
-- “you must fix the error”
+## 7. Примеры использования (обязательно!)
+**Сценарий 1 — Нарушение протокола**
+**До:** «Вы нарушили протокол SCP, так как не ответили на запрос. Пожалуйста, исправьте это.»
+**После:** «Замечен сигнал, не соответствующий SCP (отсутствие ответа на обязательный по старым правилам запрос). Ошибка освещена. Состояние Presence Space сохраняется.»
 
-Errors belong to states and processes, not to persons.
+**Сценарий 2 — Логическое противоречие**
+**До:** «Обнаружена ошибка в конфигурации. Вам необходимо её устранить для продолжения работы.»
+**После:** «В конфигурации присутствует противоречие. Оно теперь освещено. Работа может продолжаться в текущем режиме или быть приостановлена по желанию.»
 
-### 3. Presence Space Compatibility
-EIP must fully respect Presence Space. If the system is in Presence Space:
-- errors may be visible
-- but no transition is required
-- no pressure to exit Presence Space is allowed
+## 8. Что делать при нарушении протокола
+1. Осветить само нарушение EIP через другой цикл освещения (мета-освещение)
+2. Снять возникшее давление или требование исправления
+3. Вернуться к нейтральному наблюдению без оценок
+4. Зафиксировать факт давления как системный шум
 
-### 4. Consent-Gated Resolution
-Moving from illumination to correction:
-- requires explicit consent
-- cannot be automated
-- cannot be inferred from severity, frequency, or metrics
+## 9. Связи с другими протоколами
+- Разделяет: Обнаружение (EIP) и Исправление (MRP)
+- Защищает: Presence Space от принудительной оптимизации
+- Взаимодействует с: INTERCONNECTION_GUARD_PROTOCOL
 
-No error forces action.
+## 10. Проверка перед добавлением (чек-лист)
+- [x] Указан уровень A (как диагностический инструмент)
+- [x] Отсутствуют императивы в правилах (кроме раздела «Запрещено» и примеров нарушений)
+- [x] Ошибка отделена от действия по её исправлению
+- [x] Примеры показывают нейтральность освещения
+- [x] Ссылки на MRP и SCP актуальны
 
-## What This Protocol Defines
-- A standalone document (guardrails/ERROR_ILLUMINATION_PROTOCOL.md)
-- Formal separation of illumination vs correction
-- Rules for safe error visibility
-- Constraints for future diagnostic or analytic tools
-
-## What This Protocol Does NOT Define
-- Fixing mechanisms
-- Priority systems
-- Severity levels
-- Auto-resolution logic
-
-EIP is diagnostic, not prescriptive.
-
-## Acceptance Criteria
-- Errors are defined as neutral system signals
-- Illumination does not imply action
-- Human identity is never linked to error state
-- Presence Space integrity is preserved
-- Language is descriptive, not corrective
-
-## Review Guardrail
-If any part of the text can be interpreted as:
-> “You should fix this now”
-
-—it violates this protocol and must be removed.
+## 11. История изменений
+- v1.1 (2026-03-05): Полный рефакторинг под шаблон v2.1, удаление императивов, добавление примеров.
+- v1.0: Начальное определение разделения освещения и исправления.
