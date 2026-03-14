@@ -19,7 +19,7 @@ SCP is the baseline Level-3 protocol.
 > A person has the right to not respond, not act, not improve, and not play.
 
 - **Removes Obligation:** SCP does not block development or encourage passivity, but it removes the pressure to perform.
-- **Hierarchy-Aware:** Only Level 0 (Safety Floor), Level 1 (Human Consent), or Level 2 (Organism Autonomy) may supersede it.
+- **Hierarchy-Aware:** SCP is the baseline Level-3 protocol. Only Level 0 (Safety Floor), Level 1 (Human Consent), or Level 2 (Organism Autonomy) may supersede it.
 
 No other process, metric, or protocol may override the baseline protection provided by SCP.
 
