@@ -1,6 +1,6 @@
-# System Map
+# System Map (Protocol Scope)
 
-Документ | Назначение | Уровень
+Документ | Назначение | Scope
 --- | --- | ---
 CORE_PRINCIPLES.md | Базовые принципы и границы протоколов | A
 PRESENCE_SPACE.md | Описание базового состояния системы | B

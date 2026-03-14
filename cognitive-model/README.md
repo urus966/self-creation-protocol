@@ -1,14 +1,5 @@
-# cognitive-model
+# Deprecated in this repository
 
-**Уровень A (Behavior)** — здесь будет кодовая реализация reference-агента.
+This repository is protocol-only.
 
-Здесь можно:
-- Разрабатывать и тестировать код
-- Создавать модели мышления агента
-- Добавлять reference-реализации протоколов
-
-Здесь **нельзя**:
-- Дублировать guardrails или документы уровня B
-- Нарушать асимметрию ссылок (guardrails → cognitive-model запрещено)
-
-См. SYSTEM_MAP.md и PROTOCOL_TEMPLATE.md.
+Cognitive architecture content was removed from scope and should live in a separate repository: `self-creation-cognitive`.
