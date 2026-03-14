@@ -16,11 +16,11 @@
 - [guardrails/MINIMAL_RESOLUTION_PROTOCOL.md](guardrails/MINIMAL_RESOLUTION_PROTOCOL.md) — протокол минимального исправления.
 - [guardrails/PROTOCOL_TEMPLATE.md](guardrails/PROTOCOL_TEMPLATE.md) — шаблон для новых протоколов.
 
-### 3. Документация и архитектура
+### 3. Documentation and Architecture
 - [docs/protocols/Protocol_Hierarchy.md](docs/protocols/Protocol_Hierarchy.md) — иерархия протоколов и уровни авторитета.
 - [docs/protocols/Conflict_Rules.md](docs/protocols/Conflict_Rules.md) — правила разрешения конфликтов.
 - [docs/INTEGRATION_PATTERNS.md](docs/INTEGRATION_PATTERNS.md) — примеры взаимодействия протоколов.
 
-### 4. Метаданные и задачи
+### 4. Metadata and Tasks
 - [meta/SYSTEM_MAP.md](meta/SYSTEM_MAP.md) — общая таблица документов и уровней.
 - [TASK.md](TASK.md) — задача для агента проверки структуры.
