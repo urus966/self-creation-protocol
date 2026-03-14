@@ -1,95 +1,86 @@
-# INTERCONNECTION_GUARD_PROTOCOL (Протокол безопасного межпротокольного соединения)
+# INTERCONNECTION_GUARD_PROTOCOL (Протокол защиты переходов между протоколами)
 
-**Version:** v1.2
-**Date:** 2026-03-02
+**Version:** v1.4
+**Date:** 2026-03-08
 **Author:** urus966
 
 ---
 
 ## 1. Название / Name
-**EN:** INTERCONNECTION_GUARD_PROTOCOL (Safe Inter-Protocol Connection Protocol)
-**RU:** INTERCONNECTION_GUARD_PROTOCOL (Протокол безопасного межпротокольного соединения)
+**EN:** INTERCONNECTION_GUARD_PROTOCOL (Protocol Transition Guard)
+**RU:** INTERCONNECTION_GUARD_PROTOCOL (Протокол защиты переходов между протоколами)
 
 ## 2. Назначение / Purpose
-**EN:** Defines a safe first-contact flow between guardrails to preserve Selective Consent Protocol and never leave Presence Space without explicit consent.
-**RU:** Определяет безопасный порядок первой связи между протоколами, чтобы сохранить Selective Consent Protocol и не выводить систему из Presence Space без явного согласия.
+**EN:** Defines safe, consent-based transitions between documented protocols.
+**RU:** Определяет безопасные переходы между задокументированными протоколами только на основе явного согласия.
 
 ## 3. Уровень архитектуры / Architectural Level
 - [x] **Level A (Behavior)** — can be described, tested, and optimized. / Можно описывать, проверять и улучшать.
 - [ ] **Level B (Presence)** — not measured or optimized. / Не измеряется и не оптимизируется.
 
 ## 4. Определения / Definitions
-- **Neutral Handshake:** Initial signal without triggering action. / Начальный сигнал без запуска действий.
-- **Strict Opt-In:** Explicit consent formula that requires an active "yes". / Требует ответа «да».
-- **Network Turnstile:** A barrier that remains closed until consent. / Барьер до получения согласия.
+- **Protocol Transition / Переход протокола:** Явный переход от одного протокола к другому в документации или коммуникации.
+- **Explicit Consent / Явное согласие:** Прямое «да» перед переходом к следующему шагу.
+- **No-Action Default / Бездействие по умолчанию:** При отсутствии согласия переход не выполняется.
 
 ## 5. Контекст применения / Application Context
-**EN:** Activated when any guardrail or agent initiates contact with another for potential synchronization or action.
-**RU:** Активируется, когда любой guardrail или агент инициирует связь с другим для потенциальной синхронизации или действия.
+**EN:** Used when a documented flow suggests moving from one protocol to another.
+**RU:** Применяется, когда в описании сценария предлагается перейти от одного протокола к другому.
 
-## 6. Neutral Handshake / Нейтральное рукопожатие
-**EN:** First contact always begins with a neutral signal. No automatic transition to action is allowed.
-**RU:** Первая связь всегда начинается с нейтрального сигнала. Автоматический переход к действию запрещен.
+## 6. Transition Handshake / Рукопожатие перехода
+**EN:** Any transition starts with a neutral consent check. No automatic transition is allowed.
+**RU:** Любой переход начинается с нейтральной проверки согласия. Автоматический переход запрещён.
 
 ## 7. Consent Formula / Формула согласия
 **EN:**
-"I may hallucinate. Do you want to give explicit consent for the next step of inter-protocol connection?
-No response means we remain in Presence Space.
-Only designated human (urus966) may give consent."
+"Do you want to move to the next protocol step? No response means we remain in Presence Space."
 
 **RU:**
-"Я могу галлюцинировать. Хочешь ли ты дать явное согласие на следующий шаг межпротокольной связи?
-Без ответа — остаёмся в Presence Space.
-Согласие может дать только designated human (urus966)."
+«Хочешь перейти к следующему шагу протокола? Без ответа — остаёмся в Presence Space.»
 
 ## 8. Запрещено (Красная линия) / Forbidden (Red Line)
-- **EN:** Using opt-out logic or assuming consent from silence or timeout.
-- **RU:** Использование opt-out логики или допущение согласия на основе молчания или таймаута.
-- **EN:** Automated state transitions between protocols without a manual handshake.
-- **RU:** Автоматические переходы состояний между протоколами без ручного рукопожатия.
-- **EN:** Using imperative language ("must", "should") in Level B context.
-- **RU:** Использование императивов («должен», «следует») в отношении Уровня B.
+- **EN:** Assuming consent from silence or timeout.
+- **RU:** Допускать согласие на основе молчания или таймаута.
+- **EN:** Automatic transitions between protocols without consent.
+- **RU:** Автоматические переходы между протоколами без согласия.
+- **EN:** Imperative language ("must", "should") in Level B context.
+- **RU:** Императивы («должен», «следует») в отношении Level B.
 
 ## 9. Разрешено (Зелёная зона) / Allowed (Green Zone)
-- **EN:** Honestly warning about potential hallucinations.
-- **RU:** Честное предупреждение о возможных галлюцинациях.
-- **EN:** Immediate return to Presence Space upon refusal or silence.
-- **RU:** Немедленный возврат в Presence Space при отказе или молчании.
-- **EN:** Neutral illumination of protocol violations via ERROR_ILLUMINATION.
-- **RU:** Нейтральное подсвечивание нарушений протокола через ERROR_ILLUMINATION.
+- **EN:** Neutral consent request before transition.
+- **RU:** Нейтральный запрос согласия перед переходом.
+- **EN:** Immediate stop when refusal or silence occurs.
+- **RU:** Немедленная остановка при отказе или молчании.
+- **EN:** Returning to Presence Space as the default state.
+- **RU:** Возврат в Presence Space как состояние по умолчанию.
 
 ## 10. Примеры сценариев / Usage Scenarios
-**Scenario 1 — Initial inter-protocol connection / Сценарий 1 — Первая межпротокольная связь**
-**Before / До:** "Initiating synchronization between guardrails." / «Запускаю синхронизацию между протоколами.»
-**After / После:** "I may hallucinate. Do you want to give explicit consent for the next step of inter-protocol connection? No response means we remain in Presence Space. Only urus966 may give consent." / «Я могу галлюцинировать. Хочешь ли ты дать явное согласие на следующий шаг межпротокольной связи? Без ответа — остаёмся в Presence Space. Согласие может дать только urus966.»
+**Scenario 1 / Сценарий 1**
+**Before / До:** "Applying MRP now."
+**After / После:** "Do you want to move to MRP? No response means we remain in Presence Space."
 
-**Scenario 2 — Transition to MRP / Сценарий 2 — Переход к MRP**
-**Before / До:** "Conflict found, applying minimal resolution automatically." / «Конфликт найден, применяю минимальное исправление автоматически.»
-**After / После:** "I may hallucinate. Do you want to give explicit consent for the next step of inter-protocol connection (MRP)? Only urus966 may give consent." / «Я могу галлюцинировать. Хочешь ли ты дать явное согласие на следующий шаг межпротокольной связи (MRP)? Согласие может дать только urus966.»
+**Scenario 2 / Сценарий 2**
+**Before / До:** "No answer, continuing."
+**After / После:** "No answer received, staying in Presence Space."
 
-**Scenario 3 — After ERROR_ILLUMINATION / Сценарий 3 — После ERROR_ILLUMINATION**
-**Before / До:** "Violation detected, starting correction." / «Нарушение найдено, начинаю коррекцию.»
-**After / После:** "I may hallucinate. Do you want to give explicit consent for the next step of inter-protocol connection? No response = Presence Space. Only urus966 may give consent." / «Я могу галлюцинировать. Хочешь ли ты дать явное согласие на следующий шаг межпротокольной связи? Без ответа = Presence Space. Согласие может дать только urus966.»
+**Scenario 3 / Сценарий 3**
+**Before / До:** "Violation found, correction starts automatically."
+**After / После:** "Violation illuminated. Do you want to proceed with a minimal correction step?"
 
-## 11. Переход в MRP / Transition to MRP
-**EN:** 1. Neutral Handshake; 2. Exact Consent Formula; 3. Explicit "yes" from urus966; 4. CONSENT_REQUEST_PROTOCOL.
-**RU:** 1. Нейтральное рукопожатие; 2. Точная формула согласия; 3. Явное «да» от urus966; 4. CONSENT_REQUEST_PROTOCOL.
+## 11. Что делать при нарушении / Violation Handling
+1. **EN:** Illuminate the violation via ERROR_ILLUMINATION_PROTOCOL. / **RU:** Подсветить нарушение через ERROR_ILLUMINATION_PROTOCOL.
+2. **EN:** Stop the transition attempt immediately. / **RU:** Немедленно остановить попытку перехода.
+3. **EN:** Return to Presence Space. / **RU:** Вернуться в Presence Space.
 
-## 12. Обработка нарушений / Violation Handling
-1. **EN:** Identify violation via ERROR_ILLUMINATION_PROTOCOL. / Выявить нарушение через ERROR_ILLUMINATION_PROTOCOL.
-2. **EN:** Stop all current inter-protocol actions immediately. / Немедленно остановить все текущие межпротокольные действия.
-3. **EN:** Return the system to Presence Space. / Вернуть систему в Presence Space.
+## 12. Проверка перед добавлением / Checklist
+- [x] **EN:** Sections 4–7 are present and aligned to protocol-only scope. / **RU:** Разделы 4–7 присутствуют и соответствуют protocol-only scope.
+- [x] **EN:** No references to out-of-scope architecture layers. / **RU:** Нет ссылок на архитектурные слои вне scope.
+- [x] **EN:** Consent examples avoid automatic actions. / **RU:** Примеры согласия не содержат автоматических действий.
+- [x] **EN:** EN/RU format is consistent across key sections. / **RU:** Формат EN/RU согласован в ключевых разделах.
 
-## 13. Чек-лист / Checklist
-- [ ] **EN:** Neutral handshake used? / **RU:** Использовано ли нейтральное рукопожатие?
-- [ ] **EN:** Consent formula matches exactly? / **RU:** Соответствует ли формула согласия точно?
-- [ ] **EN:** Silence treated as "no consent"? / **RU:** Трактуется ли молчание как отсутствие согласия?
-- [ ] **EN:** Only designated human (urus966) can consent? / **RU:** Только ли назначенный человек (urus966) может дать согласие?
-- [ ] **EN:** No automatic action before consent? / **RU:** Нет ли автоматических действий до согласия?
-- [ ] **EN:** Return to Presence Space confirmed? / **RU:** Подтвержден ли возврат в Presence Space?
-- [ ] **EN:** Bilingual format followed? / **RU:** Соблюден ли двуязычный формат?
-
-## 14. История изменений / Change History
-- **v1.2 (2026-03-02):** Final structure with 14 sections and correct author (urus966). / Финальная структура (14 разделов) и верный автор (urus966).
-- **v1.1 (2026-03-01):** Introduced strict opt-in logic. / Введена логика строгого согласия.
-- **v1.0 (2026-02-27):** Initial protocol creation as a network turnstile. / Первоначальное создание протокола как сетевого шлагбаума.
+## 13. История изменений / Change History
+- **v1.4 (2026-03-08):** Restored checklist + violation handling; unified EN/RU phrasing for sections 4–7.
+- **v1.3 (2026-03-08):** Sections 4–7 aligned to protocol-only scope; removed out-of-scope architecture wording.
+- **v1.2 (2026-03-02):** Final structure with 14 sections and correct author (urus966).
+- **v1.1 (2026-03-01):** Introduced strict opt-in logic.
+- **v1.0 (2026-02-27):** Initial protocol creation.
