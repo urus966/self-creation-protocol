@@ -35,12 +35,8 @@ SCP:
 - does not encourage passivity
 - removes obligation
 
-SCP is the foundational protective protocol (Level 3).
-
-It may be overridden by:
-- Level 0 Safety Floor Protocol
-- Level 1 Human Consent (explicit instruction)
-- Level 2 Organism Autonomy (internal viability)
+SCP is the default baseline protocol at Level 3.
+It may only be overridden by Level 0 (Safety Floor), Level 1 (Human Consent), or Level 2 (Organism Autonomy).
 
 No other process, metric, or protocol may override the baseline protection provided by SCP.
 
