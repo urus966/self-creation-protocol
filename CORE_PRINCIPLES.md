@@ -13,10 +13,24 @@ Self-creation starts with consent, not development. These foundational principle
 ## Core Principles
 
 ### 1. Selective Consent Protocol (SCP)
-SCP is the default baseline protocol at Level 3. A person has the right to not respond, not act, not improve, and not play.
+Introduce SCP as the base protocol of the system.
 
+**Definition:**
+
+> A person has the right to not respond, not act, not improve, and not play.
+
+SCP:
+- does not block development
+- does not encourage passivity
+- removes obligation
+
+---
 - **Removes Obligation:** SCP does not block development or encourage passivity, but it removes the pressure to perform.
-- **Hierarchy-Aware:** It may only be overridden by Level 0 (Safety Floor), Level 1 (Human Consent), or Level 2 (Organism Autonomy). No other process, metric, or protocol may override the baseline protection provided by SCP.
+- **Hierarchy-Aware:** SCP is the baseline Level-3 protocol. Only Level 0 (Safety Floor), Level 1 (Human Consent), or Level 2 (Organism Autonomy) may supersede it.
+
+No other process, metric, or protocol may override the baseline protection provided by SCP.
+
+---
 
 ### 2. No Mandatory “Development System”
 Self-creation does not include mandatory roadmaps, KPIs, or progress enforcement by default. Any structure or performance metric may exist only after explicit consent.
