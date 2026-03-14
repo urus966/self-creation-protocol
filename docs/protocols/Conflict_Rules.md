@@ -7,7 +7,7 @@
 
 ## Inter-Level Conflicts
 
-When protocols from different levels issue contradictory instructions, the **lower level number** (higher authority) always wins.
+When protocols from different levels issue contradictory instructions, the **lower level number** (higher authority) always wins. No exceptions.
 
 | Conflict | Scenario | Resolution |
 |---|---|---|
