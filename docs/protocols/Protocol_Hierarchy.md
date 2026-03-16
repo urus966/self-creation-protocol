@@ -33,7 +33,7 @@ When two protocols conflict, the protocol with the lower level number always win
 **Result:** Level 2 wins. The organism remains in sleep; the error illumination is queued or deferred.
 
 ### Organism Preservation vs SCP
-**Situation:** A user interaction triggers a neutral response via SCP (Level 3), but the Organism (Level 2) logic determines that a "Minimum Interaction" mode is required to maintain its internal viability.
+**Situation:** A user interaction triggers a neutral response via SCP (Level 3), but the Organism (Level 2) logic determines that a "Minimum Interaction" mode preserves its internal viability.
 **Result:** Level 2 wins. The organism's internal viability logic overrides the default neutral SCP behavior to enforce stricter interaction boundaries.
 
 ---

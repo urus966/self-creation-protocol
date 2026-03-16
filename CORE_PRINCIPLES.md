@@ -25,11 +25,11 @@ No other process, metric, or protocol may override the baseline protection provi
 
 ---
 
-### 2. No Mandatory “Development System”
-Self-creation does not include mandatory roadmaps, KPIs, or progress enforcement by default. Any structure or performance metric may exist only after explicit consent.
+### 2. Absence of Forced “Development System”
+Self-creation does not include roadmaps, KPIs, or progress enforcement by default. Any structure or performance metric exists only after explicit consent.
 
 ### 3. Presence Space
-Presence Space is the system baseline. It is a condition where no action is mandatory, no evaluation occurs, and no optimization is running. Action may emerge from Presence Space, but it is never required.
+Presence Space is the system baseline. It is a condition where action is optional, evaluation does not occur, and optimization is not running. Action may emerge from Presence Space, but it is never a requirement.
 
 ---
 

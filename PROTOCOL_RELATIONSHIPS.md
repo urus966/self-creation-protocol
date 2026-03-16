@@ -7,7 +7,7 @@ Make the boundaries, relationships, and non-goals of the Self-creation protocol 
 Protocols coexist without creating an automated or hierarchical execution flow. They establish constraints and affordances, not a sequence of operations.
 
 - **Selective Consent Protocol (SCP):** Establishes the foundational right to not act. It acts as the core guardrail (Level 3), subordinated to Level 0 Safety, Level 1 Human Consent, and Level 2 Organism Autonomy.
-- **Presence Space:** Defines the system's baseline state—a valid condition where no action, evaluation, or optimization is required.
+- **Presence Space:** Defines the system's baseline state—a valid condition where action, evaluation, or optimization is optional.
 - **Error Illumination Protocol (EIP):** Allows system errors or inconsistencies to become visible without creating an obligation to act.
 - **Minimal Resolution Protocol (MRP):** Provides a strictly consent-gated pathway to act on an illuminated error. Any action is minimal, reversible, and optional.
 
