@@ -2,105 +2,43 @@
 
 ## Objective
 
-Establish the conceptual core of the Self-creation project.
+Define the conceptual base of Self-creation in protocol scope.
 
-This document does not introduce features, metrics, or development flows.
-Its purpose is to formally define the starting point of the system:
-a human being who is not obligated to participate, improve, or perform.
-
----
+This document avoids runtime design, cognitive modeling, and optimization logic.
 
 ## Scope
 
-This document introduces foundational principles that all future protocols, modules, and tools align with.
-
-Self-creation starts before development.
-It starts with consent.
-
----
+The principles here frame how protocol documents relate to each other.
 
 ## Core Principles
 
-### 1. Selective Consent Protocol (SCP)
+### 1. Human Primacy and Consent
 
-Introduce SCP as the base protocol of the system.
+Human consent is a governing reference for protocol interpretation.
 
-**Definition:**
+### 2. Presence Space
 
-> A person has the right to not respond, not act, not improve, and not play.
+Presence Space is the baseline condition where non-action is valid and no performance framing is active.
 
-SCP:
+### 3. SCP Position in v1.4 Hierarchy
 
-- does not block development
-- does not encourage passivity
-- removes obligation
+Selective Consent Protocol (SCP) is a Level 3 core guardrail.
 
-No process, metric, or protocol may override SCP.
+SCP is subordinate to:
+- L0: Safety
+- L1: Human Consent
+- L2: Organism Autonomy
 
----
+SCP coordinates with other Level 3 guardrails through conflict rules.
 
-### 2. No Mandatory “Development System”
+### 4. Protocol-only Boundary
 
-Explicitly state that Self-creation does not include by default:
+Self-creation documents define protocol semantics and relations.
 
-- mandatory roadmaps
-- KPIs, OKRs, or SMART goals
-- progress enforcement
-- comparative rankings
+They do not define runtime execution, internal cognition, or enforcement engines.
 
-Any structure may exist only after explicit consent.
+## Document Effect
 
----
-
-### 3. Presence Space
-
-Define Presence Space as a baseline state of the system.
-
-Presence Space is a condition where:
-
-- no action is mandatory
-- no evaluation occurs
-- no optimization is running
-
-Action may emerge from Presence Space, but it is never mandatory.
-
----
-
-## What This Document Adds
-
-- Conceptual definition of Self-creation
-- SCP as the foundational protocol
-- Clear separation from productivity and performance systems
-
----
-
-## What This Document Intentionally Does NOT Add
-
-- Development protocols
-- Behavioral rules
-- Success criteria
-- Outcome-based goals
-
-This is intentional and non-negotiable.
-
----
-
-## Rationale
-
-Most systems fail not because of technical errors,
-but because they remove the right to exit.
-
-Self-creation is built on:
-
-- human primacy over systems
-- consent over efficiency
-- presence over optimization
-
----
-
-## Acceptance Criteria
-
-- Core principles are clearly documented
-- SCP is defined and positioned as non-overridable
-- Presence Space is described as the system baseline
-- No implicit pressure to act or improve exists in the text
+- establishes foundational protocol principles
+- places SCP at Level 3 in v1.4 hierarchy
+- keeps protocol scope separate from runtime logic

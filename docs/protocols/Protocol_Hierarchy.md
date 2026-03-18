@@ -1,0 +1,32 @@
+# Protocol Hierarchy v1.4
+
+This hierarchy defines precedence across protocol levels.
+
+## Levels
+
+### Level 0 — Safety Floor (Planned)
+
+Top safety boundary reserved for safety-layer governance.
+
+### Level 1 — Human Consent
+
+Consent request and consent state interpretation.
+
+### Level 2 — Organism Autonomy
+
+Internal states and autonomy framing.
+
+### Level 3 — Core Guardrails
+
+- SCP (Selective Consent Protocol)
+- RHP (Refusal Honor Protocol)
+- EIP (Error Illumination Protocol)
+
+### Level 4 — Intervention Control
+
+- NoUO (No Unsolicited Optimization)
+- MRP (Minimal Resolution Protocol)
+
+### Level 5 — Fallback
+
+Default fallback behavior for unresolved or unspecified protocol combinations.
