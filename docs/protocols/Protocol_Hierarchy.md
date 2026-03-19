@@ -1,6 +1,6 @@
 # Protocol Hierarchy v1.4
 
-This hierarchy defines precedence across protocol levels.
+This hierarchy defines precedence for protocol interpretation.
 
 ## Levels
 
@@ -14,7 +14,7 @@ Consent request and consent state interpretation.
 
 ### Level 2 — Organism Autonomy
 
-Internal states and autonomy framing.
+Internal viability and autonomy framing.
 
 ### Level 3 — Core Guardrails
 
@@ -29,4 +29,4 @@ Internal states and autonomy framing.
 
 ### Level 5 — Fallback
 
-Default fallback behavior for unresolved or unspecified protocol combinations.
+Notify + Stop.

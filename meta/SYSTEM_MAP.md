@@ -2,17 +2,19 @@
 
 Document | Purpose | Level
 --- | --- | ---
-CORE_PRINCIPLES.md | Foundational principles and protocol boundaries | Meta
-PRESENCE_SPACE.md | Baseline system state description | Meta
-docs/protocols/Protocol_Hierarchy.md | Numerical level model for v1.4 | Meta
-docs/protocols/Conflict_Rules.md | Cross-level and intra-level conflict rules | Meta
-guardrails/CONSENT_REQUEST_PROTOCOL.md | Consent request protocol | L1
-guardrails/SELECTIVE_CONSENT_PROTOCOL.md | Selective consent protocol | L3
-guardrails/REFUSAL_HONOR_PROTOCOL.md | Refusal honor protocol | L3
-guardrails/ERROR_ILLUMINATION_PROTOCOL.md | Error illumination protocol | L3
-guardrails/NO_UNSOLICITED_OPTIMIZATION_PROTOCOL.md | No unsolicited optimization protocol | L4
-guardrails/MINIMAL_RESOLUTION_PROTOCOL.md | Minimal resolution protocol | L4
-guardrails/INTERCONNECTION_GUARD_PROTOCOL.md | Interconnection guard protocol | L4
-PROTOCOL_RELATIONSHIPS.md | Protocol relations and explicit non-goals | Meta
-docs/INTEGRATION_PATTERNS.md | Protocol interaction patterns | Meta
-guardrails/PROTOCOL_TEMPLATE.md | Template for protocol documents | Meta
+docs/protocols/Protocol_Hierarchy.md | v1.4 hierarchy model and level definitions | Meta
+docs/protocols/Conflict_Rules.md | Cross-level conflict resolution rules | Meta
+CORE_PRINCIPLES.md | Foundational principles and hierarchy framing | Meta
+PROTOCOL_RELATIONSHIPS.md | Cross-protocol relationship model | Meta
+PRESENCE_SPACE.md | Organism autonomy and baseline non-action state | L2
+guardrails/CONSENT_REQUEST_PROTOCOL.md | Human consent request protocol | L1
+guardrails/SELECTIVE_CONSENT_PROTOCOL.md | Baseline protective protocol (SCP) | L3
+guardrails/REFUSAL_HONOR_PROTOCOL.md | Refusal honor protocol (RHP) | L3
+guardrails/ERROR_ILLUMINATION_PROTOCOL.md | Error illumination protocol (EIP) | L3
+guardrails/NO_UNSOLICITED_OPTIMIZATION_PROTOCOL.md | Optimization intervention control (NoUO) | L4
+guardrails/MINIMAL_RESOLUTION_PROTOCOL.md | Minimal intervention resolution (MRP) | L4
+guardrails/INTERCONNECTION_GUARD_PROTOCOL.md | Transition control between protocols | L4
+docs/INTEGRATION_PATTERNS.md | Example protocol interaction patterns | L5
+guardrails/ARCHITECTURE_RULES.md | Repository guardrail constraints for protocol scope | Meta
+guardrails/PROTOCOL_TEMPLATE.md | Template for creating guardrail documents | Meta
+TASK.md | Structural review task reference | Meta

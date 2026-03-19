@@ -4,7 +4,7 @@
 
 Lower Level Number Wins.
 
-When two protocol directives conflict, the directive from the lower numeric level takes precedence.
+When directives conflict, the directive from the lower numeric level takes precedence.
 
 ## Intra-level Priorities
 
@@ -14,8 +14,8 @@ Within Level 3:
 
 ## Tie Handling
 
-If two directives share the same level and no explicit priority relation exists, the conflict remains open for explicit resolution in a protocol update.
+If directives share a level and no explicit priority relation exists, the conflict stays open for protocol update.
 
-## Scope Note
+## Scope
 
 These rules apply to protocol documentation and protocol interpretation only.

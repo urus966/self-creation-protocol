@@ -1,36 +1,34 @@
 # Protocol Relationships and Non-Goals
 
 ## Goal
-Make the boundaries, relationships, and non-goals of the Self-creation protocol explicit. This document clarifies how existing protocols relate to each other and what the system deliberately does not attempt to do.
 
-## Conceptual Relationships
-The protocols within the Self-creation system are designed to coexist without creating an automated or hierarchical execution flow. They establish constraints and affordances, not a sequence of operations.
+Document boundaries, relationships, and explicit non-goals across the Self-creation protocol set.
 
--   **Selective Consent Protocol (SCP):** Establishes the foundational right to not act, not engage, and not participate. It is the non-overridable base principle that governs all interactions.
--   **Presence Space:** Defines the system's baseline state—a valid condition where no action, evaluation, or optimization is required. It is the structural expression of SCP.
--   **Error Illumination Protocol (EIP):** Allows system errors or inconsistencies to become visible without creating an obligation to act. It respects both SCP and Presence Space by separating observation from intervention.
--   **Minimal Resolution Protocol (MRP):** Provides a strictly consent-gated pathway to act on an illuminated error. It ensures that any action is minimal, reversible, and optional, returning the system to Presence Space upon completion or interruption.
+## Core Relationship Model
 
-**Key Principle:** No protocol activates another automatically. All transitions out of Presence Space or into a state of action are voluntary and require explicit consent.
+The protocol set is a normative reference model. It defines constraints and compatibility rules without runtime orchestration.
+
+- **SCP (Selective Consent Protocol):** SCP is the baseline protective protocol at Level 3, subordinate to Level 0 (Safety), Level 1 (Human Consent), and Level 2 (Organism Autonomy) as defined in the v1.4 Hierarchy.
+- **Presence Space:** Baseline condition where non-action remains valid.
+- **EIP (Error Illumination Protocol):** Makes inconsistencies visible without creating action pressure.
+- **MRP (Minimal Resolution Protocol):** Defines a minimal intervention path after explicit consent.
+- **RHP (Refusal Honor Protocol):** Preserves refusal state and blocks forced continuation.
+- **NoUO (No Unsolicited Optimization):** Prevents unsolicited optimization pressure.
+
+## Transition Logic
+
+Protocol relations are consent-gated and non-automatic.
 
 ## Explicit Non-Goals
-To preserve its core principles, the system explicitly and intentionally does **NOT**:
 
--   Measure effectiveness or productivity
--   Track progress or velocity
--   Enforce improvement or optimization
--   Define success or failure metrics
--   Require completion of any task
--   Escalate actions or create urgency
--   Guarantee outcomes or results
--   Require justification, explanation, or reasoning for refusal, non-participation, or inaction
+- productivity measurement
+- velocity tracking
+- coercive improvement loops
+- outcome guarantees
+- urgency escalation
+- runtime execution definitions
+- cognitive architecture modeling
 
-These exclusions are foundational to protecting the integrity of consent and presence.
+## Normative Character
 
-## Normative vs. Executable Nature
-The protocols in this repository are **normative**, not **executable**.
-
--   **Normative** protocols define constraints on system behavior. They act as a governing framework for how other components *should* be designed.
--   **Executable** protocols define specific behaviors that can be run or tested.
-
-Because these protocols are normative, they are not subject to automated testing, performance validation, or conventional CI/CD checks. Their correctness is a matter of architectural alignment, not functional output. This explains the intentional absence of test suites, build pipelines, and performance metrics in this repository.
+This repository contains protocol documents, not executable components.
