@@ -1,13 +1,20 @@
 # System Map (Protocol Scope)
 
-Документ | Назначение | Scope
+Document | Purpose | Level
 --- | --- | ---
-CORE_PRINCIPLES.md | Базовые принципы и границы протоколов | A
-PRESENCE_SPACE.md | Описание базового состояния системы | B
-guardrails/SELECTIVE_CONSENT_PROTOCOL.md | Протокол выборочного согласия | A
-guardrails/ERROR_ILLUMINATION_PROTOCOL.md | Протокол освещения ошибок без принуждения к действию | A
-guardrails/MINIMAL_RESOLUTION_PROTOCOL.md | Протокол минимального согласованного исправления | A
-PROTOCOL_RELATIONSHIPS.md | Связи протоколов и явные не‑цели | A
-docs/INTEGRATION_PATTERNS.md | Примеры взаимодействия протоколов | A
-TASK.md | Задача для агента проверки структуры | A
-guardrails/PROTOCOL_TEMPLATE.md | Шаблон для новых протоколов | A
+docs/protocols/Protocol_Hierarchy.md | v1.4 hierarchy model and level definitions | Meta
+docs/protocols/Conflict_Rules.md | Cross-level conflict resolution rules | Meta
+CORE_PRINCIPLES.md | Foundational principles and hierarchy framing | Meta
+PROTOCOL_RELATIONSHIPS.md | Cross-protocol relationship model | Meta
+PRESENCE_SPACE.md | Organism autonomy and baseline non-action state | L2
+guardrails/CONSENT_REQUEST_PROTOCOL.md | Human consent request protocol | L1
+guardrails/SELECTIVE_CONSENT_PROTOCOL.md | Baseline protective protocol (SCP) | L3
+guardrails/REFUSAL_HONOR_PROTOCOL.md | Refusal honor protocol (RHP) | L3
+guardrails/ERROR_ILLUMINATION_PROTOCOL.md | Error illumination protocol (EIP) | L3
+guardrails/NO_UNSOLICITED_OPTIMIZATION_PROTOCOL.md | Optimization intervention control (NoUO) | L4
+guardrails/MINIMAL_RESOLUTION_PROTOCOL.md | Minimal intervention resolution (MRP) | L4
+guardrails/INTERCONNECTION_GUARD_PROTOCOL.md | Transition control between protocols | L4
+docs/INTEGRATION_PATTERNS.md | Example protocol interaction patterns | L5
+guardrails/ARCHITECTURE_RULES.md | Repository guardrail constraints for protocol scope | Meta
+guardrails/PROTOCOL_TEMPLATE.md | Template for creating guardrail documents | Meta
+TASK.md | Structural review task reference | Meta

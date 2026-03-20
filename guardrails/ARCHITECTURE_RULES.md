@@ -1,16 +1,16 @@
 ## ARCHITECTURE_RULES
 
-## Основные правила структуры репозитория
+## Repository Structure Rules
 
-### Запрещено
+### Forbidden
 
-- Императивные формулировки ("must", "should", "required", "необходимо") в документах уровня Presence (уровень B)
-- Ссылки на архитектурные слои вне protocol-only scope
-- Добавление метрик, KPI, тестов и оптимизации в файлы уровня B
+- Imperative phrasing in Presence-level documentation
+- References to architecture layers outside protocol-only scope
+- Metrics, KPI language, tests, or optimization framing in Presence-level documentation
 
-### Разрешено
+### Allowed
 
-- Изменение файлов уровня A после проверки на соответствие guardrails
-- Уточнение документации протоколов без добавления архитектурных компонентов
+- Updates to Level A documentation after guardrail alignment review
+- Clarifications to protocol documentation inside repository scope
 
-Эти правила защищают Presence Space и сохраняют scope репозитория как protocol-only.
+These rules preserve Presence Space and keep repository scope protocol-only.

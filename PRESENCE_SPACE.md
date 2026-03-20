@@ -4,14 +4,12 @@
 
 Presence Space is the baseline state of the Self-creation system in which:
 
-- no task is mandatory
+- no task is obligatory
 - no evaluation is performed
 - no optimization is running
 - no progress is expected
 
 The system remains valid and complete while in Presence Space.
-
----
 
 ## Key Properties
 
@@ -34,34 +32,13 @@ A system may remain in Presence Space indefinitely without error.
 
 Transition out of Presence Space:
 
-- requires explicit consent
+- uses explicit consent
 - cannot be triggered by metrics, deadlines, or external pressure
 - cannot be inferred implicitly
 
-No protocol may force an exit.
+No protocol can force an exit.
 
 ### 4. SCP Compatibility
 
-Presence Space is fully aligned with the Selective Consent Protocol (SCP).
-
-If SCP grants the right not to act,
-Presence Space is the environment where that right is structurally supported.
-
----
-
-## What This Document Adds
-
-- A formal definition of Presence Space
-- Explicit system guarantees while in Presence Space
-- Clear constraints on future protocol behavior
-
----
-
-## What This Document Does NOT Add
-
-- Actions or practices
-- Meditative techniques
-- Triggers or prompts
-- Evaluation mechanisms
-
-Presence Space is not a method.
+Presence Space aligns with Selective Consent Protocol (SCP).
+If SCP grants the right not to act, Presence Space is the environment where that right is structurally supported.

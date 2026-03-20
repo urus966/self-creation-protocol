@@ -1,75 +1,52 @@
 # PROTOCOL_TEMPLATE.md
 
-Шаблон для создания **нового защитного протокола** в папке `guardrails/`.
+Template for creating a new guardrail protocol file in `guardrails/`.
 
-**Версия шаблона:** v2.2
-**Дата:** 2026-03-08
-**Автор:** urus966
+**Template Version:** v2.3
+**Date:** 2026-03-18
 
-## 1. Название протокола
-(Замени на реальное, например PRESENCE_FEEDBACK_PROTOCOL)
+## 1. Protocol Name
 
-## 2. Назначение
-(1–2 предложения: что именно защищает)
+## 2. Purpose
 
-Пример:
-«Защищает Presence Space от принудительной оптимизации и внешнего давления без явного согласия.»
+## 3. Architectural Level
+- [ ] Level A (Behavior)
+- [ ] Level B (Presence)
 
-## 3. Уровень архитектуры
-- [ ] Уровень A (Behavior) — можно развивать, тестировать, оптимизировать
-- [ ] Уровень B (Presence) — запрещена любая оптимизация и императивы
+## 4. Application Context
 
-## 4. Контекст применения
-Когда протокол активируется в рамках взаимодействия с пользователем или документирования процесса.
+## 5. Red Line
+- coercive participation language
+- pressure after error illumination
+- metric framing for Presence Space
+- ignoring explicit refusal or silence
 
-Пример:
-«Применяется каждый раз, когда формулируется предложение изменить состояние или перейти к действию.»
+## 6. Green Zone
+- neutral consent checks
+- optional paths after explicit opt-in
+- observation without performance framing
+- non-action as valid outcome
 
-## 5. Запрещено (красная линия)
-- Использовать слова «должен», «надо», «необходимо», «must», «should» в контексте уровня B
-- Принуждать к действию после выявления ошибки
-- Добавлять метрики, KPI, тесты или любые формы оценки к Presence Space
-- Игнорировать явное «нет» или молчание
+## 7. Scenarios
+- Before:
+- After:
 
-## 6. Разрешено (зелёная зона)
-- Подсвечивать проблему без требования исправления
-- Предлагать варианты только после явного согласия («Хочешь обсудить?»)
-- Фиксировать наблюдения без оценки эффективности Presence Space
-- Оставлять не-действие валидным исходом
+## 8. Violation Handling
+1. Illuminate via `ERROR_ILLUMINATION_PROTOCOL`
+2. Apply minimal correction via `MINIMAL_RESOLUTION_PROTOCOL`
+3. Return to Presence Space
+4. Record incident as observation
 
-## 7. Примеры использования (обязательно!)
-**Сценарий 1**
-До: «Нужно срочно исправить это состояние.»
-После: «Я вижу это состояние. Хочешь обсудить возможный следующий шаг?»
+## 9. Protocol Links
+- Depends on:
+- Interacts with:
+- Companion protocols:
 
-**Сценарий 2**
-До: «Раз нет ответа, продолжаю автоматически.»
-После: «Нет ответа — остаёмся в Presence Space.»
-
-## 8. Что делать при нарушении протокола
-(Опиши шаги: как выявить, как восстановить)
-
-Пример:
-1. Подсветить нарушение через ERROR_ILLUMINATION_PROTOCOL (без давления)
-2. Применить MINIMAL_RESOLUTION_PROTOCOL — минимальное исправление
-3. Вернуться к нейтральному состоянию Presence Space
-4. Записать инцидент в журнал наблюдений (без самоосуждения)
-
-## 9. Связи с другими протоколами
-- Зависит от: ERROR_ILLUMINATION_PROTOCOL
-- Взаимодействует с: MINIMAL_RESOLUTION_PROTOCOL
-- Может использоваться вместе с: PRESENCE_SPACE
-
-## 10. Проверка перед добавлением (чек-лист)
-- [ ] Указан правильный уровень A или B
-- [ ] Нет запрещённых императивов в контексте уровня B
-- [ ] Нет ссылок на слои вне protocol-only scope
-- [ ] Есть хотя бы один реальный пример «до/после»
-- [ ] Есть секция «Что делать при нарушении»
-- [ ] Ссылки на связанные протоколы актуальны
-- [ ] Файл лежит в `guardrails/`
-
-## 11. История изменений шаблона
-- v2.2 (2026-03-08): Уточнены разделы 4–7 и очищены ссылки за пределами scope протоколов
-- v2.1 (2026-02-24): Добавлены примеры, чек-лист, уровни A/B, история изменений, секция "Что делать при нарушении"
-- v2.0: Базовый шаблон
+## 10. Checklist
+- [ ] Level selected
+- [ ] No imperative phrasing in Presence context
+- [ ] No out-of-scope architecture references
+- [ ] At least one scenario pair
+- [ ] Violation handling section present
+- [ ] Links verified
+- [ ] File path under `guardrails/`
