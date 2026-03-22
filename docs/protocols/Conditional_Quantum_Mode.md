@@ -47,8 +47,11 @@ Non-linear ("quantum") mode MUST be conditional and temporary.
 CQMP MAY activate only when all of the following conditions apply:
 
 - Multiple valid actions exist.
-- No clear deterministic choice is available.
-- Uncertainty prevents linear resolution.
+- Linear evaluation does not produce a single dominant action.
+
+Activation of CQMP MUST be determined by the decision system under Level 2 (Organism Autonomy).
+
+CQMP MUST NOT be self-triggering.
 
 CQMP MUST NOT activate if no viable actions exist.
 
@@ -59,14 +62,15 @@ If no viable actions are available, the system MUST use Fallback Protocol (Notif
 While CQMP is active:
 
 - The system MAY evaluate multiple possible actions or states.
+- The system SHOULD limit evaluation to a finite and bounded set of alternatives.
 - The system MUST NOT require deterministic certainty before acting.
 - Selection criteria MUST be defined by higher-level protocols or by system context.
 - CQMP MUST NOT define its own optimization logic.
-- The system MUST commit to a selected outcome.
+- The system MUST commit to a single selected outcome and exit the decision branching state.
 
 ## Constraints
 
-CQMP MUST NOT remain active during normal operation.
+CQMP MUST be active only within a single decision cycle.
 
 CQMP MUST exit immediately after a decision is made.
 
@@ -74,12 +78,12 @@ CQMP MUST NOT override Level 0 (Safety) or Level 1 (Human Consent).
 
 ## Exit Condition
 
-After commitment to a selected outcome, the system MUST return to linear reasoning mode.
+After commitment to a single selected outcome, the system MUST return to linear reasoning mode.
 
 ## Rationale
 
 Linear reasoning can fail when multiple valid actions remain unresolved.
 
-CQMP provides a controlled escape from indecision.
+CQMP provides a controlled mechanism for resolving indeterminate decision states without defaulting to arbitrary or forced choices.
 
-CQMP SHOULD prevent system deadlock without expanding beyond the active protocol hierarchy.
+CQMP SHOULD preserve separation between linear resolution and Fallback Protocol behavior within the active protocol hierarchy.
