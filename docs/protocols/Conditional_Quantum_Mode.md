@@ -47,10 +47,10 @@ Non-linear ("quantum") mode MUST be conditional and temporary.
 
 CQMP MAY activate only when all of the following conditions apply:
 
-- Multiple valid actions exist.
-- Linear evaluation has been fully exhausted without producing a single dominant action.
+- Multiple viable and permissible actions exist.
+- Linear evaluation does not produce a single dominant action.
 
-CQMP activation MUST be governed by Level 2 (Organism Autonomy).
+CQMP activation is initiated by the decision system under Level 2 (Organism Autonomy).
 
 CQMP MUST NOT activate if no viable actions exist.
 
@@ -61,12 +61,11 @@ If no viable actions are available, the system MUST use Fallback Protocol (Notif
 While CQMP is active:
 
 - The system MAY evaluate multiple possible actions or states.
-- Evaluation MUST be bounded and MUST NOT expand indefinitely.
+- Evaluation MUST be bounded.
 - The system MUST NOT require deterministic certainty before acting.
 - Selection criteria MUST be defined by higher-level protocols or by system context.
 - CQMP MUST NOT define its own optimization logic.
 - Evaluation MUST converge to a single selected outcome within the same decision cycle.
-- The system MUST commit to a single selected outcome and exit the decision branching state.
 
 ## Constraints
 
@@ -78,11 +77,11 @@ CQMP MUST exit immediately after a decision is made.
 
 CQMP MUST NOT override Level 0 (Safety) or Level 1 (Human Consent).
 
-CQMP MUST NOT modify or redefine protocol hierarchy during execution.
+CQMP operates within the existing protocol hierarchy.
 
 ## Exit Condition
 
-After commitment to a single selected outcome, the system MUST return to linear reasoning mode.
+After evaluation converges to a single selected outcome, the system MUST return to linear reasoning mode.
 
 ## Rationale
 
@@ -93,7 +92,5 @@ CQMP provides a controlled mechanism for resolving indeterminate decision states
 CQMP does not introduce randomness.
 
 It provides a structured mechanism for resolving indeterminate states within the protocol hierarchy.
-
-CQMP preserves determinism at the system level while allowing controlled non-deterministic evaluation within a bounded scope.
 
 CQMP SHOULD preserve separation between linear resolution and Fallback Protocol behavior within the active protocol hierarchy.
