@@ -39,8 +39,8 @@ Non-linear ("quantum") mode MUST be conditional and temporary.
 
 ### Interaction
 
-- CQMP MAY follow EIP when ambiguity is detected.
-- CQMP operates only when multiple viable actions exist.
+- CQMP MAY follow EIP when ambiguity remains unresolved after illumination.
+- CQMP operates only when multiple viable and permissible actions exist.
 - CQMP MUST defer to Fallback Protocol if no viable actions exist.
 
 ## Activation Conditions
@@ -90,5 +90,3 @@ Linear reasoning can fail when multiple viable and permissible actions remain un
 CQMP provides a controlled mechanism for resolving indeterminate decision states without defaulting to arbitrary or forced choices.
 
 CQMP does not introduce randomness.
-
-CQMP SHOULD preserve separation between linear resolution and Fallback Protocol behavior within the active protocol hierarchy.
