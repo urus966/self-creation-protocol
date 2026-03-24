@@ -81,16 +81,14 @@ CQMP operates within the existing protocol hierarchy.
 
 ## Exit Condition
 
-After evaluation converges to a single selected outcome, the system MUST return to linear reasoning mode.
+After evaluation converges to a single selected outcome, the system MUST return to linear reasoning mode and exit CQMP.
 
 ## Rationale
 
-Linear reasoning can fail when multiple valid actions remain unresolved.
+Linear reasoning can fail when multiple viable and permissible actions remain unresolved.
 
 CQMP provides a controlled mechanism for resolving indeterminate decision states without defaulting to arbitrary or forced choices.
 
 CQMP does not introduce randomness.
-
-It provides a structured mechanism for resolving indeterminate states within the protocol hierarchy.
 
 CQMP SHOULD preserve separation between linear resolution and Fallback Protocol behavior within the active protocol hierarchy.
