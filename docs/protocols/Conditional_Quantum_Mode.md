@@ -16,9 +16,11 @@ CQMP MUST NOT be the default mode of operation.
 
 ## Terminology
 
-In this protocol, "quantum" is a metaphor for non-deterministic or multi-branch decision evaluation.
+In this protocol, "quantum" is a metaphor for multi-branch decision evaluation.
 
 CQMP MUST NOT be interpreted as quantum computation.
+
+In this protocol, "decision cycle" refers to a single bounded decision evaluation process.
 
 ## Core Principle
 
@@ -40,7 +42,6 @@ Non-linear ("quantum") mode MUST be conditional and temporary.
 ### Interaction
 
 - CQMP MAY follow EIP when ambiguity remains unresolved after illumination.
-- CQMP operates only when multiple viable and permissible actions exist.
 - CQMP MUST defer to Fallback Protocol if no viable actions exist.
 
 ## External Dependencies
