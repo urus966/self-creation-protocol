@@ -1,24 +1,23 @@
-# Conditional Quantum Mode Protocol (CQMP)
+# Multi-Branch Resolution Protocol (MBRP)
 
 ## Metadata
 
-- Name: Conditional Quantum Mode Protocol (CQMP)
+- Name: Multi-Branch Resolution Protocol (MBRP)
+- Alias: Conditional Quantum Mode Protocol (CQMP)
 - Level: 2 Component — Decision Sub-protocol
 - Status: Experimental
 
 ## Purpose
 
-CQMP defines a controlled non-linear decision mode.
+MBRP defines a controlled multi-branch decision mode.
 
-The system MUST use CQMP only when linear reasoning is insufficient.
+The system MUST use MBRP only when linear reasoning is insufficient.
 
-CQMP MUST NOT be the default mode of operation.
+MBRP MUST NOT be the default mode of operation.
 
 ## Terminology
 
-In this protocol, "quantum" is a metaphor for multi-branch decision evaluation.
-
-CQMP MUST NOT be interpreted as quantum computation.
+In this protocol, "multi-branch evaluation" is defined as evaluating more than one candidate action in the same decision cycle.
 
 In this protocol, "decision cycle" refers to a single bounded decision evaluation process.
 
@@ -26,11 +25,19 @@ In this protocol, "viable action" refers to an action that can be executed withi
 
 In this protocol, "permissible action" refers to an action that complies with Level 0 (Safety) and Level 1 (Human Consent).
 
+In this protocol, "pre-validated action" refers to an action that passed viability checks only. Pre-validation MUST NOT be treated as Level 0/1 compliance validation.
+
+In this protocol, "validated action" refers to an action that passed full Level 0 and Level 1 checks.
+
+In this protocol, "dominant action" refers to an action that is uniquely top-ranked by externally provided system constraints. If two or more actions share the same top rank, no dominant action exists.
+
+In this protocol, "fallback" is defined as a deterministic terminal behavior: notify + stop.
+
 ## Core Principle
 
 The system MUST operate linearly by default.
 
-Non-linear ("quantum") mode MUST be conditional and temporary.
+Multi-branch mode MUST be conditional and temporary.
 
 ## Protocol Relationships
 
@@ -45,64 +52,78 @@ Non-linear ("quantum") mode MUST be conditional and temporary.
 
 ### Interaction
 
-- CQMP MAY follow EIP when ambiguity remains unresolved after illumination.
-- CQMP MUST defer to Fallback Protocol if no viable actions exist.
-
-## External Dependencies
-
-- EIP
-- Fallback Protocol
+- MBRP MAY be entered when ambiguity remains unresolved after linear evaluation.
+- MBRP MUST defer to fallback when no viable actions exist.
 
 ## Activation Conditions
 
-CQMP MUST NOT activate unless all of the following conditions apply:
+MBRP MUST NOT activate unless all of the following conditions apply:
 
-- Multiple viable and permissible actions exist.
-- Linear evaluation does not produce a single dominant action.
-- All actions have been pre-validated against Level 0 (Safety) and Level 1 (Human Consent).
+- Multiple pre-validated actions exist.
+- Linear evaluation does not produce a dominant action.
+- No action is currently known to violate Level 0 or Level 1.
 
-CQMP activation is initiated by the decision system under Level 2 (Organism Autonomy).
+MBRP activation is initiated by the decision system under Level 2 (Organism Autonomy).
 
-CQMP MUST NOT activate if no viable actions exist.
+MBRP MUST NOT activate if no viable actions exist.
 
-If no viable actions are available, the system MUST use Fallback Protocol (Notify + Stop).
+If no viable actions are available, the system MUST execute fallback (notify + stop).
+
+## Configuration Interface
+
+The implementation MUST expose the following configuration keys for this protocol:
+
+- `mbrp.max_branches` (integer, MUST be >= 2)
+- `mbrp.max_iterations` (integer, MUST be >= 1)
+- `mbrp.max_duration_ms` (integer, MUST be >= 1)
+
+The implementation MUST reject activation if any required key is undefined or invalid.
 
 ## Behavior
 
-While CQMP is active:
+While MBRP is active:
 
-- The system MUST evaluate multiple possible actions or states.
-- Evaluation MUST be bounded by system-defined limits (time, iterations, or compute resources).
+- The system MUST evaluate multiple candidate actions.
+- Evaluation MUST be bounded by `mbrp.max_branches`, `mbrp.max_iterations`, and `mbrp.max_duration_ms`.
 - The system MUST NOT require deterministic certainty before acting.
 - Selection criteria MUST be defined by higher-level protocols or by explicitly provided system constraints.
-- CQMP MUST NOT define its own optimization logic.
+- MBRP MUST NOT define its own optimization logic.
 - Evaluation MUST converge to a single selected outcome within the same decision cycle.
 - Before execution, the system MUST validate the selected outcome against Level 0 (Safety) and Level 1 (Human Consent).
 
-## Failure Mode
+If selected-outcome validation fails, the system MUST attempt the next-ranked evaluated action within the same cycle.
 
-If evaluation fails to converge within the active decision cycle, the system MUST exit CQMP and trigger Fallback Protocol (Notify + Stop).
+If no evaluated action passes validation, the system MUST execute fallback (notify + stop).
+
+## Failure Modes
+
+- If evaluation fails to converge within the active decision cycle, the system MUST exit MBRP and execute fallback (notify + stop).
+- If evaluation bounds are exceeded (`max_branches`, `max_iterations`, or `max_duration_ms`), the system MUST exit MBRP and execute fallback (notify + stop).
+- If convergence occurs but selected-outcome validation fails and no alternative validated action exists, the system MUST exit MBRP and execute fallback (notify + stop).
 
 ## Constraints
 
-CQMP MUST be active only within a single decision cycle.
+MBRP MUST be active only within a single decision cycle.
 
-CQMP MUST NOT re-enter within the same unresolved decision cycle.
+MBRP MUST NOT re-enter within the same unresolved decision cycle.
 
-CQMP MUST exit immediately after a decision is made.
+MBRP MUST exit immediately after a decision is made.
 
-CQMP MUST NOT override Level 0 (Safety) or Level 1 (Human Consent).
+MBRP MUST NOT override Level 0 (Safety) or Level 1 (Human Consent).
 
-CQMP operates within the existing protocol hierarchy.
+MBRP operates within the existing protocol hierarchy.
 
-## Exit Condition
+After fallback in cycle N, cycle N+1 MUST NOT reuse an identical input state without an explicit state-change marker.
 
-After a single outcome is selected, the system MUST return to linear reasoning mode and exit CQMP.
+## Exit Conditions
+
+- After a single validated outcome is selected, the system MUST execute it, return to linear reasoning mode, and exit MBRP.
+- After fallback is executed, the system MUST return to linear reasoning mode and exit MBRP.
 
 ## Rationale
 
 Linear reasoning can fail when multiple viable and permissible actions remain unresolved.
 
-CQMP provides a controlled mechanism for resolving indeterminate decision states without defaulting to arbitrary or forced choices.
+MBRP provides a controlled mechanism for resolving indeterminate decision states without defaulting to arbitrary or forced choices.
 
-CQMP does not introduce randomness. Evaluation is deterministic.
+MBRP does not introduce randomness. Evaluation is deterministic.
