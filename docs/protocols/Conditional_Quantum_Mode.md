@@ -22,6 +22,10 @@ CQMP MUST NOT be interpreted as quantum computation.
 
 In this protocol, "decision cycle" refers to a single bounded decision evaluation process.
 
+In this protocol, "viable action" refers to an action that can be executed within system constraints.
+
+In this protocol, "permissible action" refers to an action that complies with Level 0 (Safety) and Level 1 (Human Consent).
+
 ## Core Principle
 
 The system MUST operate linearly by default.
@@ -55,6 +59,7 @@ CQMP MUST NOT activate unless all of the following conditions apply:
 
 - Multiple viable and permissible actions exist.
 - Linear evaluation does not produce a single dominant action.
+- All actions have been pre-validated against Level 0 (Safety) and Level 1 (Human Consent).
 
 CQMP activation is initiated by the decision system under Level 2 (Organism Autonomy).
 
@@ -66,17 +71,17 @@ If no viable actions are available, the system MUST use Fallback Protocol (Notif
 
 While CQMP is active:
 
-- The system MAY evaluate multiple possible actions or states.
+- The system MUST evaluate multiple possible actions or states.
 - Evaluation MUST be bounded by system-defined limits (time, iterations, or compute resources).
 - The system MUST NOT require deterministic certainty before acting.
-- Selection criteria MUST be defined by higher-level protocols or by system context.
+- Selection criteria MUST be defined by higher-level protocols or by explicitly provided system constraints.
 - CQMP MUST NOT define its own optimization logic.
 - Evaluation MUST converge to a single selected outcome within the same decision cycle.
 - Before execution, the system MUST validate the selected outcome against Level 0 (Safety) and Level 1 (Human Consent).
 
 ## Failure Mode
 
-If evaluation fails to converge within the active decision cycle, the system MUST trigger Fallback Protocol (Notify + Stop).
+If evaluation fails to converge within the active decision cycle, the system MUST exit CQMP and trigger Fallback Protocol (Notify + Stop).
 
 ## Constraints
 
@@ -92,7 +97,7 @@ CQMP operates within the existing protocol hierarchy.
 
 ## Exit Condition
 
-After evaluation converges to a single selected outcome, the system MUST return to linear reasoning mode and exit CQMP.
+After a single outcome is selected, the system MUST return to linear reasoning mode and exit CQMP.
 
 ## Rationale
 
