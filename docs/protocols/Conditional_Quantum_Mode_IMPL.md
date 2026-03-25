@@ -26,7 +26,7 @@ Compute `input_state` as a canonical hash:
 
 ```text
 input_state = HASH(
-  ordered_candidate_action_ids,
+  lexicographically_sorted_candidate_action_ids,
   constraint_set_version,
   context_timestamp_ms,
   parent_invocation_id
@@ -35,7 +35,7 @@ input_state = HASH(
 
 Generation rules:
 
-- Candidate action IDs MUST be sorted deterministically.
+- Candidate action IDs MUST be sorted lexicographically (UTF-8 byte order).
 - `constraint_set_version` MUST be a stable version identifier.
 - `context_timestamp_ms` MUST be captured once at cycle start.
 - `parent_invocation_id` MUST be supplied by Level 2.
@@ -47,12 +47,12 @@ Generation rules:
 ```text
 [Linear Evaluation]
        |
-       | no dominant action + multiple pre-validated actions
+       | no dominant action + multiple pre-validated actions + within max_branches
        v
 [Activate MBRP]
        |
        v
-[Evaluate Candidates (bounded)]
+[Evaluate Candidates (bounded by iterations/duration)]
        |
    +---+----------------------+---------------+
    |                          |               |
@@ -69,29 +69,35 @@ Generation rules:
    |                              |
    | none valid                   v
    v                        [Control -> Level 2]
-[ConvergedInvalid]                |
-   |                              |
-   +------------------------------+
+[ConvergedInvalid]
+   |
    v
 [Fallback]
    |
    v
-[Exit MBRP -> Control to Level 2]
+[Exit MBRP]
+   |
+   v
+[Control -> Level 2]
 ```
+
+
 
 ## Edge Case Handling Matrix
 
-| Condition | Required behavior |
-|---|---|
-| No viable actions | Trigger fallback (notify + stop) without activating MBRP |
-| Missing/invalid MBRP config keys | Reject activation; trigger fallback (notify + stop) |
-| Single dominant action exists | Stay in linear mode; do not activate MBRP |
-| Multiple actions tie for top rank | Treat as no dominant action |
-| Any bound exceeded (`max_branches` OR `max_iterations` OR `max_duration_ms`) | Exit MBRP; trigger fallback (`BoundsExceeded`) |
-| Converged selection fails Level 0/1 | Try next-ranked evaluated action in same cycle |
-| Converged but no validated alternatives remain | Exit MBRP; trigger fallback (`ConvergedInvalid`) |
-| Re-entry requested in same unresolved cycle | Reject re-entry |
-| Next cycle has identical `input_state` after fallback and no marker | Level 2 rejects activation before MBRP entry |
+| Condition | Required behavior | Failure Mode |
+|---|---|---|
+| No viable actions | Trigger fallback without activating MBRP | `ActivationRejected` |
+| Missing/invalid MBRP config keys | Reject activation; trigger fallback (notify + stop) | `ActivationRejected` |
+| Candidate count > `max_branches` | Reject activation; trigger fallback | `ActivationRejected` |
+| Next cycle has identical `input_state` after fallback and no marker | Level 2 rejects activation before MBRP entry | `ActivationRejected` |
+| Single dominant action exists | Stay in linear mode; do not activate MBRP | N/A |
+| Multiple actions tie for top rank | Treat as no dominant action | N/A |
+| `max_iterations` or `max_duration_ms` exceeded during evaluation | Exit MBRP; trigger fallback | `BoundsExceeded` |
+| Evaluation does not converge before runtime bounds | Exit MBRP; trigger fallback | `NoConvergence` |
+| Converged selection fails Level 0/1 | Try next-ranked evaluated action in same cycle | N/A |
+| Converged but no validated alternatives remain | Exit MBRP; trigger fallback | `ConvergedInvalid` |
+| Re-entry requested in same unresolved cycle | Reject re-entry | N/A |
 
 ## Test Scenarios
 

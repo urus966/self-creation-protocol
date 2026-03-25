@@ -36,7 +36,7 @@ In this protocol, "fallback" is defined as deterministic `notify + stop` behavio
 Terminal for MBRP means MBRP does not resume after fallback execution. Control returns to Level 2 (Organism Autonomy), which MAY resume linear reasoning.
 
 In this protocol, `input_state` is a canonical hash of:
-- ordered list of candidate action IDs,
+- lexicographically sorted candidate action IDs,
 - active constraint set version,
 - system context timestamp (ms precision),
 - parent protocol invocation ID.
@@ -87,14 +87,15 @@ The implementation MUST expose the following configuration keys for this protoco
 - `mbrp.max_iterations` (integer, MUST be >= 1)
 - `mbrp.max_duration_ms` (integer, MUST be >= 1)
 
-If any required key is undefined or invalid, the system MUST reject MBRP activation and MUST execute fallback (notify + stop) without entering MBRP.
+If any required key is undefined or invalid, the system MUST trigger `ActivationRejected` and MUST execute fallback (notify + stop) without entering MBRP.
 
 ## Behavior
 
 While MBRP is active:
 
 - The system MUST evaluate multiple candidate actions.
-- Evaluation MUST be bounded by `mbrp.max_branches`, `mbrp.max_iterations`, and `mbrp.max_duration_ms`.
+- Candidate count MUST NOT exceed `mbrp.max_branches` at cycle start.
+- Evaluation MUST be bounded by `mbrp.max_iterations` and `mbrp.max_duration_ms`.
 - The system MUST NOT require deterministic certainty before acting.
 - Selection criteria MUST be defined by higher-level protocols or by explicitly provided system constraints.
 - MBRP MUST NOT define its own optimization logic.
@@ -103,12 +104,13 @@ While MBRP is active:
 
 If selected-outcome validation fails, the system MUST attempt the next-ranked evaluated action within the same cycle.
 
-If no evaluated action passes validation, the system MUST transition to `ConvergedInvalid` and MUST execute fallback (notify + stop).
+If no evaluated action passes validation, the system MUST transition to `ConvergedInvalid`.
 
 ## Failure Modes
 
+- `ActivationRejected`: If configuration keys are missing or invalid, if candidate count exceeds `mbrp.max_branches` at cycle start, or if `input_state` reuse is detected by Level 2, the system MUST execute fallback without entering MBRP.
+- `BoundsExceeded`: If evaluation exceeds `mbrp.max_iterations` or `mbrp.max_duration_ms` during execution, the system MUST exit MBRP and execute fallback (notify + stop).
 - `NoConvergence`: If evaluation fails to converge within the active decision cycle, the system MUST exit MBRP and execute fallback (notify + stop).
-- `BoundsExceeded`: If evaluation exceeds `mbrp.max_branches`, `mbrp.max_iterations`, or `mbrp.max_duration_ms`, the system MUST exit MBRP and execute fallback (notify + stop).
 - `ConvergedInvalid`: If evaluation converges but all candidate actions fail Level 0/1 validation, the system MUST exit MBRP and execute fallback (notify + stop).
 
 ## Constraints
