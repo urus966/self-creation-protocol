@@ -81,8 +81,6 @@ Generation rules:
 [Control -> Level 2]
 ```
 
-
-
 ## Edge Case Handling Matrix
 
 | Condition | Required behavior | Failure Mode |

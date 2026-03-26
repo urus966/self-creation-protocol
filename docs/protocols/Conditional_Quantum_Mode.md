@@ -29,7 +29,7 @@ In this protocol, "pre-validated action" refers to an action that passed viabili
 
 In this protocol, "validated action" refers to an action that passed full Level 0 and Level 1 checks.
 
-In this protocol, "dominant action" refers to an action that is uniquely top-ranked by externally provided system constraints. If two or more actions share the same top rank, no dominant action exists.
+In this protocol, "dominant action" refers to an action that is uniquely top-ranked by static constraints (Level 2 configuration) or dynamic constraints (runtime context). If two or more actions share the same top rank, no dominant action exists.
 
 In this protocol, "fallback" is defined as deterministic `notify + stop` behavior.
 
@@ -94,10 +94,11 @@ If any required key is undefined or invalid, the system MUST execute fallback (n
 While MBRP is active:
 
 - The system MUST evaluate multiple candidate actions.
+- Evaluation MUST produce a total ordering of candidate actions by static or dynamic constraints.
 - Candidate count MUST NOT exceed `mbrp.max_branches` at cycle start.
 - Evaluation MUST be bounded by `mbrp.max_iterations` and `mbrp.max_duration_ms`.
 - The system MUST NOT require deterministic certainty before acting.
-- Selection criteria MUST be defined by higher-level protocols or by explicitly provided system constraints.
+- Selection criteria MUST be defined by static or dynamic constraints.
 - MBRP MUST NOT define its own optimization logic.
 - Evaluation MUST converge to a single selected outcome within the same decision cycle.
 - Before execution, the system MUST validate the selected outcome against Level 0 (Safety) and Level 1 (Human Consent).
@@ -119,8 +120,6 @@ MBRP MUST be active only within a single decision cycle.
 
 MBRP MUST NOT re-enter within the same unresolved decision cycle.
 
-MBRP MUST exit immediately after a decision is made.
-
 MBRP MUST NOT override Level 0 (Safety) or Level 1 (Human Consent).
 
 MBRP operates within the existing protocol hierarchy.
@@ -138,3 +137,5 @@ Linear reasoning can fail when multiple viable and permissible actions remain un
 MBRP provides a controlled mechanism for resolving indeterminate decision states without defaulting to arbitrary or forced choices.
 
 MBRP does not introduce randomness. Evaluation is deterministic.
+
+Determinism enables formal verification and reproducible behavior required for safety-critical systems.
