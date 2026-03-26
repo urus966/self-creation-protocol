@@ -94,7 +94,7 @@ Generation rules:
 | Single dominant action exists | Stay in linear mode; do not activate MBRP | N/A |
 | Multiple actions tie for top rank | Treat as no dominant action | N/A |
 | `max_iterations` or `max_duration_ms` exceeded during evaluation | Exit MBRP; trigger fallback | `BoundsExceeded` |
-| Evaluation does not converge before runtime bounds | Exit MBRP; trigger fallback | `NoConvergence` |
+| Evaluation does not converge within the active decision cycle | Exit MBRP; trigger fallback | `NoConvergence` |
 | Converged selection fails Level 0/1 | Try next-ranked evaluated action in same cycle | N/A |
 | Converged but no validated alternatives remain | Exit MBRP; trigger fallback | `ConvergedInvalid` |
 | Re-entry requested in same unresolved cycle | Reject re-entry | N/A |

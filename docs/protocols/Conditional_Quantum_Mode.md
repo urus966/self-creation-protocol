@@ -87,7 +87,7 @@ The implementation MUST expose the following configuration keys for this protoco
 - `mbrp.max_iterations` (integer, MUST be >= 1)
 - `mbrp.max_duration_ms` (integer, MUST be >= 1)
 
-If any required key is undefined or invalid, the system MUST trigger `ActivationRejected` and MUST execute fallback (notify + stop) without entering MBRP.
+If any required key is undefined or invalid, the system MUST execute fallback (notify + stop) without entering MBRP. This outcome is classified as `ActivationRejected` for telemetry purposes.
 
 ## Behavior
 
@@ -130,7 +130,6 @@ After fallback in cycle N, cycle N+1 MUST NOT reuse an identical `input_state` w
 ## Exit Conditions
 
 - After a single validated outcome is selected, the system MUST execute it, return to linear reasoning mode, and exit MBRP.
-- After fallback is executed, the system MUST return control to Level 2 and exit MBRP.
 
 ## Rationale
 
