@@ -21,7 +21,7 @@ CQMP MUST NOT be the default mode of operation.
 ## Terminology
 
 - Quantum (metaphor) — evaluation of multiple possible decision branches without requiring immediate deterministic resolution.
-- Decision Cycle — a bounded decision evaluation process that begins when ambiguity is detected and ends with either a committed outcome or fallback.
+- Decision Cycle — a bounded decision evaluation process that begins when ambiguity is detected and ends with either a committed outcome or fallback. The decision cycle MUST be tracked and enforced by the execution system.
 
 ---
 
@@ -58,7 +58,7 @@ Non-linear ("quantum") mode MUST be:
 ## External Dependencies
 
 - EIP — protocol responsible for detecting ambiguity or insufficient clarity in the environment.
-- EIP MUST provide a signal indicating unresolved ambiguity.
+- EIP MUST provide a boolean or structured signal indicating unresolved ambiguity.
 - Fallback Protocol (Notify + Stop)
 
 ---
@@ -82,7 +82,7 @@ While CQMP is active:
 - Evaluation MUST be bounded (time / iterations / compute).
 - Bounds MUST be enforced by the execution system.
 - The system MUST NOT require deterministic certainty before acting.
-- Selection criteria MUST be defined by higher-level protocols or system context.
+- Selection criteria MUST be defined by higher-level protocols or by system context.
 - If no external selection criteria are defined, the system MUST prefer the least risky viable action.
 - CQMP MUST NOT define its own optimization logic.
 - Evaluation MUST converge to a single selected outcome within the same decision cycle.
