@@ -21,7 +21,7 @@ CQMP MUST NOT be the default mode of operation.
 ## Terminology
 
 - Quantum (metaphor) — evaluation of multiple possible decision branches without requiring immediate deterministic resolution.
-- Decision Cycle — a bounded decision evaluation process that begins when ambiguity is detected and ends with either a committed outcome or fallback. A decision cycle starts when ambiguity is detected and ends when a single outcome is selected or fallback is triggered. The decision cycle MUST be tracked and enforced by the execution system.
+- Decision Cycle — a bounded decision evaluation process that begins when ambiguity is detected and ends with either a committed outcome or fallback.
 
 ---
 
@@ -61,6 +61,7 @@ Non-linear ("quantum") mode MUST be:
 - EIP MUST provide a boolean or structured signal indicating unresolved ambiguity between options.
 - EIP (Error Illumination Protocol) reference: [guardrails/ERROR_ILLUMINATION_PROTOCOL.md](../../guardrails/ERROR_ILLUMINATION_PROTOCOL.md).
 - Fallback Protocol (Notify + Stop)
+- Fallback Protocol is defined as Level 5 default behavior: Notify + Stop.
 - Fallback reference: [docs/protocols/Protocol_Hierarchy.md](./Protocol_Hierarchy.md) (Level 0 default response: Notify + Stop).
 
 ---
@@ -72,7 +73,7 @@ CQMP MUST NOT activate unless ALL conditions are met:
 - Multiple viable and permissible actions exist.
 - Linear evaluation does not produce a single dominant action.
 
-CQMP activation is initiated by the decision system under Level 2.
+CQMP activation MUST be initiated by the decision process operating under Level 2 (Organism Autonomy).
 
 ---
 

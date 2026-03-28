@@ -48,6 +48,7 @@ Non-linear ("quantum") mode is:
 ## External Dependencies
 
 - EIP (Error Illumination Protocol)
+- EIP MUST provide a boolean or structured signal indicating unresolved ambiguity.
 - Fallback Protocol (Notify + Stop)
 
 ## Activation Conditions
@@ -65,8 +66,10 @@ While CQMP is active:
 
 - the system may evaluate multiple possible actions
 - evaluation is bounded (time / iterations / compute)
+- Evaluation bounds MUST be enforced by the execution system.
 - the system does not require deterministic certainty before acting
 - selection criteria are defined by higher-level protocols or system context
+- If no external selection criteria are defined, the system MUST prefer the least risky viable action.
 - CQMP does not define its own optimization logic
 - evaluation converges to a single selected outcome within the same decision cycle
 
@@ -77,6 +80,10 @@ Before execution, the system validates the selected outcome against:
 ## Failure Mode
 
 If evaluation fails to converge within the decision cycle:
+
+→ trigger Fallback Protocol (Notify + Stop)
+
+If all evaluated actions become non-viable during evaluation:
 
 → trigger Fallback Protocol (Notify + Stop)
 
