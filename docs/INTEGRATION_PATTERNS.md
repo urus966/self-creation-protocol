@@ -50,3 +50,15 @@ Automatic escalation is outside this protocol set:
 - no urgency accumulation from illuminated inconsistencies
 - no warning loops tied to inactivity
 - no inferred consent from prior actions
+
+
+## Pattern 5: Conditional Multi-Branch Resolution
+
+**Situation:** Multiple permissible actions remain viable and linear evaluation cannot produce one dominant path.
+
+**How protocols interact:**
+- **CQMP** enables bounded multi-branch evaluation within one decision cycle
+- **Level 0 / Level 1** validation gates any selected outcome before execution
+- **EIP** may precede CQMP when ambiguity is first illuminated
+- **Fallback (Notify + Stop)** is triggered if evaluation cannot converge
+- **Linear mode** resumes immediately after decision or fallback
