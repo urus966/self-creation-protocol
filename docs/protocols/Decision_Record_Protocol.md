@@ -78,16 +78,52 @@ Evaluation of outcome using a simple scale:
  0 → neutral  
 +1 → positive  
 
+### 7. Timestamp (REQUIRED)
+
+ISO 8601 format.
+
+Defines temporal ordering of decisions.
+
+### Additional Fields (Graph Support)
+
+- Record ID — unique identifier
+- Parent Record IDs — list of preceding decisions
+- Child Record IDs — list of subsequent decisions
+
 ---
 
 ## Optional Fields
 
 The system MAY include:
 
-- Timestamp — ISO 8601 format
 - Actors involved — list of unique identifiers
 - Confidence level — number from 0 to 1
 - Source of decision — string (`CQMP` / `linear` / `human`)
+
+---
+
+## Path Definition
+
+A path is a sequence of connected decision records across time.
+
+Path = DRP₁ → DRP₂ → DRP₃
+
+Paths MAY branch.
+
+Paths MAY remain incomplete.
+
+---
+
+## Learning Model (Non-Intrusive)
+
+The system MAY:
+
+- increase confidence for repeated positive outcomes
+- decrease confidence for repeated negative outcomes
+
+This MUST NOT influence decisions directly.
+
+This MAY influence analysis layers only.
 
 ---
 
@@ -97,6 +133,7 @@ The system MAY include:
 - DRP MUST NOT introduce optimization pressure
 - DRP MUST record without judgment of actors
 - DRP MUST focus on decisions, not identities
+- DRP MUST preserve protocol hierarchy and MUST NOT override Level 0 (Safety) or Level 1 (Human Consent)
 - DRP MUST consider storage and write load under high decision volume; implementations SHOULD use batch recording or event-significance filters to reduce overhead
 
 ---
@@ -110,6 +147,8 @@ After a decision is executed:
 After outcome is observed:
 
 → The system MUST update the record with outcome and impact
+
+Record linkage SHOULD be updated so decision paths can be reconstructed across time.
 
 ---
 
