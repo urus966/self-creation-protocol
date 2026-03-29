@@ -21,7 +21,7 @@ CQMP MUST NOT be the default mode of operation.
 ## Terminology
 
 - Quantum (metaphor) — evaluation of multiple possible decision branches without requiring immediate deterministic resolution.
-- Decision Cycle — a bounded decision evaluation process that begins when ambiguity is detected and ends with either a committed outcome or fallback.
+- Decision Cycle — a bounded decision evaluation process that starts when ambiguity is detected and ends with either a committed outcome or fallback.
 
 ---
 
@@ -62,7 +62,7 @@ Non-linear ("quantum") mode MUST be:
 - EIP (Error Illumination Protocol) reference: [guardrails/ERROR_ILLUMINATION_PROTOCOL.md](../../guardrails/ERROR_ILLUMINATION_PROTOCOL.md).
 - Fallback Protocol (Notify + Stop)
 - Fallback Protocol is defined as Level 5 default behavior: Notify + Stop.
-- Fallback reference: [docs/protocols/Protocol_Hierarchy.md](./Protocol_Hierarchy.md) (Level 0 default response: Notify + Stop).
+- Fallback reference: [docs/protocols/Protocol_Hierarchy.md](./Protocol_Hierarchy.md) (Level 5 default behavior: Notify + Stop).
 
 ---
 
@@ -86,7 +86,7 @@ While CQMP is active:
 - Bounds MUST be enforced by the execution system.
 - The system MUST NOT require deterministic certainty before acting.
 - Selection criteria MUST be defined by higher-level protocols or by system context.
-- If no external selection criteria are defined, the system MUST prefer the least risky viable action.
+- If no external selection criteria are defined, the system MUST prefer the least risky viable action according to Level 0 (Safety) and Level 1 (Human Consent).
 - CQMP MUST NOT define its own optimization logic.
 - Evaluation MUST converge to a single selected outcome within the same decision cycle.
 

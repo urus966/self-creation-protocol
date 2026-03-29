@@ -21,7 +21,7 @@ CQMP is not a default operating mode.
 ## Terminology
 
 - **Quantum (metaphor):** evaluation of multiple possible decision branches without requiring immediate deterministic resolution.
-- **Decision Cycle:** a single bounded decision evaluation process that starts with ambiguity and ends with a committed outcome or fallback.
+- **Decision Cycle:** a bounded decision evaluation process that starts when ambiguity is detected and ends with either a committed outcome or fallback.
 
 ## Core Principle
 
@@ -69,7 +69,7 @@ While CQMP is active:
 - Evaluation bounds MUST be enforced by the execution system.
 - the system does not require deterministic certainty before acting
 - selection criteria are defined by higher-level protocols or system context
-- If no external selection criteria are defined, the system MUST prefer the least risky viable action.
+- If no external selection criteria are defined, the system MUST prefer the least risky viable action according to Level 0 (Safety) and Level 1 (Human Consent).
 - CQMP does not define its own optimization logic
 - evaluation converges to a single selected outcome within the same decision cycle
 
