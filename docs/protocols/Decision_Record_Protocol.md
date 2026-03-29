@@ -59,11 +59,18 @@ List of viable actions considered.
 
 The selected action.
 
-### 4. Outcome
+### 4. Status
+
+Record completeness indicator:
+
+- `complete` — outcome and impact are recorded
+- `incomplete` — outcome is not observed
+
+### 5. Outcome
 
 Observed result after execution.
 
-### 5. Impact
+### 6. Impact
 
 Evaluation of outcome using a simple scale:
 
@@ -77,10 +84,10 @@ Evaluation of outcome using a simple scale:
 
 The system MAY include:
 
-- Timestamp
-- Actors involved
-- Confidence level
-- Source of decision (CQMP / linear / human)
+- Timestamp — ISO 8601 format
+- Actors involved — list of unique identifiers
+- Confidence level — number from 0 to 1
+- Source of decision — string (`CQMP` / `linear` / `human`)
 
 ---
 
@@ -90,6 +97,7 @@ The system MAY include:
 - DRP MUST NOT introduce optimization pressure
 - DRP MUST record without judgment of actors
 - DRP MUST focus on decisions, not identities
+- DRP MUST consider storage and write load under high decision volume; implementations SHOULD use batch recording or event-significance filters to reduce overhead
 
 ---
 
@@ -109,7 +117,9 @@ After outcome is observed:
 
 If outcome cannot be observed:
 
-→ The record MUST remain incomplete
+→ The record MUST be marked `incomplete`
+
+→ Impact MUST NOT be assigned
 
 The system MUST NOT fabricate outcomes.
 
@@ -119,6 +129,7 @@ The system MUST NOT fabricate outcomes.
 
 A record is complete when:
 
+- Status is `complete`
 - Outcome is observed
 - Impact is assigned
 
