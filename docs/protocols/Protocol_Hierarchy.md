@@ -16,8 +16,6 @@ Consent request and consent state interpretation.
 
 Internal viability and autonomy framing.
 
-- CQMP (Conditional Quantum Mode Protocol) — conditional multi-branch decision evaluation
-
 ### Level 3 — Core Guardrails
 
 - SCP (Selective Consent Protocol)

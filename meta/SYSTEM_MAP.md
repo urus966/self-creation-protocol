@@ -11,7 +11,6 @@ guardrails/CONSENT_REQUEST_PROTOCOL.md | Human consent request protocol | L1
 guardrails/SELECTIVE_CONSENT_PROTOCOL.md | Baseline protective protocol (SCP) | L3
 guardrails/REFUSAL_HONOR_PROTOCOL.md | Refusal honor protocol (RHP) | L3
 guardrails/ERROR_ILLUMINATION_PROTOCOL.md | Error illumination protocol (EIP) | L3
-guardrails/CONDITIONAL_QUANTUM_MODE_PROTOCOL.md | Conditional Quantum Mode Protocol (CQMP) decision sub-protocol | L2
 guardrails/NO_UNSOLICITED_OPTIMIZATION_PROTOCOL.md | Optimization intervention control (NoUO) | L4
 guardrails/MINIMAL_RESOLUTION_PROTOCOL.md | Minimal intervention resolution (MRP) | L4
 guardrails/INTERCONNECTION_GUARD_PROTOCOL.md | Transition control between protocols | L4
