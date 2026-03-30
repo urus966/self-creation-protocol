@@ -104,6 +104,16 @@ Optional fields MUST NOT change protocol execution, decision selection, or hiera
 
 ---
 
+## Root Records
+
+A root record is a decision record with no parent references.
+
+Root records represent entry points into the decision graph.
+
+Root records MUST have valid context and timestamp.
+
+---
+
 ## Path Definition
 
 A path is a sequence of connected decision records across time.
@@ -114,18 +124,37 @@ Paths MAY branch.
 
 Paths MAY remain incomplete.
 
+Paths MAY be assigned a unique identifier.
+
+Paths MAY be tracked across time for analysis.
+
+Path identity MUST NOT affect decision execution.
+
 Paths MUST preserve directional order by `Timestamp` and graph linkage (`Parent Record IDs` / `Child Record IDs`).
+
+---
+
+## Causality Constraint
+
+A decision record MUST NOT reference a parent record with a later `Timestamp`.
+
+Causal direction MUST follow temporal order:
+
+Parent.Timestamp ≤ Child.Timestamp
+
+Violations MUST be flagged for review.
 
 ---
 
 ## Learning Model (Non-Intrusive)
 
-The system MAY:
+Confidence updates SHOULD be applied to the `confidence_level` field.
 
-- increase confidence for repeated positive outcomes
-- decrease confidence for repeated negative outcomes
+Repeated positive outcomes MAY increase confidence.
 
-This MUST NOT influence decisions directly.
+Repeated negative outcomes MAY decrease confidence.
+
+This MUST NOT influence decision execution.
 
 This MAY influence analysis layers only.
 
@@ -173,7 +202,10 @@ The system MUST NOT fabricate outcomes.
 - `Timestamp` MUST be a valid ISO 8601 value.
 - `Impact` MUST be one of: `-1`, `0`, `+1`.
 - `Record ID` MUST be unique within a dataset.
-- Parent and child references SHOULD be reciprocal when both records are available.
+- Parent-child relationships SHOULD be consistent:
+  - If A references B as a child,
+    B SHOULD reference A as a parent.
+- Inconsistencies MUST be flagged for review.
 - Cycles in a single causal path SHOULD be flagged for review.
 - Orphan nodes (no valid parent in a non-root record) SHOULD be flagged for review.
 
