@@ -99,8 +99,48 @@ The system MAY include:
 - Actors involved — list of unique identifiers
 - Confidence level — number from 0 to 1
 - Source of decision — string (`CQMP` / `linear` / `human`)
+- `semantic_index` — index of semantic vectors for historical DRP records
+- `related_records` — list of Record IDs with similar semantic meaning
 
 Optional fields MUST NOT change protocol execution, decision selection, or hierarchy behavior.
+
+---
+
+## Semantic Matching
+
+A query MAY be represented as an embedding (semantic vector) and compared against historical DRP embeddings.
+
+If semantic similarity is greater than or equal to a configured threshold (example: `0.85`), the query MAY be treated as a semantic match.
+
+Semantic matching MUST be used for lookup only and MUST NOT create or modify decisions.
+
+---
+
+## DRP Lookup Behavior (Non-Intrusive)
+
+When a semantic match is found, DRP SHOULD return recorded fields from the matched record:
+
+- `decision`
+- `outcome`
+- `impact`
+- `source_record_id`
+
+DRP MUST NOT re-execute decision logic for matched queries.
+
+DRP MUST NOT modify historical records during lookup.
+
+DRP MUST remain subordinate to Level 0 (Safety) and Level 1 (Human Consent).
+
+Example lookup response:
+
+```json
+{
+  "decision": "route_to_human",
+  "outcome": "Issue resolved by human specialist",
+  "impact": 1,
+  "source_record_id": "drp-2026-03-29-001"
+}
+```
 
 ---
 
@@ -131,6 +171,8 @@ Paths MAY be tracked across time for analysis.
 Path identity MUST NOT affect decision execution.
 
 Paths MUST preserve directional order by `Timestamp` and graph linkage (`Parent Record IDs` / `Child Record IDs`).
+
+`related_records` MAY define semantic links across paths and forms a semantic graph overlay on top of the causal graph.
 
 ---
 
@@ -167,6 +209,8 @@ This MAY influence analysis layers only.
 - DRP MUST record without judgment of actors
 - DRP MUST focus on decisions, not identities
 - DRP MUST preserve protocol hierarchy and MUST NOT override Level 0 (Safety) or Level 1 (Human Consent)
+- DRP MUST support semantic reuse via lookup without re-solving previously matched decision patterns
+- DRP MUST NOT mutate historical records when serving semantic lookup results
 - DRP MUST consider storage and write load under high decision volume; implementations SHOULD use batch recording or event-significance filters to reduce overhead
 
 ---
@@ -202,6 +246,8 @@ The system MUST NOT fabricate outcomes.
 - `Timestamp` MUST be a valid ISO 8601 value.
 - `Impact` MUST be one of: `-1`, `0`, `+1`.
 - `Record ID` MUST be unique within a dataset.
+- Semantic lookup traces SHOULD include query timestamp, matched `source_record_id`, and similarity score.
+- Similarity threshold configuration SHOULD be explicit and versioned.
 - Parent-child relationships SHOULD be consistent:
   - If A references B as a child,
     B SHOULD reference A as a parent.
