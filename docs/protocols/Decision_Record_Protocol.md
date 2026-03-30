@@ -1,117 +1,197 @@
 # Decision Record Protocol (DRP)
 
-## Metadata
+## 1. Metadata
 
 - Name: Decision Record Protocol (DRP)
 - Level: Meta / Cross-layer Support
 - Status: Experimental
-- Scope: Documentation and analysis support only
+- Scope Type: Documentation and analysis support
 
 ---
 
-## Purpose
+## 2. Purpose
 
-DRP defines a standardized format to record decisions, decision context, observed outcomes, and impact over time.
+**TL;DR:** DRP is a formal memory of decisions and outcomes across time.
 
-The system MUST use DRP to preserve traceability and support longitudinal analysis.
+DRP defines a strict specification to record decision context, selected actions, outcomes, impacts, and graph links.
 
-DRP MUST remain non-intrusive and MUST NOT execute, alter, or override decision logic.
+DRP MUST preserve traceability across time.
 
----
-
-## Core Principle
-
-Decisions MUST be observable across time.
-
-The system MUST support the trace chain:
-
-`Context → Decision → Outcome → Impact`
+DRP MUST remain non-intrusive and MUST NOT execute decisions.
 
 ---
 
-## Protocol Relationships
+## 3. Scope & Non-Goals
+
+**TL;DR:** DRP stores and traces decisions; it does not decide or execute.
+
+### DRP IS
+
+- a decision memory
+- a trace system
+- an analysis support layer
+
+### DRP IS NOT
+
+- a decision engine
+- an optimization engine
+- an execution system
+
+---
+
+## 4. Core Principles
+
+**TL;DR:** DRP guarantees consistent, auditable decision records.
+
+- DRP MUST treat each record as a decision trace artifact.
+- DRP MUST keep causal order explicit.
+- DRP MUST keep semantic similarity separate from execution authority.
+- DRP MUST preserve Level 0 (Safety) and Level 1 (Human Consent) precedence.
+
+---
+
+## 5. Protocol Relationships
+
+**TL;DR:** DRP supports other protocols through recording only.
 
 ### Supports
 
-- CQMP — records multi-branch decision exploration and selected branch outcome. See [docs/protocols/Conditional_Quantum_Mode.md](./Conditional_Quantum_Mode.md) and [guardrails/CONDITIONAL_QUANTUM_MODE_PROTOCOL.md](../../guardrails/CONDITIONAL_QUANTUM_MODE_PROTOCOL.md).
+- CQMP — records branch exploration and selected branch outcomes. See [docs/protocols/Conditional_Quantum_Mode.md](./Conditional_Quantum_Mode.md) and [guardrails/CONDITIONAL_QUANTUM_MODE_PROTOCOL.md](../../guardrails/CONDITIONAL_QUANTUM_MODE_PROTOCOL.md).
 - MRP — records executed minimal-resolution actions and consequences. See [guardrails/MINIMAL_RESOLUTION_PROTOCOL.md](../../guardrails/MINIMAL_RESOLUTION_PROTOCOL.md).
-- EIP — records ambiguity/error discovery and downstream correction outcomes. See [guardrails/ERROR_ILLUMINATION_PROTOCOL.md](../../guardrails/ERROR_ILLUMINATION_PROTOCOL.md).
+- EIP — records ambiguity/error detection and resulting outcomes. See [guardrails/ERROR_ILLUMINATION_PROTOCOL.md](../../guardrails/ERROR_ILLUMINATION_PROTOCOL.md).
 
 ### Does NOT override
 
 - Level 0 — Safety
 - Level 1 — Human Consent
 
-DRP MUST remain subordinate to protocol hierarchy and MUST NOT introduce control behavior.
+DRP MUST remain subordinate to hierarchy constraints.
 
 ---
 
-## Record Structure
+## 6. Record Schema (Formal Table)
 
-Each DRP record MUST contain the following required fields.
+**TL;DR:** Use one normalized schema with strict names and constraints.
 
-| Field | Type | Requirement | Description |
-| --- | --- | --- | --- |
-| `record_id` | string | MUST | Unique identifier of this record. |
-| `context` | string | MUST | Situation snapshot at decision time. |
-| `options` | array of strings | MUST | Viable options considered. |
-| `decision` | string | MUST | Selected option/action. |
-| `status` | enum | MUST | `complete` or `incomplete`. |
-| `outcome` | string or null | MUST | Observed result. MUST be `null` when not yet observed. |
-| `impact` | enum or null | MUST | `-1`, `0`, `+1`. MUST be `null` when status is `incomplete`. |
-| `timestamp` | string | MUST | ISO 8601 decision-time marker. |
-| `parent_record_ids` | array of strings | MUST | Direct causal parents. Empty for root records. |
-| `child_record_ids` | array of strings | MUST | Direct causal children. Empty allowed. |
+| Field | Type | Required | Constraints | Description |
+| --- | --- | --- | --- | --- |
+| `record_id` | string | MUST | Unique within dataset | Record identifier |
+| `context` | string | MUST | Non-empty | Decision-time context; MUST explain why, not only what |
+| `options` | array<string> | MUST | Length >= 1 | Viable options considered |
+| `decision` | string | MUST | Non-empty | Selected option |
+| `status` | enum | MUST | `proposed` \| `complete` \| `incomplete` \| `superseded` | Decision record state |
+| `outcome` | string or null | MUST | Null allowed only when unresolved | Observed result |
+| `impact` | enum or null | MUST | `-1` \| `0` \| `+1` \| `null` | Outcome impact value |
+| `timestamp` | string | MUST | ISO 8601 | Decision timestamp |
+| `parent_record_ids` | array<string> | MUST | Empty only for root records | Direct causal parents |
+| `child_record_ids` | array<string> | MUST | Empty allowed | Direct causal children |
+| `related_records` | array<string> | MAY | Semantic references only | Meaning-based links |
+| `actors_involved` | array<string> | MAY | Unique IDs only | Associated actors |
+| `confidence_level` | number | MAY | 0 <= x <= 1 | Analysis confidence field |
+| `source_of_decision` | string | MAY | `CQMP` \| `linear` \| `human` | Origin label |
+| `semantic_index` | string/object reference | MAY | Versioned reference | Embedding index identifier |
 
-Required field semantics:
+### ENUM Definitions
 
-- `status = complete` implies `outcome != null` and `impact != null`.
-- `status = incomplete` implies `outcome = null` and `impact = null`.
-- `timestamp` MUST be parseable as ISO 8601.
-
----
-
-## Optional Fields
-
-The system MAY include optional fields for analysis enrichment:
-
-| Field | Type | Purpose |
-| --- | --- | --- |
-| `actors_involved` | array of strings | Unique actor identifiers related to the record. |
-| `confidence_level` | number | Confidence in `[0, 1]` used for analysis only. |
-| `source_of_decision` | string | Origin label (`CQMP`, `linear`, `human`). |
-| `semantic_index` | string/object reference | Reference to semantic embedding index used for matching. |
-| `related_records` | array of strings | Record IDs with semantic similarity links. |
-
-Optional fields MUST NOT change execution, safety, consent enforcement, or branch selection.
+- `status`: `proposed`, `complete`, `incomplete`, `superseded`
+- `impact`: `-1`, `0`, `+1`
 
 ---
 
-## Semantic Matching
+## 7. Field Semantics (Rules)
 
-A query MAY be converted to an embedding and compared against historical DRP records.
+**TL;DR:** Field values MUST obey invariants.
 
-A semantic match MAY be accepted when similarity is greater than or equal to a configured threshold (example: `0.85`).
+### Explicit Invariants
 
-Semantic matching MUST be lookup-only:
+- `status = complete` ⇒ `outcome != null` AND `impact != null`
+- `status = incomplete` ⇒ `outcome = null` AND `impact = null`
+- `status = proposed` ⇒ `outcome = null` AND `impact = null`
+- `status = superseded` ⇒ record remains immutable; supersession MUST be represented by a new record
+- `timestamp` MUST be parseable ISO 8601
+- `record_id` MUST be unique
+- `parent_record_ids = []` defines a root record
 
-- MUST NOT execute new decision logic.
-- MUST NOT rewrite historical decisions.
-- MUST preserve full traceability to source records.
+### Decision Integrity Rules (ADR-aligned)
 
-Best-practice guidance:
-
-- Threshold SHOULD be explicitly versioned (for example, `semantic_threshold_v1 = 0.85`).
-- Embedding model/version SHOULD be logged with lookup traces.
-- Similarity scoring method SHOULD remain stable per evaluation period.
+- One record MUST represent one decision event.
+- Records MUST be append-only.
+- History MUST NOT be rewritten.
+- Changes MUST create new records, not in-place edits.
+- `context` MUST capture rationale (why), not only action text (what).
 
 ---
 
-## DRP Lookup Behavior
+## 8. Lifecycle (Behavior)
 
-When semantic matching returns a valid hit, DRP SHOULD return previously recorded decision evidence.
+**TL;DR:** Create once, update with outcome, never rewrite history.
 
-DRP lookup response SHOULD include:
+### Decision Status Evolution
+
+`proposed → complete` or `proposed → incomplete`
+
+`complete → superseded` ONLY via new record that references prior record
+
+Lifecycle rules:
+
+- System MUST create a record when a decision is formed.
+- System MUST update status/outcome/impact when evidence appears.
+- System MUST preserve prior records when a decision is superseded.
+- System MUST preserve trace links across lifecycle transitions.
+
+---
+
+## 9. Graph Model (Causality + Paths)
+
+**TL;DR:** DRP has two graph layers: causal and path-level trace.
+
+### 9.1 Causal Graph (parent-child)
+
+- Causal edges are defined by `parent_record_ids` and `child_record_ids`.
+- Causal graph MUST represent time-consistent dependencies.
+- Root records MUST have no parents.
+
+### 9.2 Path Model
+
+- A path is an ordered causal sequence: `DRP_1 → DRP_2 → DRP_3`.
+- Paths MAY branch.
+- Paths MAY remain incomplete.
+- Paths MAY use `path_id` in analysis contexts.
+- Path identity MUST NOT influence execution behavior.
+
+### Formal Causality Rules
+
+- `Parent.timestamp <= Child.timestamp`
+- Future-parent references MUST NOT occur.
+- Cycles SHOULD be flagged for review.
+
+---
+
+## 10. Semantic Layer
+
+**TL;DR:** Semantic links accelerate lookup, never execution.
+
+### 10.1 Semantic Graph (related_records)
+
+- Semantic edges are defined by `related_records`.
+- Semantic edges represent meaning similarity, not temporal causality.
+- Semantic graph MUST remain separate from causal authority.
+
+### 10.2 Semantic Matching Guarantees
+
+- Semantic matching MUST NOT affect decision execution.
+- Semantic matching MUST NOT override hierarchy or protocols.
+- Semantic matching MUST NOT mutate records.
+
+### 10.3 Similarity Threshold Governance
+
+- Threshold configuration MUST be versioned.
+- Embedding model/version MUST be logged.
+- Similarity score MUST be included in lookup response.
+
+### 10.4 DRP Lookup Behavior
+
+When a semantic match is accepted, DRP MUST return stored evidence fields:
 
 - `decision`
 - `outcome`
@@ -119,150 +199,79 @@ DRP lookup response SHOULD include:
 - `source_record_id`
 - `similarity`
 
-DRP lookup MUST remain non-intrusive and MUST NOT mutate records.
-
-Example lookup response:
-
-```json
-{
-  "decision": "route_to_human",
-  "outcome": "Issue resolved by human specialist",
-  "impact": 1,
-  "source_record_id": "drp-2026-03-30-001",
-  "similarity": 0.91
-}
-```
+DRP lookup MUST remain read-only.
 
 ---
 
-## Root Records
+## 11. Constraints
 
-A root record is a record with no parents (`parent_record_ids = []`).
+**TL;DR:** DRP is strict, passive, and hierarchy-safe.
 
-Root records represent entry points into a causal graph.
+- DRP MUST NOT modify decision execution.
+- DRP MUST NOT optimize actor behavior.
+- DRP MUST preserve Level 0 and Level 1 precedence.
+- DRP MUST support traceability without adding decision authority.
+- DRP SHOULD support high-volume operation with batching and significance filters.
 
-Root records MUST contain valid `context` and `timestamp`.
+### Protocol Guarantees
 
----
+- Traceability
+- Immutability
+- Non-intrusiveness
+- Temporal consistency
 
-## Path Definition
+### Known Limitations
 
-A path is an ordered sequence of causally linked records across time.
-
-`DRP_1 → DRP_2 → DRP_3`
-
-Path rules:
-
-- Paths MAY branch.
-- Paths MAY remain incomplete.
-- Paths MAY be assigned a unique `path_id` for analytics.
-- Path identity MUST NOT affect decision execution.
-- `related_records` MAY define semantic edges that overlay the causal graph.
-
----
-
-## Causality Constraint
-
-A child record MUST NOT reference a parent record with a later timestamp.
-
-Causality MUST follow temporal order:
-
-`Parent.timestamp ≤ Child.timestamp`
-
-Violations MUST be flagged for review.
+- DRP has no automatic learning authority.
+- DRP has no decision authority.
+- DRP quality depends on input record quality.
 
 ---
 
-## Learning Model
+## 12. Data Quality Rules
 
-DRP learning is passive and analysis-only.
+**TL;DR:** Invalid structure MUST be detectable and reviewable.
 
-- Confidence updates SHOULD target `confidence_level`.
-- Repeated positive outcomes MAY increase confidence.
-- Repeated negative outcomes MAY decrease confidence.
-
-This model MUST NOT influence decision execution.
-
----
-
-## Constraints
-
-- DRP MUST NOT modify decisions.
-- DRP MUST NOT introduce optimization pressure on actors.
-- DRP MUST record decisions, not identities.
-- DRP MUST preserve Level 0 (Safety) and Level 1 (Human Consent) precedence.
-- DRP MUST support semantic reuse without re-solving already matched decision patterns.
-- DRP MUST NOT mutate historical records during lookup.
-- DRP SHOULD support high-volume operation using batching and event-significance filters.
-
-High-load storage recommendations:
-
-- Use append-only storage for write safety.
-- Use asynchronous batch ingestion for large decision volumes.
-- Index at minimum: `record_id`, `timestamp`, `impact`, `status`.
-
-Future-extension recommendations:
-
-- Graph backends (for example Neo4j) MAY be used for causal/semantic traversal.
-- Vector indices MAY be separated from canonical DRP storage to avoid coupling.
-
----
-
-## Behavior
-
-After a decision is executed:
-
-→ The system SHOULD create a DRP record.
-
-After outcome observation:
-
-→ The system MUST update the same record with `outcome`, `impact`, and `status`.
-
-After semantic lookup:
-
-→ The system SHOULD return matched historical evidence and preserve lookup trace metadata.
-
----
-
-## Failure Mode
-
-If outcome cannot be observed:
-
-- Record MUST remain `incomplete`.
-- `outcome` MUST remain `null`.
-- `impact` MUST remain `null`.
-
-The system MUST NOT fabricate outcomes or impact.
-
----
-
-## Data Quality Rules
-
-- `record_id` MUST be unique within a dataset.
+- `record_id` MUST be unique.
 - `timestamp` MUST be valid ISO 8601.
-- `impact` MUST be one of `-1`, `0`, `+1` when present.
+- `impact` MUST be `-1`, `0`, or `+1` when present.
 - Parent-child consistency SHOULD hold:
   - If A lists B in `child_record_ids`, B SHOULD list A in `parent_record_ids`.
 - Inconsistencies MUST be flagged for review.
-- Cycles SHOULD be flagged for review unless explicitly allowed by versioned policy.
 - Non-root records without valid parents SHOULD be flagged as orphan nodes.
-- Semantic lookup traces SHOULD include: query timestamp, threshold version, embedding model version, similarity, and `source_record_id`.
+- Semantic lookup traces SHOULD include query timestamp, threshold version, embedding model version, similarity, and `source_record_id`.
 
 ---
 
-## Exit Condition
+## 13. Failure Modes
 
-A record is complete when ALL are true:
+**TL;DR:** Missing evidence keeps records incomplete; no fabrication.
 
-- `status = complete`
-- `outcome != null`
-- `impact != null`
+- If outcome is unobserved, record MUST remain `incomplete`.
+- In incomplete state, `outcome` MUST be `null`.
+- In incomplete state, `impact` MUST be `null`.
+- System MUST NOT fabricate outcomes.
+- System MUST NOT fabricate impact.
 
 ---
 
-## Examples
+## 14. Examples
 
-### Example A — Branching Path (Multiple Records)
+**TL;DR:** Examples show valid, minimal, invalid, and semantic-lookup cases.
+
+### 14.1 Minimal Example (5 lines)
+
+```json
+{
+  "record_id": "drp-min-001",
+  "context": "User request requires escalation",
+  "decision": "route_to_human",
+  "status": "proposed",
+  "timestamp": "2026-03-30T12:00:00Z"
+}
+```
+
+### 14.2 Valid Branching Path (Multiple Records)
 
 ```json
 [
@@ -276,12 +285,11 @@ A record is complete when ALL are true:
     "impact": 1,
     "timestamp": "2026-03-30T09:00:00Z",
     "parent_record_ids": [],
-    "child_record_ids": ["drp-2026-03-30-002", "drp-2026-03-30-003"],
-    "source_of_decision": "CQMP"
+    "child_record_ids": ["drp-2026-03-30-002", "drp-2026-03-30-003"]
   },
   {
     "record_id": "drp-2026-03-30-002",
-    "context": "Follow-up action on specialist route",
+    "context": "Follow-up on specialist route",
     "options": ["request_logs", "close_case"],
     "decision": "request_logs",
     "status": "complete",
@@ -289,12 +297,11 @@ A record is complete when ALL are true:
     "impact": 1,
     "timestamp": "2026-03-30T09:05:00Z",
     "parent_record_ids": ["drp-2026-03-30-001"],
-    "child_record_ids": ["drp-2026-03-30-004"],
-    "source_of_decision": "linear"
+    "child_record_ids": ["drp-2026-03-30-004"]
   },
   {
     "record_id": "drp-2026-03-30-003",
-    "context": "Alternative branch for automation route",
+    "context": "Automation alternative branch",
     "options": ["route_to_bot", "escalate_human"],
     "decision": "route_to_bot",
     "status": "incomplete",
@@ -302,26 +309,12 @@ A record is complete when ALL are true:
     "impact": null,
     "timestamp": "2026-03-30T09:06:00Z",
     "parent_record_ids": ["drp-2026-03-30-001"],
-    "child_record_ids": [],
-    "source_of_decision": "CQMP"
-  },
-  {
-    "record_id": "drp-2026-03-30-004",
-    "context": "Logs analyzed",
-    "options": ["close_case", "reopen_case"],
-    "decision": "close_case",
-    "status": "complete",
-    "outcome": "Resolved",
-    "impact": 1,
-    "timestamp": "2026-03-30T09:10:00Z",
-    "parent_record_ids": ["drp-2026-03-30-002"],
-    "child_record_ids": [],
-    "source_of_decision": "human"
+    "child_record_ids": []
   }
 ]
 ```
 
-### Example B — Incomplete Record
+### 14.3 Incomplete Record Example
 
 ```json
 {
@@ -338,12 +331,14 @@ A record is complete when ALL are true:
 }
 ```
 
-### Example C — Semantic Lookup Match
+### 14.4 Semantic Lookup Match Example
 
 ```json
 {
   "query": "Need specialist for ambiguous support issue",
+  "threshold_version": "semantic_threshold_v1",
   "threshold": 0.85,
+  "embedding_model": "text-embedding-v1",
   "matches": [
     {
       "source_record_id": "drp-2026-03-30-001",
@@ -357,7 +352,30 @@ A record is complete when ALL are true:
 }
 ```
 
-### Mermaid — Branching + Impact
+### 14.5 Invalid Record Example
+
+```json
+{
+  "record_id": "drp-invalid-001",
+  "context": "Follow-up decision",
+  "options": ["close_case"],
+  "decision": "close_case",
+  "status": "complete",
+  "outcome": null,
+  "impact": null,
+  "timestamp": "2026-03-30T08:00:00Z",
+  "parent_record_ids": ["drp-2026-03-30-999"],
+  "child_record_ids": []
+}
+```
+
+Why invalid:
+
+- `status = complete` but `outcome` is `null`.
+- `status = complete` but `impact` is `null`.
+- Parent reference may be unresolved (potential orphan).
+
+### 14.6 Mermaid — Branching + Impact
 
 ```mermaid
 graph TD
@@ -366,27 +384,26 @@ graph TD
   B --> D[drp-004 impact:+1]
 ```
 
-### Mermaid — Causal Graph with Semantic Overlay
+### 14.7 Mermaid — Causal vs Semantic
 
 ```mermaid
 graph LR
   A[drp-001] --> B[drp-002]
   A --> C[drp-003]
-  B --> D[drp-004]
-  A -. semantic related .-> X[drp-120]
+  B -. semantic related .-> X[drp-120]
   C -. semantic related .-> Y[drp-204]
 ```
 
 ---
 
-## Rationale
+## 15. Rationale
 
-Without structured records, systems cannot reliably analyze historical decision quality or reconstruct causal paths.
+DRP formalizes decision memory with strict constraints and explicit graph semantics.
 
-DRP enables:
+It enables:
 
-- Pattern detection over decision histories.
-- Causal and semantic graph analysis.
-- Passive learning signals without intervention in execution logic.
+- auditable trace chains
+- causal path reconstruction
+- semantic retrieval for analysis reuse
 
-DRP evaluates decision trajectories over time, not people.
+DRP preserves protocol safety by remaining read-oriented, non-intrusive, and hierarchy-subordinate.
