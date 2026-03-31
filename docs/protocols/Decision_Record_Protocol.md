@@ -121,7 +121,7 @@ DRP MUST remain subordinate to hierarchy constraints.
 ### Status Definitions
 
 - `proposed` — decision is defined, execution has not started.
-- `incomplete` — execution started, outcome is not yet known.
+- `incomplete` — decision executed but outcome is not yet observed.
 - `complete` — outcome and impact are observed.
 - `superseded` — decision is replaced by a newer DRP Record.
 
@@ -136,7 +136,6 @@ DRP MUST remain subordinate to hierarchy constraints.
 - `status = complete` ⇒ `outcome != null` AND `impact != null`
 - `status = incomplete` ⇒ `outcome = null` AND `impact = null`
 - `status = proposed` ⇒ `outcome = null` AND `impact = null`
-- `status = incomplete` ⇒ execution has started
 - `status = superseded` ⇒ `supersedes_record_id != null`
 - `status = superseded` ⇒ supersession MUST be represented by a newer DRP Record
 - `timestamp` MUST be parseable ISO 8601
@@ -153,7 +152,13 @@ DRP MUST remain subordinate to hierarchy constraints.
 
 ### Immutability Rules
 
-- DRP Records MUST NOT be modified after creation except for:
+DRP Records are append-only in structure, but allow controlled field completion for:
+
+- `status`
+- `outcome`
+- `impact`
+
+DRP Records MUST NOT be modified after creation except for:
   - `status`
   - `outcome`
   - `impact`
@@ -177,8 +182,13 @@ Lifecycle rules:
 
 - System MUST create a DRP Record when a decision is formed.
 - System MUST update status/outcome/impact when evidence appears.
-- System MUST preserve prior records when a decision is superseded.
+- System MUST preserve prior DRP Records when a decision is superseded.
+- A new DRP Record MUST reference the replaced DRP Record via `supersedes_record_id`.
+- The superseded DRP Record MUST have `status = superseded`.
+- Supersession is a forward link from new to old and MUST NOT rely on backward mutation.
 - System MUST preserve trace links across lifecycle transitions.
+- A DRP Record MAY remain indefinitely in `proposed` state if no execution occurs.
+- A `proposed` DRP Record MUST NOT have `outcome` or `impact`.
 
 ---
 
@@ -219,6 +229,7 @@ Lifecycle rules:
 - Symmetry is NOT required.
 - Semantic edges represent meaning similarity, not temporal causality.
 - Semantic links MUST NOT imply causality.
+- Semantic similarity MUST NOT be used as a substitute for causal linkage.
 - Semantic graph MUST remain separate from causal authority.
 
 ### 10.2 Semantic Matching Guarantees
@@ -276,13 +287,17 @@ Lookup traces SHOULD be stored as separate records (not DRP Records).
 - DRP MUST NOT optimize actor behavior.
 - DRP MUST preserve Level 0 and Level 1 precedence.
 - DRP SHOULD preserve audit quality under high-volume workloads.
+- Duplicate DRP Records representing the same decision event SHOULD be avoided.
+- If duplication occurs, DRP Records MUST be linked via `related_records` or resolved via supersession.
 
-### Protocol Guarantees
+### Formal Guarantees
 
-- Traceability
-- Immutability
-- Non-intrusiveness
-- Temporal consistency
+DRP guarantees:
+
+- No hidden mutation of decision history
+- No execution influence from stored records
+- Deterministic trace reconstruction (given complete data)
+- Separation of causal and semantic graphs
 
 ### Known Limitations
 
@@ -299,7 +314,8 @@ Lookup traces SHOULD be stored as separate records (not DRP Records).
 - `record_id` MUST be unique.
 - `timestamp` MUST be valid ISO 8601.
 - `impact` MUST be `-1`, `0`, or `+1` when present.
-- Parent-child consistency SHOULD hold:
+- Parent -> Child linkage MUST be valid in causal direction.
+- Bidirectional consistency SHOULD be enforced, but MAY be eventually consistent in distributed systems.
   - If A lists B in `child_record_ids`, B SHOULD list A in `parent_record_ids`.
 - Inconsistencies MUST be flagged for review.
 - Non-root records without valid parents SHOULD be flagged as orphan nodes.
@@ -311,7 +327,7 @@ Lookup traces SHOULD be stored as separate records (not DRP Records).
 
 **TL;DR:** Missing evidence keeps records incomplete; no fabrication.
 
-- If outcome is unobserved, record MUST remain `incomplete`.
+- If outcome is unobserved, DRP Record MUST remain `incomplete`.
 - In incomplete state, `outcome` MUST be `null`.
 - In incomplete state, `impact` MUST be `null`.
 - System MUST NOT fabricate outcomes.
@@ -323,7 +339,9 @@ Lookup traces SHOULD be stored as separate records (not DRP Records).
 
 **TL;DR:** Examples show valid, minimal, invalid, and semantic-lookup cases.
 
-### 14.1 Minimal Example (Illustrative, Not Schema-Valid)
+Examples MAY be partial for illustration, but MUST NOT be treated as schema-valid unless explicitly marked as "VALID EXAMPLE".
+
+### 14.1 PARTIAL EXAMPLE — Minimal Example (Illustrative, Not Schema-Valid)
 
 NOTE: This is a partial example for illustration only (not schema-valid).
 
@@ -337,7 +355,7 @@ NOTE: This is a partial example for illustration only (not schema-valid).
 }
 ```
 
-### 14.2 Valid Branching Path (Multiple Records)
+### 14.2 VALID EXAMPLE — Valid Branching Path (Multiple Records)
 
 ```json
 [
@@ -380,7 +398,7 @@ NOTE: This is a partial example for illustration only (not schema-valid).
 ]
 ```
 
-### 14.3 Incomplete Record Example
+### 14.3 VALID EXAMPLE — Incomplete Record Example
 
 ```json
 {
@@ -397,7 +415,7 @@ NOTE: This is a partial example for illustration only (not schema-valid).
 }
 ```
 
-### 14.4 Semantic Lookup Match Example
+### 14.4 VALID EXAMPLE — Semantic Lookup Match Example
 
 ```json
 {
@@ -418,7 +436,7 @@ NOTE: This is a partial example for illustration only (not schema-valid).
 }
 ```
 
-### 14.5 Invalid Record Example
+### 14.5 INVALID EXAMPLE — Invalid Record Example
 
 ```json
 {
