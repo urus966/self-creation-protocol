@@ -9,15 +9,27 @@
 
 ---
 
+## 1.1 Protocol Status Model
+
+- `draft` — structure is evolving and not ready for cross-team dependency.
+- `experimental` — usable for controlled adoption with active feedback.
+- `stable` — format is versioned and expected to be backward compatible within major versions.
+
+Current status: `experimental`.
+
+---
+
 ## 2. Purpose
 
 **TL;DR:** DRP is a formal memory of decisions and outcomes across time.
 
 DRP defines a strict specification to record decision context, selected actions, outcomes, impacts, and graph links.
 
-DRP MUST preserve traceability across time.
+Without DRP, decision traces fragment across systems, causal attribution weakens, and repeated mistakes become harder to detect.
 
-DRP MUST remain non-intrusive and MUST NOT execute decisions.
+DRP MUST preserve traceability across time so historical decisions can be audited and compared.
+
+DRP records decisions only and MUST NOT execute, validate, or optimize decisions.
 
 ---
 
@@ -201,16 +213,22 @@ When a semantic match is accepted, DRP MUST return stored evidence fields:
 
 DRP lookup MUST remain read-only.
 
+### 10.5 Semantic Matching Limitations
+
+- Semantic matches are advisory signals, not ground truth.
+- A semantic match MUST be overridable by authoritative context, safety policy, or human consent constraints.
+- Similarity alone MUST NOT be treated as factual equivalence between records.
+
 ---
 
 ## 11. Constraints
 
 **TL;DR:** DRP is strict, passive, and hierarchy-safe.
 
+- DRP MUST record decisions only.
 - DRP MUST NOT modify decision execution.
 - DRP MUST NOT optimize actor behavior.
 - DRP MUST preserve Level 0 and Level 1 precedence.
-- DRP MUST support traceability without adding decision authority.
 - DRP SHOULD support high-volume operation with batching and significance filters.
 
 ### Protocol Guarantees
@@ -396,14 +414,62 @@ graph LR
 
 ---
 
-## 15. Rationale
+## 15. Alternatives Considered
+
+### Recomputation-only approach
+
+- Recompute each decision from scratch every time.
+- Strength: no storage overhead.
+- Limitation: weak traceability and repeated analysis cost.
+
+### Simple cache approach
+
+- Store outputs keyed by surface query only.
+- Strength: low complexity.
+- Limitation: weak causal context, weak audit quality, and semantic drift risk.
+
+### DRP approach
+
+- Store normalized decision records with causal and semantic links.
+- Strength: high auditability, path reconstruction, and reusable analysis evidence.
+- Limitation: depends on record quality and governance discipline.
+
+---
+
+## 16. Rationale
 
 DRP formalizes decision memory with strict constraints and explicit graph semantics.
 
-It enables:
+Without DRP, systems lose consistent decision history, traceability decreases, and repeated mistakes are harder to identify.
+
+DRP enables:
 
 - auditable trace chains
 - causal path reconstruction
 - semantic retrieval for analysis reuse
 
 DRP preserves protocol safety by remaining read-oriented, non-intrusive, and hierarchy-subordinate.
+
+---
+
+## 17. Summary
+
+DRP does:
+
+- record decision context, decision, outcome, and impact
+- preserve causal and semantic trace links for analysis
+- provide read-only lookup evidence for prior records
+
+DRP does NOT:
+
+- execute decisions
+- validate decision correctness
+- optimize decision policy
+
+### Anti-Patterns
+
+DRP is NOT:
+
+- a cache
+- a decision engine
+- a replacement for reasoning
