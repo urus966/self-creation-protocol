@@ -5,6 +5,7 @@
 - Name: Decision Record Protocol (DRP)
 - Level: Meta / Cross-layer Support
 - Status: Experimental
+- Version: v0.1
 - Scope Type: Documentation and analysis support
 
 ---
@@ -16,6 +17,8 @@
 - `stable` — format is versioned and expected to be backward compatible within major versions.
 
 Current status: `experimental`.
+
+Breaking schema changes MUST increment major version.
 
 ---
 
@@ -48,6 +51,12 @@ DRP records decisions only and MUST NOT execute, validate, or optimize decisions
 - a decision engine
 - an optimization engine
 - an execution system
+
+DRP MUST NOT:
+
+- trigger actions
+- influence decision selection
+- act as memory for execution reuse
 
 ---
 
@@ -102,11 +111,19 @@ DRP MUST remain subordinate to hierarchy constraints.
 | `confidence_level` | number | MAY | 0 <= x <= 1 | Analysis confidence field |
 | `source_of_decision` | string | MAY | `CQMP` \| `linear` \| `human` | Origin label |
 | `semantic_index` | string/object reference | MAY | Versioned reference | Embedding index identifier |
+| `supersedes_record_id` | string | MAY | References a replaced DRP Record | Identifier of the superseded DRP Record |
 
 ### ENUM Definitions
 
 - `status`: `proposed`, `complete`, `incomplete`, `superseded`
 - `impact`: `-1`, `0`, `+1`
+
+### Status Definitions
+
+- `proposed` — decision is defined, execution has not started.
+- `incomplete` — execution started, outcome is not yet known.
+- `complete` — outcome and impact are observed.
+- `superseded` — decision is replaced by a newer DRP Record.
 
 ---
 
@@ -119,18 +136,28 @@ DRP MUST remain subordinate to hierarchy constraints.
 - `status = complete` ⇒ `outcome != null` AND `impact != null`
 - `status = incomplete` ⇒ `outcome = null` AND `impact = null`
 - `status = proposed` ⇒ `outcome = null` AND `impact = null`
-- `status = superseded` ⇒ record remains immutable; supersession MUST be represented by a new record
+- `status = incomplete` ⇒ execution has started
+- `status = superseded` ⇒ `supersedes_record_id != null`
+- `status = superseded` ⇒ supersession MUST be represented by a newer DRP Record
 - `timestamp` MUST be parseable ISO 8601
 - `record_id` MUST be unique
 - `parent_record_ids = []` defines a root record
 
 ### Decision Integrity Rules (ADR-aligned)
 
-- One record MUST represent one decision event.
-- Records MUST be append-only.
+- One DRP Record MUST represent one decision event.
+- DRP Records MUST be append-only.
 - History MUST NOT be rewritten.
-- Changes MUST create new records, not in-place edits.
+- Changes MUST create new DRP Records, not in-place edits.
 - `context` MUST capture rationale (why), not only action text (what).
+
+### Immutability Rules
+
+- DRP Records MUST NOT be modified after creation except for:
+  - `status`
+  - `outcome`
+  - `impact`
+- All other fields MUST remain immutable.
 
 ---
 
@@ -140,13 +167,15 @@ DRP MUST remain subordinate to hierarchy constraints.
 
 ### Decision Status Evolution
 
-`proposed → complete` or `proposed → incomplete`
+`proposed → incomplete → complete`
 
-`complete → superseded` ONLY via new record that references prior record
+`proposed → complete` is allowed when execution and outcome observation are immediate.
+
+`complete → superseded` ONLY via a newer DRP Record that references the replaced DRP Record.
 
 Lifecycle rules:
 
-- System MUST create a record when a decision is formed.
+- System MUST create a DRP Record when a decision is formed.
 - System MUST update status/outcome/impact when evidence appears.
 - System MUST preserve prior records when a decision is superseded.
 - System MUST preserve trace links across lifecycle transitions.
@@ -186,7 +215,10 @@ Lifecycle rules:
 ### 10.1 Semantic Graph (related_records)
 
 - Semantic edges are defined by `related_records`.
+- `related_records` MAY be asymmetric.
+- Symmetry is NOT required.
 - Semantic edges represent meaning similarity, not temporal causality.
+- Semantic links MUST NOT imply causality.
 - Semantic graph MUST remain separate from causal authority.
 
 ### 10.2 Semantic Matching Guarantees
@@ -213,7 +245,21 @@ When a semantic match is accepted, DRP MUST return stored evidence fields:
 
 DRP lookup MUST remain read-only.
 
-### 10.5 Semantic Matching Limitations
+### 10.5 Lookup Trace Record (Separate Structure)
+
+Lookup traces SHOULD be stored as separate records (not DRP Records).
+
+```json
+{
+  "query_timestamp": "2026-03-31T08:00:00Z",
+  "threshold_version": "semantic_threshold_v1",
+  "embedding_model": "text-embedding-v1",
+  "similarity": 0.91,
+  "source_record_id": "drp-2026-03-30-001"
+}
+```
+
+### 10.6 Semantic Matching Limitations
 
 - Semantic matches are advisory signals, not ground truth.
 - A semantic match MUST be overridable by authoritative context, safety policy, or human consent constraints.
@@ -229,7 +275,7 @@ DRP lookup MUST remain read-only.
 - DRP MUST NOT modify decision execution.
 - DRP MUST NOT optimize actor behavior.
 - DRP MUST preserve Level 0 and Level 1 precedence.
-- DRP SHOULD support high-volume operation with batching and significance filters.
+- DRP SHOULD preserve audit quality under high-volume workloads.
 
 ### Protocol Guarantees
 
@@ -257,7 +303,7 @@ DRP lookup MUST remain read-only.
   - If A lists B in `child_record_ids`, B SHOULD list A in `parent_record_ids`.
 - Inconsistencies MUST be flagged for review.
 - Non-root records without valid parents SHOULD be flagged as orphan nodes.
-- Semantic lookup traces SHOULD include query timestamp, threshold version, embedding model version, similarity, and `source_record_id`.
+- Semantic lookup traces SHOULD include query_timestamp, threshold_version, embedding_model, similarity, and source_record_id.
 
 ---
 
@@ -277,7 +323,9 @@ DRP lookup MUST remain read-only.
 
 **TL;DR:** Examples show valid, minimal, invalid, and semantic-lookup cases.
 
-### 14.1 Minimal Example (5 lines)
+### 14.1 Minimal Example (Illustrative, Not Schema-Valid)
+
+NOTE: This is a partial example for illustration only (not schema-valid).
 
 ```json
 {
@@ -438,7 +486,7 @@ graph LR
 
 ## 16. Rationale
 
-DRP formalizes decision memory with strict constraints and explicit graph semantics.
+DRP formalizes DRP Record memory with strict constraints and explicit graph semantics.
 
 Without DRP, systems lose consistent decision history, traceability decreases, and repeated mistakes are harder to identify.
 
@@ -473,3 +521,13 @@ DRP is NOT:
 - a cache
 - a decision engine
 - a replacement for reasoning
+---
+
+## Appendix A — Implementation Guidelines (Non-Normative)
+
+- Append-only storage is RECOMMENDED to preserve audit history.
+- Batch ingestion is RECOMMENDED for high-volume DRP Record streams.
+- Indexing `record_id`, `timestamp`, `impact`, and `status` improves query performance.
+- Graph databases (for example Neo4j) MAY be used for causal/semantic traversal.
+- Vector indexes MAY be separated from canonical DRP storage to reduce coupling.
+
