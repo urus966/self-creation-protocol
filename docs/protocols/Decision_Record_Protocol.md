@@ -96,11 +96,11 @@ DRP MUST remain subordinate to hierarchy constraints.
 
 | Field | Type | Required | Constraints | Description |
 | --- | --- | --- | --- | --- |
-| `record_id` | string | MUST | Unique within dataset | Record identifier |
+| `record_id` | string | MUST | Unique within dataset | DRP Record identifier |
 | `context` | string | MUST | Non-empty | Decision-time context; MUST explain why, not only what |
 | `options` | array<string> | MUST | Length >= 1 | Viable options considered |
 | `decision` | string | MUST | Non-empty | Selected option |
-| `status` | enum | MUST | `proposed` \| `complete` \| `incomplete` \| `superseded` | Decision record state |
+| `status` | enum | MUST | `proposed` \| `complete` \| `incomplete` \| `superseded` | DRP Record state |
 | `outcome` | string or null | MUST | Null allowed only when unresolved | Observed result |
 | `impact` | enum or null | MUST | `-1` \| `0` \| `+1` \| `null` | Outcome impact value |
 | `timestamp` | string | MUST | ISO 8601 | Decision timestamp |
@@ -120,8 +120,8 @@ DRP MUST remain subordinate to hierarchy constraints.
 
 ### Status Definitions
 
-- `proposed` — decision is defined, execution has not started.
-- `incomplete` — decision executed but outcome is not yet observed.
+- `proposed` — decision is defined and execution has not started.
+- `incomplete` — execution started but outcome not yet observed.
 - `complete` — outcome and impact are observed.
 - `superseded` — decision is replaced by a newer DRP Record.
 
@@ -129,18 +129,18 @@ DRP MUST remain subordinate to hierarchy constraints.
 
 ## 7. Field Semantics (Rules)
 
-**TL;DR:** Field values MUST obey invariants.
+**TL;DR:** Field values MUST obey machine-checkable invariants.
 
-### Explicit Invariants
+### Explicit Invariants (IF/THEN)
 
-- `status = complete` ⇒ `outcome != null` AND `impact != null`
-- `status = incomplete` ⇒ `outcome = null` AND `impact = null`
-- `status = proposed` ⇒ `outcome = null` AND `impact = null`
-- `status = superseded` ⇒ `supersedes_record_id != null`
-- `status = superseded` ⇒ supersession MUST be represented by a newer DRP Record
-- `timestamp` MUST be parseable ISO 8601
-- `record_id` MUST be unique
-- `parent_record_ids = []` defines a root record
+- IF `status = complete`, THEN `outcome != null` AND `impact != null`.
+- IF `status = incomplete`, THEN `outcome = null` AND `impact = null`.
+- IF `status = proposed`, THEN `outcome = null` AND `impact = null`.
+- IF `status = superseded`, THEN `supersedes_record_id != null`.
+- IF `status = superseded`, THEN a newer DRP Record MUST reference this DRP Record via its `supersedes_record_id`.
+- IF `parent_record_ids = []`, THEN the DRP Record is a root record.
+- IF `timestamp` is present, THEN `timestamp` MUST parse as ISO 8601.
+- IF a DRP Record is created, THEN `record_id` MUST be unique in the dataset.
 
 ### Decision Integrity Rules (ADR-aligned)
 
@@ -158,17 +158,17 @@ DRP Records are append-only in structure, but allow controlled field completion 
 - `outcome`
 - `impact`
 
-DRP Records MUST NOT be modified after creation except for:
-  - `status`
-  - `outcome`
-  - `impact`
-- All other fields MUST remain immutable.
+Rules:
+
+- IF a DRP Record exists, THEN only `status`, `outcome`, and `impact` MAY be modified.
+- IF a field is not `status`, `outcome`, or `impact`, THEN it MUST remain immutable after creation.
+- IF `parent_record_ids` or `child_record_ids` would change, THEN a new DRP Record MUST be created.
 
 ---
 
 ## 8. Lifecycle (Behavior)
 
-**TL;DR:** Create once, update with outcome, never rewrite history.
+**TL;DR:** Create once, complete with evidence, preserve history.
 
 ### Decision Status Evolution
 
@@ -176,19 +176,19 @@ DRP Records MUST NOT be modified after creation except for:
 
 `proposed → complete` is allowed when execution and outcome observation are immediate.
 
-`complete → superseded` ONLY via a newer DRP Record that references the replaced DRP Record.
+`complete → superseded` is allowed ONLY when a newer DRP Record replaces the previous decision.
 
 Lifecycle rules:
 
 - System MUST create a DRP Record when a decision is formed.
-- System MUST update status/outcome/impact when evidence appears.
+- System MUST update `status`, `outcome`, and `impact` when evidence appears.
 - System MUST preserve prior DRP Records when a decision is superseded.
-- A new DRP Record MUST reference the replaced DRP Record via `supersedes_record_id`.
-- The superseded DRP Record MUST have `status = superseded`.
-- Supersession is a forward link from new to old and MUST NOT rely on backward mutation.
+- IF a new DRP Record supersedes an older DRP Record, THEN the new DRP Record MUST set `supersedes_record_id` to the older `record_id`.
+- IF a DRP Record is superseded, THEN that DRP Record MUST transition to `status = superseded`.
+- Supersession is represented as a forward link from new to old and MUST NOT require mutation of immutable fields.
 - System MUST preserve trace links across lifecycle transitions.
 - A DRP Record MAY remain indefinitely in `proposed` state if no execution occurs.
-- A `proposed` DRP Record MUST NOT have `outcome` or `impact`.
+- IF `status = proposed`, THEN `outcome = null` AND `impact = null`.
 
 ---
 
@@ -200,7 +200,7 @@ Lifecycle rules:
 
 - Causal edges are defined by `parent_record_ids` and `child_record_ids`.
 - Causal graph MUST represent time-consistent dependencies.
-- Root records MUST have no parents.
+- Root DRP Records MUST have no parents.
 
 ### 9.2 Path Model
 
@@ -212,8 +212,8 @@ Lifecycle rules:
 
 ### Formal Causality Rules
 
-- `Parent.timestamp <= Child.timestamp`
-- Future-parent references MUST NOT occur.
+- IF A is parent of B, THEN `A.timestamp <= B.timestamp`.
+- IF `A.timestamp > B.timestamp`, THEN the A→B parent reference MUST be flagged as invalid.
 - Cycles SHOULD be flagged for review.
 
 ---
@@ -236,7 +236,7 @@ Lifecycle rules:
 
 - Semantic matching MUST NOT affect decision execution.
 - Semantic matching MUST NOT override hierarchy or protocols.
-- Semantic matching MUST NOT mutate records.
+- Semantic matching MUST NOT mutate DRP Records.
 
 ### 10.3 Similarity Threshold Governance
 
@@ -274,7 +274,7 @@ Lookup traces SHOULD be stored as separate records (not DRP Records).
 
 - Semantic matches are advisory signals, not ground truth.
 - A semantic match MUST be overridable by authoritative context, safety policy, or human consent constraints.
-- Similarity alone MUST NOT be treated as factual equivalence between records.
+- Similarity alone MUST NOT be treated as factual equivalence between DRP Records.
 
 ---
 
@@ -288,7 +288,7 @@ Lookup traces SHOULD be stored as separate records (not DRP Records).
 - DRP MUST preserve Level 0 and Level 1 precedence.
 - DRP SHOULD preserve audit quality under high-volume workloads.
 - Duplicate DRP Records representing the same decision event SHOULD be avoided.
-- If duplication occurs, DRP Records MUST be linked via `related_records` or resolved via supersession.
+- IF duplicate DRP Records occur, THEN they MUST be linked via `related_records` or resolved via supersession.
 
 ### Formal Guarantees
 
@@ -303,7 +303,7 @@ DRP guarantees:
 
 - DRP has no automatic learning authority.
 - DRP has no decision authority.
-- DRP quality depends on input record quality.
+- DRP quality depends on input DRP Record quality.
 
 ---
 
@@ -314,34 +314,45 @@ DRP guarantees:
 - `record_id` MUST be unique.
 - `timestamp` MUST be valid ISO 8601.
 - `impact` MUST be `-1`, `0`, or `+1` when present.
-- Parent -> Child linkage MUST be valid in causal direction.
-- Bidirectional consistency SHOULD be enforced, but MAY be eventually consistent in distributed systems.
-  - If A lists B in `child_record_ids`, B SHOULD list A in `parent_record_ids`.
+- IF A appears in `B.parent_record_ids`, THEN B MUST NOT have an earlier `timestamp` than A.
+- IF A appears in `B.child_record_ids`, THEN A MUST NOT have a later `timestamp` than B.
+- IF A lists B in `child_record_ids`, THEN B SHOULD list A in `parent_record_ids`.
 - Inconsistencies MUST be flagged for review.
-- Non-root records without valid parents SHOULD be flagged as orphan nodes.
-- Semantic lookup traces SHOULD include query_timestamp, threshold_version, embedding_model, similarity, and source_record_id.
+- IF a DRP Record has non-empty `parent_record_ids` and none of those parents exist, THEN the DRP Record is an orphan and MUST be flagged.
+- IF two DRP Records share equivalent `context`, equivalent `decision`, and close `timestamp` values within a defined window, THEN they SHOULD be flagged as potential duplicates.
+- Semantic lookup traces SHOULD include `query_timestamp`, `threshold_version`, `embedding_model`, `similarity`, and `source_record_id`.
 
 ---
 
-## 13. Failure Modes
+## 13. Validation Readiness
+
+**TL;DR:** DRP is validator-ready by design, but validators are out of scope.
+
+- All invariants in this specification are designed to be machine-checkable.
+- DRP is validator-ready but does NOT include validation implementation.
+- Validation tooling is external to this repository.
+
+---
+
+## 14. Failure Modes
 
 **TL;DR:** Missing evidence keeps records incomplete; no fabrication.
 
-- If outcome is unobserved, DRP Record MUST remain `incomplete`.
-- In incomplete state, `outcome` MUST be `null`.
-- In incomplete state, `impact` MUST be `null`.
+- IF outcome is unobserved after execution starts, THEN DRP Record MUST remain `incomplete`.
+- IF `status = incomplete`, THEN `outcome` MUST be `null`.
+- IF `status = incomplete`, THEN `impact` MUST be `null`.
 - System MUST NOT fabricate outcomes.
 - System MUST NOT fabricate impact.
 
 ---
 
-## 14. Examples
+## 15. Examples
 
-**TL;DR:** Examples show valid, minimal, invalid, and semantic-lookup cases.
+**TL;DR:** Examples show valid, partial, and invalid cases.
 
-Examples MAY be partial for illustration, but MUST NOT be treated as schema-valid unless explicitly marked as "VALID EXAMPLE".
+Examples MAY be partial for illustration, but MUST NOT be treated as schema-valid unless explicitly marked as `VALID EXAMPLE`.
 
-### 14.1 PARTIAL EXAMPLE — Minimal Example (Illustrative, Not Schema-Valid)
+### 15.1 PARTIAL EXAMPLE — Minimal Example (Illustrative, Not Schema-Valid)
 
 NOTE: This is a partial example for illustration only (not schema-valid).
 
@@ -355,7 +366,7 @@ NOTE: This is a partial example for illustration only (not schema-valid).
 }
 ```
 
-### 14.2 VALID EXAMPLE — Valid Branching Path (Multiple Records)
+### 15.2 VALID EXAMPLE — Valid Branching Path (Multiple Records)
 
 ```json
 [
@@ -369,7 +380,12 @@ NOTE: This is a partial example for illustration only (not schema-valid).
     "impact": 1,
     "timestamp": "2026-03-30T09:00:00Z",
     "parent_record_ids": [],
-    "child_record_ids": ["drp-2026-03-30-002", "drp-2026-03-30-003"]
+    "child_record_ids": ["drp-2026-03-30-002", "drp-2026-03-30-003"],
+    "related_records": [],
+    "actors_involved": ["agent-1"],
+    "confidence_level": 0.87,
+    "source_of_decision": "human",
+    "semantic_index": "semantic-index-v1"
   },
   {
     "record_id": "drp-2026-03-30-002",
@@ -381,7 +397,12 @@ NOTE: This is a partial example for illustration only (not schema-valid).
     "impact": 1,
     "timestamp": "2026-03-30T09:05:00Z",
     "parent_record_ids": ["drp-2026-03-30-001"],
-    "child_record_ids": ["drp-2026-03-30-004"]
+    "child_record_ids": [],
+    "related_records": ["drp-2026-03-31-120"],
+    "actors_involved": ["agent-2"],
+    "confidence_level": 0.8,
+    "source_of_decision": "CQMP",
+    "semantic_index": "semantic-index-v1"
   },
   {
     "record_id": "drp-2026-03-30-003",
@@ -393,12 +414,17 @@ NOTE: This is a partial example for illustration only (not schema-valid).
     "impact": null,
     "timestamp": "2026-03-30T09:06:00Z",
     "parent_record_ids": ["drp-2026-03-30-001"],
-    "child_record_ids": []
+    "child_record_ids": [],
+    "related_records": [],
+    "actors_involved": ["agent-3"],
+    "confidence_level": 0.42,
+    "source_of_decision": "linear",
+    "semantic_index": "semantic-index-v1"
   }
 ]
 ```
 
-### 14.3 VALID EXAMPLE — Incomplete Record Example
+### 15.3 VALID EXAMPLE — Incomplete DRP Record
 
 ```json
 {
@@ -411,11 +437,16 @@ NOTE: This is a partial example for illustration only (not schema-valid).
   "impact": null,
   "timestamp": "2026-03-30T10:00:00Z",
   "parent_record_ids": [],
-  "child_record_ids": []
+  "child_record_ids": [],
+  "related_records": [],
+  "actors_involved": ["agent-4"],
+  "confidence_level": 0.5,
+  "source_of_decision": "human",
+  "semantic_index": "semantic-index-v1"
 }
 ```
 
-### 14.4 VALID EXAMPLE — Semantic Lookup Match Example
+### 15.4 PARTIAL EXAMPLE — Semantic Lookup Match Response
 
 ```json
 {
@@ -436,7 +467,7 @@ NOTE: This is a partial example for illustration only (not schema-valid).
 }
 ```
 
-### 14.5 INVALID EXAMPLE — Invalid Record Example
+### 15.5 INVALID EXAMPLE — Violates Required Invariants
 
 ```json
 {
@@ -455,11 +486,11 @@ NOTE: This is a partial example for illustration only (not schema-valid).
 
 Why invalid:
 
-- `status = complete` but `outcome` is `null`.
-- `status = complete` but `impact` is `null`.
-- Parent reference may be unresolved (potential orphan).
+- Violates invariant: IF `status = complete`, THEN `outcome != null`.
+- Violates invariant: IF `status = complete`, THEN `impact != null`.
+- Violates data quality rule when referenced parent does not exist (orphan condition).
 
-### 14.6 Mermaid — Branching + Impact
+### 15.6 Mermaid — Branching + Impact
 
 ```mermaid
 graph TD
@@ -468,7 +499,7 @@ graph TD
   B --> D[drp-004 impact:+1]
 ```
 
-### 14.7 Mermaid — Causal vs Semantic
+### 15.7 Mermaid — Causal vs Semantic
 
 ```mermaid
 graph LR
@@ -480,7 +511,7 @@ graph LR
 
 ---
 
-## 15. Alternatives Considered
+## 16. Alternatives Considered
 
 ### Recomputation-only approach
 
@@ -502,7 +533,7 @@ graph LR
 
 ---
 
-## 16. Rationale
+## 17. Rationale
 
 DRP formalizes DRP Record memory with strict constraints and explicit graph semantics.
 
@@ -518,7 +549,7 @@ DRP preserves protocol safety by remaining read-oriented, non-intrusive, and hie
 
 ---
 
-## 17. Summary
+## 18. Summary
 
 DRP does:
 
@@ -539,6 +570,7 @@ DRP is NOT:
 - a cache
 - a decision engine
 - a replacement for reasoning
+
 ---
 
 ## Appendix A — Implementation Guidelines (Non-Normative)
@@ -548,4 +580,3 @@ DRP is NOT:
 - Indexing `record_id`, `timestamp`, `impact`, and `status` improves query performance.
 - Graph databases (for example Neo4j) MAY be used for causal/semantic traversal.
 - Vector indexes MAY be separated from canonical DRP storage to reduce coupling.
-
