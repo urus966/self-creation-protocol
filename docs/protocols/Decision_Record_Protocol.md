@@ -64,7 +64,7 @@ DRP MUST NOT:
 
 **TL;DR:** DRP guarantees consistent, auditable decision records.
 
-- DRP MUST treat each record as a decision trace artifact.
+- DRP MUST treat each DRP Record as a decision trace artifact.
 - DRP MUST keep causal order explicit.
 - DRP MUST keep semantic similarity separate from execution authority.
 - DRP MUST preserve Level 0 (Safety) and Level 1 (Human Consent) precedence.
@@ -138,6 +138,9 @@ DRP MUST remain subordinate to hierarchy constraints.
 - IF `status = proposed`, THEN `outcome = null` AND `impact = null`.
 - IF `status = superseded`, THEN `supersedes_record_id != null`.
 - IF `status = superseded`, THEN a newer DRP Record MUST reference this DRP Record via its `supersedes_record_id`.
+- IF DRP Record A supersedes DRP Record B, THEN `A.supersedes_record_id = B.record_id`.
+- IF DRP Record B is superseded, THEN `B.status = superseded`.
+- IF DRP Record A supersedes DRP Record B, THEN supersession MUST be forward-declared (A → B) and MUST NOT require mutation of DRP Record B except `status`.
 - IF `parent_record_ids = []`, THEN the DRP Record is a root record.
 - IF `timestamp` is present, THEN `timestamp` MUST parse as ISO 8601.
 - IF a DRP Record is created, THEN `record_id` MUST be unique in the dataset.
@@ -180,15 +183,13 @@ Rules:
 
 Lifecycle rules:
 
-- System MUST create a DRP Record when a decision is formed.
-- System MUST update `status`, `outcome`, and `impact` when evidence appears.
-- System MUST preserve prior DRP Records when a decision is superseded.
-- IF a new DRP Record supersedes an older DRP Record, THEN the new DRP Record MUST set `supersedes_record_id` to the older `record_id`.
-- IF a DRP Record is superseded, THEN that DRP Record MUST transition to `status = superseded`.
-- Supersession is represented as a forward link from new to old and MUST NOT require mutation of immutable fields.
-- System MUST preserve trace links across lifecycle transitions.
-- A DRP Record MAY remain indefinitely in `proposed` state if no execution occurs.
-- IF `status = proposed`, THEN `outcome = null` AND `impact = null`.
+- IF a decision is formed, THEN a DRP Record MUST be created.
+- IF new evidence appears, THEN only `status`, `outcome`, and `impact` MAY be updated.
+- IF a DRP Record is superseded, THEN prior DRP Records MUST be preserved.
+- IF supersession occurs, THEN supersession invariants in Section 7 MUST be satisfied.
+- IF lifecycle transitions occur, THEN causal and semantic trace links MUST remain preserved.
+- IF no execution occurs, THEN a DRP Record MAY remain indefinitely in `proposed` state.
+- IF `status = proposed`, THEN Section 7 invariants MUST be satisfied.
 
 ---
 
@@ -214,7 +215,7 @@ Lifecycle rules:
 
 - IF A is parent of B, THEN `A.timestamp <= B.timestamp`.
 - IF `A.timestamp > B.timestamp`, THEN the A→B parent reference MUST be flagged as invalid.
-- Cycles SHOULD be flagged for review.
+- IF a causal cycle exists, THEN it SHOULD be flagged for review by external validation systems.
 
 ---
 
@@ -286,7 +287,7 @@ Lookup traces SHOULD be stored as separate records (not DRP Records).
 - DRP MUST NOT modify decision execution.
 - DRP MUST NOT optimize actor behavior.
 - DRP MUST preserve Level 0 and Level 1 precedence.
-- DRP SHOULD preserve audit quality under high-volume workloads.
+- IF high-volume workloads occur, THEN audit quality SHOULD be preserved.
 - Duplicate DRP Records representing the same decision event SHOULD be avoided.
 - IF duplicate DRP Records occur, THEN they MUST be linked via `related_records` or resolved via supersession.
 
@@ -316,11 +317,12 @@ DRP guarantees:
 - `impact` MUST be `-1`, `0`, or `+1` when present.
 - IF A appears in `B.parent_record_ids`, THEN B MUST NOT have an earlier `timestamp` than A.
 - IF A appears in `B.child_record_ids`, THEN A MUST NOT have a later `timestamp` than B.
-- IF A lists B in `child_record_ids`, THEN B SHOULD list A in `parent_record_ids`.
-- Inconsistencies MUST be flagged for review.
-- IF a DRP Record has non-empty `parent_record_ids` and none of those parents exist, THEN the DRP Record is an orphan and MUST be flagged.
-- IF two DRP Records share equivalent `context`, equivalent `decision`, and close `timestamp` values within a defined window, THEN they SHOULD be flagged as potential duplicates.
-- Semantic lookup traces SHOULD include `query_timestamp`, `threshold_version`, `embedding_model`, `similarity`, and `source_record_id`.
+- IF DRP Record A lists DRP Record B in `child_record_ids`, THEN DRP Record B SHOULD list DRP Record A in `parent_record_ids`.
+- IF parent/child links are eventually consistent, THEN external validation systems MUST NOT require synchronous mutation.
+- IF a rule in this section is violated, THEN the violation MUST be flagged by external validation systems.
+- IF a DRP Record has non-empty `parent_record_ids` and none of those parent DRP Records exist, THEN the DRP Record is an orphan and MUST be flagged by external validation systems.
+- IF two DRP Records share equivalent `context`, equivalent `decision`, and close `timestamp` values within a defined window, THEN they SHOULD be flagged as potential duplicates by external validation systems.
+- IF a semantic lookup trace is recorded, THEN it SHOULD include `query_timestamp`, `threshold_version`, `embedding_model`, `similarity`, and `source_record_id`.
 
 ---
 
@@ -329,7 +331,9 @@ DRP guarantees:
 **TL;DR:** DRP is validator-ready by design, but validators are out of scope.
 
 - All invariants in this specification are designed to be machine-checkable.
-- DRP is validator-ready but does NOT include validation implementation.
+- All invariants defined in this document MUST be externally verifiable without ambiguity.
+- DRP is validator-ready and contains ONLY declarative constraints.
+- DRP does NOT include validation logic.
 - Validation tooling is external to this repository.
 
 ---
@@ -339,10 +343,9 @@ DRP guarantees:
 **TL;DR:** Missing evidence keeps records incomplete; no fabrication.
 
 - IF outcome is unobserved after execution starts, THEN DRP Record MUST remain `incomplete`.
-- IF `status = incomplete`, THEN `outcome` MUST be `null`.
-- IF `status = incomplete`, THEN `impact` MUST be `null`.
-- System MUST NOT fabricate outcomes.
-- System MUST NOT fabricate impact.
+- IF `status = incomplete`, THEN Section 7 invariants MUST be satisfied.
+- IF `outcome` is unobserved, THEN fabricated outcomes MUST NOT be recorded.
+- IF `impact` is unobserved, THEN fabricated impact values MUST NOT be recorded.
 
 ---
 
@@ -529,7 +532,7 @@ graph LR
 
 - Store normalized decision records with causal and semantic links.
 - Strength: high auditability, path reconstruction, and reusable analysis evidence.
-- Limitation: depends on record quality and governance discipline.
+- Limitation: depends on DRP Record quality and governance discipline.
 
 ---
 
