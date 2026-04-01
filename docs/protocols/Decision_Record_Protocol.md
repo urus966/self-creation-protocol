@@ -141,6 +141,7 @@ DRP MUST remain subordinate to hierarchy constraints.
 - IF DRP Record A supersedes DRP Record B, THEN `A.supersedes_record_id = B.record_id`.
 - IF DRP Record B is superseded, THEN `B.status = superseded`.
 - IF DRP Record A supersedes DRP Record B, THEN supersession MUST be forward-declared (A → B) and MUST NOT require mutation of DRP Record B except `status`.
+- IF multiple DRP Records reference the same `supersedes_record_id`, THEN this condition MUST be flagged as a conflict by external validation systems.
 - IF `parent_record_ids = []`, THEN the DRP Record is a root record.
 - IF `timestamp` is present, THEN `timestamp` MUST parse as ISO 8601.
 - IF a DRP Record is created, THEN `record_id` MUST be unique in the dataset.
@@ -173,6 +174,8 @@ Rules:
 
 **TL;DR:** Create once, complete with evidence, preserve history.
 
+Section 7 is the single source of truth for invariants. Section 8 defines transition flow only.
+
 ### Decision Status Evolution
 
 `proposed → incomplete → complete`
@@ -185,11 +188,9 @@ Lifecycle rules:
 
 - IF a decision is formed, THEN a DRP Record MUST be created.
 - IF new evidence appears, THEN only `status`, `outcome`, and `impact` MAY be updated.
+- IF lifecycle transitions occur, THEN all Section 7 invariants MUST remain satisfied.
 - IF a DRP Record is superseded, THEN prior DRP Records MUST be preserved.
-- IF supersession occurs, THEN supersession invariants in Section 7 MUST be satisfied.
-- IF lifecycle transitions occur, THEN causal and semantic trace links MUST remain preserved.
 - IF no execution occurs, THEN a DRP Record MAY remain indefinitely in `proposed` state.
-- IF `status = proposed`, THEN Section 7 invariants MUST be satisfied.
 
 ---
 
@@ -312,12 +313,15 @@ DRP guarantees:
 
 **TL;DR:** Invalid structure MUST be detectable and reviewable.
 
+Section 7 is the single source of truth for invariants. Section 12 defines validation-quality checks and external flagging requirements.
+
 - `record_id` MUST be unique.
 - `timestamp` MUST be valid ISO 8601.
 - `impact` MUST be `-1`, `0`, or `+1` when present.
 - IF A appears in `B.parent_record_ids`, THEN B MUST NOT have an earlier `timestamp` than A.
 - IF A appears in `B.child_record_ids`, THEN A MUST NOT have a later `timestamp` than B.
-- IF DRP Record A lists DRP Record B in `child_record_ids`, THEN DRP Record B SHOULD list DRP Record A in `parent_record_ids`.
+- IF DRP Record A lists DRP Record B in `child_record_ids`, THEN DRP Record B MUST eventually list DRP Record A in `parent_record_ids`.
+- IF parent/child eventual consistency is not satisfied, THEN this condition MUST be flagged by external validation systems.
 - IF parent/child links are eventually consistent, THEN external validation systems MUST NOT require synchronous mutation.
 - IF a rule in this section is violated, THEN the violation MUST be flagged by external validation systems.
 - IF a DRP Record has non-empty `parent_record_ids` and none of those parent DRP Records exist, THEN the DRP Record is an orphan and MUST be flagged by external validation systems.
