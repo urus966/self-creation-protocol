@@ -38,3 +38,26 @@ This repository excludes runtime agents, cognitive internals, and orchestration 
 - [guardrails/INTERCONNECTION_GUARD_PROTOCOL.md](guardrails/INTERCONNECTION_GUARD_PROTOCOL.md)
 - [guardrails/PROTOCOL_TEMPLATE.md](guardrails/PROTOCOL_TEMPLATE.md)
 - [guardrails/ARCHITECTURE_RULES.md](guardrails/ARCHITECTURE_RULES.md)
+
+## DRP Validator
+
+Minimal DRP validator MVP is available as a CLI command:
+
+```bash
+./drp-validate examples/drp/valid.json
+```
+
+Expected output format:
+
+```json
+{
+  "valid": true,
+  "errors": [],
+  "warnings": []
+}
+```
+
+Behavior:
+- Exit code `0` when input is valid.
+- Exit code `1` when input is invalid.
+- Accepts either one DRP Record object or an array of DRP Record objects.
