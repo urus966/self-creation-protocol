@@ -4,6 +4,7 @@ Document | Purpose | Level
 --- | --- | ---
 docs/protocols/Protocol_Hierarchy.md | v1.4 hierarchy model and level definitions | Meta
 docs/protocols/Conflict_Rules.md | Cross-level conflict resolution rules | Meta
+docs/protocols/Decision_Record_Protocol.md | Decision recording, causal path linkage, and passive learning support (CQMP/MRP/EIP) | Meta
 CORE_PRINCIPLES.md | Foundational principles and hierarchy framing | Meta
 PROTOCOL_RELATIONSHIPS.md | Cross-protocol relationship model | Meta
 PRESENCE_SPACE.md | Organism autonomy and baseline non-action state | L2
