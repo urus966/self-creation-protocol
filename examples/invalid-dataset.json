@@ -1,0 +1,53 @@
+[
+  {
+    "record_id": "R1",
+    "context": "Deploy model v2",
+    "options": [],
+    "decision": "canary",
+    "status": "complete",
+    "outcome": null,
+    "impact": null,
+    "timestamp": "2026-03-01",
+    "parent_record_ids": ["MISSING"],
+    "child_record_ids": ["R2"],
+    "supersedes_record_id": "R3"
+  },
+  {
+    "record_id": "R1",
+    "context": "Deploy model v2",
+    "options": ["rollback"],
+    "decision": "canary",
+    "status": "incomplete",
+    "outcome": "should be null",
+    "impact": 1,
+    "timestamp": "2026-03-01T09:00:00Z",
+    "parent_record_ids": ["R2"],
+    "child_record_ids": []
+  },
+  {
+    "record_id": "R2",
+    "context": "Deploy model v2",
+    "options": ["expand"],
+    "decision": "canary",
+    "status": "superseded",
+    "outcome": null,
+    "impact": null,
+    "timestamp": "2026-03-01T08:00:00Z",
+    "parent_record_ids": ["R1"],
+    "child_record_ids": ["R1"],
+    "supersedes_record_id": null
+  },
+  {
+    "record_id": "R4",
+    "context": "Deploy model v2",
+    "options": ["full"],
+    "decision": "canary",
+    "status": "complete",
+    "outcome": "done",
+    "impact": 1,
+    "timestamp": "2026-03-01T10:01:00Z",
+    "parent_record_ids": [],
+    "child_record_ids": [],
+    "supersedes_record_id": "R3"
+  }
+]
