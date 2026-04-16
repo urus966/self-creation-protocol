@@ -1,0 +1,14 @@
+[
+  {
+    "record_id": "drp-1",
+    "context": "ctx",
+    "options": [],
+    "decision": "dec",
+    "status": "complete",
+    "outcome": "out",
+    "impact": 1,
+    "timestamp": "2026-04-01T09:00:00Z",
+    "parent_record_ids": [],
+    "child_record_ids": ["drp-2"]
+  }
+]
