@@ -22,7 +22,6 @@ This repository excludes runtime agents, cognitive internals, and orchestration 
 - [PROTOCOL_RELATIONSHIPS.md](PROTOCOL_RELATIONSHIPS.md)
 - [docs/protocols/Protocol_Hierarchy.md](docs/protocols/Protocol_Hierarchy.md)
 - [docs/protocols/Conflict_Rules.md](docs/protocols/Conflict_Rules.md)
-- [docs/protocols/Decision_Record_Protocol.md](docs/protocols/Decision_Record_Protocol.md)
 - [docs/INTEGRATION_PATTERNS.md](docs/INTEGRATION_PATTERNS.md)
 - [meta/SYSTEM_MAP.md](meta/SYSTEM_MAP.md)
 
