@@ -1,0 +1,50 @@
+[
+  {
+    "record_id": "drp-type-error",
+    "context": 123,
+    "options": "not-a-list",
+    "decision": "dec",
+    "status": "complete",
+    "outcome": "out",
+    "impact": 1,
+    "timestamp": "2026-04-01T09:00:00Z",
+    "parent_record_ids": [],
+    "child_record_ids": []
+  },
+  {
+    "record_id": "drp-orphan-child",
+    "context": "ctx",
+    "options": [],
+    "decision": "dec",
+    "status": "incomplete",
+    "outcome": null,
+    "impact": null,
+    "timestamp": "2026-04-01T09:00:00Z",
+    "parent_record_ids": [],
+    "child_record_ids": ["non-existent-child"]
+  },
+  {
+    "record_id": "drp-link-error-1",
+    "context": "ctx",
+    "options": [],
+    "decision": "dec",
+    "status": "incomplete",
+    "outcome": null,
+    "impact": null,
+    "timestamp": "2026-04-01T09:00:00Z",
+    "parent_record_ids": [],
+    "child_record_ids": ["drp-link-error-2"]
+  },
+  {
+    "record_id": "drp-link-error-2",
+    "context": "ctx",
+    "options": [],
+    "decision": "dec",
+    "status": "incomplete",
+    "outcome": null,
+    "impact": null,
+    "timestamp": "2026-04-01T09:00:00Z",
+    "parent_record_ids": [],
+    "child_record_ids": []
+  }
+]

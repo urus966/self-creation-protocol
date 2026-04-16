@@ -1,0 +1,26 @@
+[
+  {
+    "record_id": "drp-2026-04-01-101",
+    "context": "Follow-up decision",
+    "options": ["close_case"],
+    "decision": "close_case",
+    "status": "complete",
+    "outcome": null,
+    "impact": null,
+    "timestamp": "2026-04-01T10:00:00Z",
+    "parent_record_ids": [],
+    "child_record_ids": []
+  },
+  {
+    "record_id": "drp-2026-04-01-102",
+    "context": "Dependent branch",
+    "options": ["wait", "fallback"],
+    "decision": "wait",
+    "status": "incomplete",
+    "outcome": null,
+    "impact": null,
+    "timestamp": "2026-04-01T10:05:00Z",
+    "parent_record_ids": ["drp-2026-04-01-999"],
+    "child_record_ids": []
+  }
+]
